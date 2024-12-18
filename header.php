@@ -144,18 +144,18 @@
                             RECETTES
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Petit déjeuner</a></li>
-                            <li><a class="dropdown-item" href="#">Déjeuner</a></li>
-                            <li><a class="dropdown-item" href="#">Dîner</a></li>
-                            <li><a class="dropdown-item" href="#">Dessert</a></li>
-                            <li><a class="dropdown-item" href="#">Boissons</a></li>
+                            <li><a class="dropdown-item" href="petit-dejeuner.php">Petit déjeuner</a></li>
+                            <li><a class="dropdown-item" href="dejeuner.php">Déjeuner</a></li>
+                            <li><a class="dropdown-item" href="diner.php">Dîner</a></li>
+                            <li><a class="dropdown-item" href="dessert.php">Dessert</a></li>
+                            <li><a class="dropdown-item" href="boisson.php">Boissons</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-normal custom-link" href="trucs-et-astuces.html">TRUCS ET ASTUCES</a>
+                        <a class="nav-link fw-normal custom-link" href="trucs-et-astuces.html">trucs-et-astuces.php</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-normal custom-link" href="a-propos.html">À PROPOS</a>
+                        <a class="nav-link fw-normal custom-link" href="about-page.php">À PROPOS</a>
                     </li>
                 </ul>
 
