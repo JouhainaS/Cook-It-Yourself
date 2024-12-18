@@ -1,5 +1,5 @@
 <?php
-/* Template Name: My about page */
+/* Template Name: A propos */
 get_header();
 ?>
 
@@ -32,14 +32,14 @@ get_header();
   <h3>Une communauté qui cuisine ensemble</h3>
   <p><strong>Ici, on cuisine ensemble !</strong>
   <br>Cook'It Yourself, c’est bien plus qu’une plateforme : c’est une communauté d’entraide. Partage tes recettes, note celles des autres, propose des variantes… bref, apporte ta touche perso !</p>
-  <img src="assets/photos/recettes/pancakes 2.jpg" alt="Pancake express">
+  <img src="<?php echo get_template_directory_uri(); ?>/assets/photos/cook-together.jpg" alt="Students cook together">
 </div>
 
 <div class="objectif">
   <h3>Notre objectif</h3>
   <p><strong>Alors, prêt(e) à te lancer ?</strong>
   <br>Bien manger, même avec un emploi du temps blindé et un budget serré, c’est possible. Avec Cook'It Yourself, la cuisine devient enfin accessible (et amusante !).</p>
-  <a href="#" class="btn"> S'inscrire</a>
+  <a href="/inscription" class="btn" aria-label="S'inscrire pour rejoindre Cook'It Yourself">S'inscrire</a>
 </div>
 
 <div class="container">
