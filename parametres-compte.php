@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paramètres compte</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+<?php
+/* Template Name: A propos */
+get_header();
+?>
 
     <div class="body-wrapper">
         <!-- Sidebar -->
@@ -50,7 +44,4 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <?php get_footer(); ?>
