@@ -69,27 +69,27 @@ get_header();
         <h2 class="fw-bold mb-4">Catégories</h2>
         <div class="d-flex flex-wrap justify-content-center gap-3">
             <!-- Petit déjeuner -->
-            <a href="<?php echo home_url('/petit-dejeuner.php'); ?>" class="category-btn">
+            <a href="<?php echo home_url('petit-dejeuner.php'); ?>" class="category-btn">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/petit dej.svg" alt="Petit déjeuner" class="category-icon">
                 <span>Petit déjeuner</span>
             </a>
             <!-- Déjeuner -->
-            <a href="<?php echo home_url('/dejeuner.php'); ?>" class="category-btn">
+            <a href="<?php echo home_url('dejeuner.php'); ?>" class="category-btn">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dej.svg" alt="Déjeuner" class="category-icon">
                 <span>Déjeuner</span>
             </a>
             <!-- Dîner -->
-            <a href="<?php echo home_url('/diner.php'); ?>" class="category-btn">
+            <a href="<?php echo home_url('diner.php'); ?>" class="category-btn">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/diner.svg" alt="Dîner" class="category-icon">
                 <span>Dîner</span>
             </a>
             <!-- Desserts -->
-            <a href="<?php echo home_url('/dessert.php'); ?>" class="category-btn">
+            <a href="<?php echo home_url('dessert.php'); ?>" class="category-btn">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dessert.svg" alt="Desserts" class="category-icon">
                 <span>Desserts</span>
             </a>
             <!-- Boissons -->
-            <a href="<?php echo home_url('/boisson.php'); ?>" class="category-btn">
+            <a href="<?php echo home_url('boisson.php'); ?>" class="category-btn">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/boisson.svg" alt="Boissons" class="category-icon">
                 <span>Boissons</span>
             </a>

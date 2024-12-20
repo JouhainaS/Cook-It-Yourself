@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-    <?php wp_footer(); ?>
-=======
 <?php /* Template Name: header*/ wp_footer(); ?>
->>>>>>> Stashed changes
     <footer class="footer-container">
                 <div class="container">
                     <div class="row">
@@ -43,19 +39,15 @@
         
                     <!-- Bottom Footer -->
                     <div class="footer-bottom d-flex justify-content-between align-items-center">
-                        <p class="mb-0">© 2024 Brand. All rights reserved.</p>
+                        <p class="mb-0">© 2024.Tous droits réservés.</p>
                         <div class="social-media d-flex">
-                            <a href="#"><img src="assets/RS/tiktok 2.svg" alt="TikTok" class="social-icon"></a>
-                            <a href="#"><img src="assets/RS/pinterset 2.svg" alt="Pinterest" class="social-icon"></a>
-                            <a href="#"><img src="assets/RS/instagram 2.svg" alt="Instagram" class="social-icon"></a>
-                            <a href="#"><img src="assets/RS/youtube 2.svg" alt="YouTube" class="social-icon"></a>
+                            <a href="#"><img src="assets/RS/tiktok_2.svg" alt="TikTok" class="social-icon"></a>
+                            <a href="#"><img src="assets/RS/pinterset_2.svg" alt="Pinterest" class="social-icon"></a>
+                            <a href="#"><img src="assets/RS/instagram_2.svg" alt="Instagram" class="social-icon"></a>
+                            <a href="#"><img src="assets/RS/youtube_2.svg" alt="YouTube" class="social-icon"></a>
                         </div>
                     </div>
                 </div>
             </footer>
-    <script src="script.js"></script>
-
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
