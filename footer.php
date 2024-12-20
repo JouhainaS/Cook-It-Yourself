@@ -1,5 +1,6 @@
 <style>/* Global Styles */
- *,
+/* Global Styles */
+*,
  *::before,
  *::after {
    margin: 0;
@@ -19,7 +20,7 @@
  /* Typography & General Layout */
  h1, h2, h3, h4, h5, h6 {
    margin-bottom: 1rem;
-   text-align: left;
+   text-align: center;  /* Centrer tous les titres (h1, h2, h3, h4, h5, h6) */
    color: #3a5676;
    font-weight: 400;
  }
@@ -30,71 +31,122 @@
  h4 { font-size: 1.5rem; }
  h5 { font-size: 1.25rem; }
  h6 { font-size: 1rem; }
- 
- .btn {
-   background-color: #ffb053;
-   color: white;
-   border-radius: 20px;
-   padding: 8px 20px;
-   border: none;
-   transition: background-color 0.3s ease;
- }
- 
- .btn:hover {
-   background-color: #dc9340;
- }
- 
+
+ /* Footer Styles */
  .footer-container {
     background-color: #3a5676;
     color: white;
     padding: 40px 20px;
   }
- 
+
   .footer-container h5 {
-    text-align: right;
+    text-align: center;  /* Centrer le titre des sections dans le footer */
     color: white;
   }
+
   .footer-logo {
     width: 120px;
     height: auto;
   }
- 
+
   .footer-text {
     font-size: 14px;
     line-height: 1.5;
+    text-align: center;  /* Centrer le texte de description dans le footer */
   }
- 
+
   .footer-heading {
     margin-bottom: 10px;
+    text-align: center;  /* Centrer les titres des sections du footer */
   }
- 
+
   .footer-link {
     color: white; 
     text-decoration: none;
   }
- 
+
   .footer-link:hover {
     text-decoration: underline;
   }
- 
+
   .footer-line {
     border-color: white;
     margin: 20px 0;
   }
- 
+
   .social-icon {
     height: 24px;
     margin-left: 10px;
   }
- 
+
   .footer-bottom {
     font-size: 12px;
     display: flex;
     align-items: center;
+    justify-content: center;  /* Centrer les éléments du bas du footer */
   }
- 
+
   .social-media a {
     text-decoration: none;
+  }
+
+ /* Media Queries */
+ @media (max-width: 768px) {
+     .search-bar {
+        width: 250px;
+        font-size: 1rem;
+     }
+      
+     .btn {
+        padding: 6px 15px;
+     }
+      
+     .profile-image {
+        width: 30px;
+        height: 30px;
+     }
+
+     .hero-section h1 {
+        font-size: 2rem;
+     }
+     
+     .top-rated-recipes .row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+     }
+
+     .article-card {
+        flex-direction: column;
+        width: 100%;
+     }
+
+     .article-card img {
+        width: 100%;
+        height: 200px;
+     }
+
+     .category-btn {
+        width: 120px;
+        height: 160px;
+     }
+
+     .category-btn span {
+        font-size: 1rem;
+     }
+
+     .navbar-brand .logo-image {
+        height: 30px;
+     }
+
+     .profile-image {
+        width: 25px;
+        height: 25px;
+     }
+
+     .footer-logo {
+        margin-bottom: 20px; /* Ajouter de l'espace sous le logo uniquement sur les écrans mobiles */
+    }
   }
 
  </style>
@@ -105,7 +157,7 @@
                         <!-- Section 1: Logo -->
                         <div class="col-md-2 text-center text-md-start">
                             <a href="#">
-                                <img src="assets/logo/CIY vertical vert.svg" alt="Logo" class="footer-logo">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/CIY_vertical_vert.svg" alt="Logo" class="footer-logo">
                             </a>
                         </div>
                         <!-- Section 2: Description -->
@@ -141,13 +193,14 @@
                     <div class="footer-bottom d-flex justify-content-between align-items-center">
                         <p class="mb-0">© 2024.Tous droits réservés.</p>
                         <div class="social-media d-flex">
-                            <a href="#"><img src="assets/RS/tiktok_2.svg" alt="TikTok" class="social-icon"></a>
-                            <a href="#"><img src="assets/RS/pinterset_2.svg" alt="Pinterest" class="social-icon"></a>
-                            <a href="#"><img src="assets/RS/instagram_2.svg" alt="Instagram" class="social-icon"></a>
-                            <a href="#"><img src="assets/RS/youtube_2.svg" alt="YouTube" class="social-icon"></a>
+                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/tiktok_2.svg" alt="TikTok" class="social-icon"></a>
+                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/pinterset_2.svg" alt="Pinterest" class="social-icon"></a>
+                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/instagram_2.svg" alt="Instagram" class="social-icon"></a>
+                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/youtube_2.svg" alt="YouTube" class="social-icon"></a>
+
                         </div>
                     </div>
                 </div>
-            </footer>
+    </footer>
 </body>
 </html>

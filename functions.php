@@ -67,10 +67,19 @@ function add_favicon() {
 }
 add_action('wp_head', 'add_favicon');
 
+function allow_svg_uploads($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'allow_svg_uploads');
+
+
 // Filtrer l'éditeur d'images
 add_filter('wp_image_editors', function() {
     return array('WP_Image_Editor_Imagick'); // Utiliser Imagick
     // return array('WP_Image_Editor_GD'); // Utiliser GD
 });
 ?>
+
+
 
