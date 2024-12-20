@@ -51,10 +51,10 @@ function styles_scripts() {
         get_template_directory_uri() . 'js/script.js', array(), null, true);
 }
 
-<<<<<<< Updated upstream
 
 add_action('wp_enqueue_scripts', 'styles_scripts');
-=======
-add_action('wp_enqueue_scripts', 'styles_scripts');
-?>
->>>>>>> Stashed changes
+
+add_filter('wp_image_editors', function() {
+    return array('WP_Image_Editor_Imagick'); // Utiliser Imagick
+    // return array('WP_Image_Editor_GD'); // Utiliser GD
+});
