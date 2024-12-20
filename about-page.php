@@ -2,7 +2,7 @@
 /* Template Name: A propos */
 get_header();
 ?>
-
+<main> 
 <h1>Cook'It Yourself : la cuisine étudiante, fun et accessible</h1>
 
 <div class="intro">
@@ -45,5 +45,6 @@ get_header();
 <div class="container">
   <?php echo do_shortcode(the_content()); ?>
 </div>
+</main>
 
 <?php get_footer(); ?>
