@@ -1,6 +1,6 @@
 <?php
-/* Template : Page d'Accueil */
-get_header(); 
+/** Template Name: Index - Page */
+get_header();
 ?>
 
 <body <?php body_class(); ?>>

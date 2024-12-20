@@ -1,136 +1,190 @@
 <?php
-add_theme_support('post-thumbnails');
-add_theme_support('title-tag');
-add_theme_support('menus');
+/** Template Name: Formulaire - Page */
+get_header(); // Charge le header du site WordPress (fichier header.php)
 
-register_nav_menu('header', 'En tête du menu');
+// Si le formulaire a été soumis (méthode POST)
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération et sécurisation des données du formulaire
+    $titre_recette = htmlspecialchars($_POST['titre_recette']); // Récupère le titre de la recette
+    $description = htmlspecialchars($_POST['description']); // Récupère la description de la recette
+    $portions = htmlspecialchars($_POST['portions']); // Récupère le nombre de portions
+    $preparation = htmlspecialchars($_POST['preparation']); // Temps de préparation (en heures)
+    $cuisson = htmlspecialchars($_POST['cuisson']); // Temps de cuisson (en heures)
+    $total = htmlspecialchars($_POST['total']); // Temps total
+    $difficulte = htmlspecialchars($_POST['difficulte']); // Niveau de difficulté
+    $ingredients = $_POST['ingredients']; // Liste des ingrédients (tableau)
+    $instructions = $_POST['instructions']; // Liste des instructions (tableau)
+    $tags = $_POST['tags']; // Tags de la recette (tableau)
+    $photo = $_FILES['photo']; // Fichier image téléchargé
 
-function styles_scripts()
-{
-  wp_enqueue_style(
-    'bootstrap',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'
-  );
-  wp_enqueue_style(
-    'style',
-    get_template_directory_uri() . '/assets/css/app.css'
-  );
-
-  wp_enqueue_script(
-    'bootstrap-bundle',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
-    false,
-    1,
-    true
-  );
-  wp_enqueue_script(
-    'app-js',
-    get_template_directory_uri() . '/assets/js/app.js',
-    ['bootstrap-bundle'],
-    1,
-    true
-  );
-}
-add_action('wp_enqueue_scripts', 'styles_scripts');
-
-// CUSTOM POSTS TYPES
-function create_post_type()
-{
-  register_post_type('faqs', [
-    'labels' => ['name' => 'FAQs'],
-    'supports' => ['title', 'editor', 'thumbnail'],
-    'public' => true,
-    'has_archive' => true,
-    'rewrite' => ['slug' => 'faqs']
-  ]);
-  register_post_type('services', [
-    'labels' => ['name' => 'Services'],
-    'supports' => ['title', 'editor', 'thumbnail'],
-    'public' => true,
-    'has_archive' => true,
-    'rewrite' => ['slug' => 'services']
-  ]);
-}
-add_action('init', 'create_post_type');
-
-// MENUS
-function menuheader_class($classes)
-{
-  $classes[] = 'nav-item';
-  return $classes;
-}
-add_filter('nav_menu_css_class', 'menuheader_class');
-
-function menuheader_link_class($attributes)
-{
-  $attributes['class'] = 'nav-link';
-  return $attributes;
-}
-add_filter('nav_menu_link_attributes', 'menuheader_link_class');
-
-// FONCTION POUR AJOUTER DES LIEUX
-function ajouter_lieu_wordpress($nom, $adresse, $description, $rating, $items) {
-    $contenu = "<strong>Adresse :</strong> $adresse<br>";
-    $contenu .= "<strong>Description :</strong> $description<br>";
-    $contenu .= "<strong>Note :</strong> $rating/5<br>";
-    $contenu .= "<strong>Items :</strong> $items";
-
-    $post_data = array(
-        'post_title'   => wp_strip_all_tags($nom),
-        'post_content' => $contenu,
-        'post_status'  => 'publish',
-        'post_type'    => 'post',
-    );
-    
-    $post_id = wp_insert_post($post_data);
-    if (!is_wp_error($post_id)) {
-        return true;
-    } else {
-        error_log("Erreur d'insertion : " . $post_id->get_error_message());
-        return false;
+    // Gestion de l'upload de la photo
+    if (!empty($photo['name'])) { // Si une image a été sélectionnée
+        $upload_dir = wp_upload_dir(); // Obtient le répertoire d'upload de WordPress
+        $upload_file = wp_handle_upload($photo, ['test_form' => false]); // Gère l'upload du fichier
+        $photo_url = $upload_file['url']; // Récupère l'URL de l'image téléchargée
     }
+
+    // Affichage des données soumises (pour test)
+    echo "<h3>Votre recette a été soumise avec succès :</h3>";
+    echo "Titre : $titre_recette <br>"; // Affiche le titre
+    echo "Description : $description <br>"; // Affiche la description
+    echo "Portions : $portions <br>"; // Affiche les portions
+    echo "Difficulté : $difficulte <br>"; // Affiche la difficulté
+    if (isset($photo_url)) echo "<img src='$photo_url' style='max-width:200px;'><br>"; // Affiche l'image téléchargée
+    exit(); // Termine l'exécution du script
 }
+?>
 
-// SHORTCODE POUR AFFICHER LE FORMULAIRE
-function afficher_formulaire_lieu() {
-    ob_start();
-    ?>
-    <form method="POST" action="" enctype="multipart/form-data">
-        <label for="nom">Nom *</label>
-        <input type="text" id="nom" name="nom" placeholder="Entrer le nom du lieu" required><br>
-
-        <label for="adresse">Adresse *</label>
-        <input type="text" id="adresse" name="adresse" placeholder="Entrer l'adresse du lieu" required><br>
-
-        <label for="description">Description *</label>
-        <textarea id="description" name="description" rows="4" required></textarea><br>
-
-        <label>Items :</label><br>
-        <label><input type="checkbox" name="items[]" value="Wifi"> Wifi</label><br>
-        <label><input type="checkbox" name="items[]" value="Prise"> Prise</label><br>
-        <label><input type="checkbox" name="items[]" value="PC"> PC</label><br>
-
-        <label for="rating">Note :</label>
-        <input type="number" id="rating" name="rating" min="1" max="5" value="3"><br><br>
-
-        <button type="submit">Ajouter le lieu</button>
-    </form>
-
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nom = sanitize_text_field($_POST['nom']);
-        $adresse = sanitize_text_field($_POST['adresse']);
-        $description = sanitize_textarea_field($_POST['description']);
-        $rating = intval($_POST['rating']);
-        $items = isset($_POST['items']) ? implode(', ', $_POST['items']) : 'Aucun';
-
-        if (ajouter_lieu_wordpress($nom, $adresse, $description, $rating, $items)) {
-            echo "<p style='color:green;'>Le lieu a été ajouté avec succès !</p>";
-        } else {
-            echo "<p style='color:red;'>Une erreur est survenue lors de l'ajout du lieu.</p>";
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"> <!-- Définit l'encodage des caractères -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rend la page responsive -->
+    <title>Ajouter une recette</title> <!-- Titre de la page -->
+    <style>
+        /* Styles généraux pour le body */
+        body {
+            font-family: Arial, sans-serif; /* Police d'écriture */
+            background-color: #f9f9f9; /* Couleur de fond */
+            margin: 0; /* Supprime les marges par défaut */
+            padding: 0;
+            color: #333; /* Couleur du texte principal */
         }
-    }
 
-    return ob_get_clean();
+        /* Conteneur principal */
+        .container {
+            max-width: 1200px; /* Largeur maximale pour les écrans PC */
+            margin: 50px auto; /* Centre le conteneur horizontalement */
+            background: white; /* Fond blanc */
+            padding: 30px; /* Espacement intérieur */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            border-radius: 10px; /* Coins arrondis */
+        }
+
+        /* Style du titre principal */
+        h1 {
+            text-align: center; /* Centre le titre */
+            font-size: 32px; /* Taille de police */
+            font-weight: bold; /* Gras */
+            margin-bottom: 10px;
+        }
+
+        /* Description sous le titre */
+        .description-header {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Style des étiquettes (labels) */
+        label {
+            font-weight: bold; /* Met le texte en gras */
+            margin-top: 15px;
+            display: block; /* Place chaque label sur une nouvelle ligne */
+        }
+
+        /* Style des champs de formulaire */
+        input, textarea, select {
+            width: 100%; /* Occupe toute la largeur */
+            padding: 10px; /* Espacement intérieur */
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd; /* Bordure légère */
+            border-radius: 5px; /* Coins arrondis */
+            font-size: 14px; /* Taille de police */
+            box-sizing: border-box; /* Inclut padding et bordure dans la largeur */
+        }
+
+        /* Boutons */
+        button {
+            background-color: #5cb85c; /* Couleur verte */
+            color: white; /* Texte blanc */
+            padding: 10px 20px;
+            border: none; /* Supprime les bordures */
+            cursor: pointer; /* Change le curseur */
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #4cae4c; /* Couleur plus sombre au survol */
+        }
+
+        /* Champs dynamiques (ingrédients) */
+        .dynamic-section {
+            margin-top: 10px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            margin-top: 10px;
+            color: #5bc0de;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Zone pour l'upload de photo */
+        .photo-upload {
+            background-color: #f5f9f2;
+            padding: 20px;
+            text-align: center;
+            border: 1px dashed #d4e3c4; /* Bordure pointillée */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .photo-upload input {
+            display: none; /* Cache le champ de fichier */
+        }
+
+        .photo-upload label {
+            font-weight: normal;
+            color: #5cb85c;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Ajouter une recette</h1>
+    <p class="description-header">Tu te sens comme un chef étoilé ? Montre-nous ton chef-d'œuvre ! Ajoute ta recette et laisse éclater ta créativité culinaire.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <!-- Zone de téléchargement d'image -->
+        <div class="photo-upload">
+            <label for="photo">+ Ajouter une photo</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+
+        <!-- Titre de la recette -->
+        <label for="titre_recette">Titre de la recette *</label>
+        <input type="text" id="titre_recette" name="titre_recette" placeholder="Entrer le titre de la recette" required>
+
+        <!-- Description -->
+        <label for="description">Description *</label>
+        <textarea id="description" name="description" rows="3" placeholder="Décrivez votre recette" required></textarea>
+
+        <!-- Portions -->
+        <label for="portions">Portions *</label>
+        <input type="number" id="portions" name="portions" placeholder="e.g., 4" required>
+
+        <!-- Bouton de soumission -->
+        <button type="submit">Soumettre la recette</button>
+    </form>
+</div>
+
+<script>
+function ajouterIngredient() {
+    const container = document.getElementById('ingredients_list');
+    container.innerHTML += '<div><input type="text" name="ingredients[]" placeholder="Qté"><input type="text" name="ingredients[]" placeholder="Mesure"><input type="text" name="ingredients[]" placeholder="Elément"></div>';
 }
-add_shortcode('formulaire_lieu', 'afficher_formulaire_lieu');
+</script>
+</body>
+<?php get_footer(); ?>
