@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
     <?php wp_footer(); ?>
+=======
+<?php /* Template Name: header*/ wp_footer(); ?>
+>>>>>>> Stashed changes
     <footer class="footer-container">
                 <div class="container">
                     <div class="row">

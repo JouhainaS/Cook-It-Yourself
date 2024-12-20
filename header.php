@@ -9,9 +9,14 @@
     
     <!-- Intégration du CSS de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<<<<<<< Updated upstream
     
 
     <?php wp_head(); ?>
+=======
+
+    <?php /* Template Name: header*/ wp_head(); ?> 
+>>>>>>> Stashed changes
 </head>
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
@@ -66,4 +71,12 @@
                 </div>
             </div>
         </div>
+<<<<<<< Updated upstream
     </nav>
+=======
+    </nav>
+
+    <?php get_footer();  // Inclut le pied de page du site ?>
+</body>
+</html>
+>>>>>>> Stashed changes
