@@ -58,7 +58,6 @@ function styles_scripts() {
         true // Charger dans le footer
     );
 }
-
 add_action('wp_enqueue_scripts', 'styles_scripts');
 
 // Ajouter un favicon
@@ -73,11 +72,9 @@ function allow_svg_uploads($mimes) {
 }
 add_filter('upload_mimes', 'allow_svg_uploads');
 
-
 // Filtrer l'éditeur d'images
 add_filter('wp_image_editors', function() {
     return array('WP_Image_Editor_Imagick'); // Utiliser Imagick
-    // return array('WP_Image_Editor_GD'); // Utiliser GD
 });
 
 // Custom Post Type "Recettes"
@@ -105,10 +102,8 @@ add_action('after_switch_theme', 'rewrite_flush');
 
 // Ajout de taxonomies pour les recettes
 function add_recipe_taxonomies() {
-    // Associer les catégories par défaut aux recettes
     register_taxonomy_for_object_type('category', 'recipe');
 
-    // Ajouter une taxonomy "Types de Cuisine"
     register_taxonomy('cuisine_type', 'recipe', [
         'labels' => [
             'name' => __('Types de Cuisine', 'textdomain'),
@@ -121,7 +116,7 @@ function add_recipe_taxonomies() {
             'new_item_name' => __('Nouveau type de cuisine', 'textdomain'),
             'menu_name' => __('Types de Cuisine', 'textdomain'),
         ],
-        'hierarchical' => true, // Définit une hiérarchie comme les catégories
+        'hierarchical' => true,
         'public' => true,
     ]);
 }
@@ -142,12 +137,10 @@ add_action('add_meta_boxes', 'add_recipe_meta_box');
 
 // Contenu des métaboxes
 function recipe_meta_box_callback($post) {
-    // Récupérer les valeurs existantes
     $prep_time = get_post_meta($post->ID, 'prep_time', true);
     $portions = get_post_meta($post->ID, 'portions', true);
     $difficulty = get_post_meta($post->ID, 'difficulty', true);
 
-    // Afficher les champs
     echo '<label for="prep_time">' . __('Temps de préparation (minutes)', 'textdomain') . '</label>';
     echo '<input type="number" id="prep_time" name="prep_time" value="' . esc_attr($prep_time) . '" class="widefat" />';
 
@@ -175,5 +168,100 @@ function save_recipe_meta($post_id) {
     }
 }
 add_action('save_post', 'save_recipe_meta');
-?>
 
+// Gestion de l'inscription
+function custom_registration_form_handler() {
+    if (isset($_POST['register'])) {
+        $username = sanitize_text_field($_POST['username']);
+        $email = sanitize_email($_POST['email']);
+        $password = $_POST['password'];
+        $errors = [];
+
+        if (username_exists($username)) {
+            $errors[] = "Ce nom d'utilisateur existe déjà.";
+        }
+        if (email_exists($email)) {
+            $errors[] = "Cet email est déjà utilisé.";
+        }
+        if (strlen($password) < 6) {
+            $errors[] = "Le mot de passe doit comporter au moins 6 caractères.";
+        }
+
+        if (empty($errors)) {
+            $user_id = wp_create_user($username, $password, $email);
+            if (!is_wp_error($user_id)) {
+                wp_signon([
+                    'user_login' => $username,
+                    'user_password' => $password,
+                    'remember' => true,
+                ]);
+                wp_safe_redirect(home_url());
+                exit;
+            } else {
+                $errors[] = $user_id->get_error_message();
+            }
+        }
+
+        set_transient('registration_errors', $errors, 30);
+    }
+}
+add_action('init', 'custom_registration_form_handler');
+
+// Shortcode pour afficher le formulaire d'inscription
+function custom_registration_form_shortcode() {
+    $errors = get_transient('registration_errors');
+    delete_transient('registration_errors');
+
+    ob_start(); ?>
+    <form method="post" action="">
+        <h2>Inscription</h2>
+        <?php if (!empty($errors)): ?>
+            <ul class="error-messages">
+                <?php foreach ($errors as $error): ?>
+                    <li><?php echo esc_html($error); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <button type="submit" name="register">S'inscrire</button>
+    </form>
+    <?php return ob_get_clean();
+}
+add_shortcode('custom_registration_form', 'custom_registration_form_shortcode');
+
+// Redirection des utilisateurs non connectés
+add_action('template_redirect', function () {
+    if (!is_user_logged_in() && !is_page(['connexion', 'inscription'])) {
+        wp_safe_redirect(home_url('/connexion'));
+        exit;
+    }
+});
+
+// Redirection après connexion
+function redirect_after_login($redirect_to, $request, $user) {
+    return home_url();
+}
+add_filter('login_redirect', 'redirect_after_login', 10, 3);
+
+// Redirection après soumission du formulaire de connexion
+function custom_login_handler() {
+    if (isset($_POST['login'])) {
+        $creds = [
+            'user_login'    => sanitize_text_field($_POST['username']),
+            'user_password' => $_POST['password'],
+            'remember'      => isset($_POST['remember']) ? true : false,
+        ];
+
+        $user = wp_signon($creds, false);
+
+        if (!is_wp_error($user)) {
+            wp_safe_redirect(home_url());
+            exit;
+        } else {
+            echo '<p class="error-message">Nom d\'utilisateur ou mot de passe incorrect.</p>';
+        }
+    }
+}
+add_action('init', 'custom_login_handler');
