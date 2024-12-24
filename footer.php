@@ -52,17 +52,18 @@
   .footer-text {
     font-size: 14px;
     line-height: 1.5;
-    text-align: center;  /* Centrer le texte de description dans le footer */
+    text-align: left;  
   }
 
   .footer-heading {
     margin-bottom: 10px;
-    text-align: center;  /* Centrer les titres des sections du footer */
+    text-align: left;
   }
 
   .footer-link {
     color: white; 
     text-decoration: none;
+    text-align: center.
   }
 
   .footer-link:hover {

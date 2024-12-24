@@ -1,8 +1,40 @@
 <?php
-/* Template : Page d'Accueil */
+/* Template : accueil */
 get_header(); 
 ?>
 <style>/* Section Hero */
+ *,
+ *::before,
+ *::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+ 
+ body {
+   font-family: 'Poppins', sans-serif;
+   background-color: white;
+   color: black;
+   margin: 0;
+   padding: 0;
+   padding-top: 80px;
+ }
+ 
+ /* Typography & General Layout */
+ h1, h2, h3, h4, h5, h6 {
+   margin-bottom: 1rem;
+   text-align: left;
+   color: #3a5676;
+   font-weight: 400;
+ }
+ 
+ h1 { font-size: 2.5rem; }
+ h2 { font-size: 2rem; }
+ h3 { font-size: 1.75rem; }
+ h4 { font-size: 1.5rem; }
+ h5 { font-size: 1.25rem; }
+ h6 { font-size: 1rem; }
+ 
  .hero-section {
    position: relative;
    height: 70vh;
@@ -184,67 +216,93 @@ get_header();
     object-fit: contain;
   }
   
-  /* Articles Section */
-  .articles-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 40px;
+  /* article section*/
+  .articles-list { 
+    display: flex; 
+    flex-direction: column; /* Empile les cartes verticalement */ 
+    gap: 20px; /* Ajoute un espacement vertical entre les cartes */ 
   }
-  
+
   .article-card {
     display: flex;
-    width: 1170px;
-    background-color: white;
+    align-items: stretch;
+    background-color: #fff;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(86, 146, 178, 0.1);
-    transition: transform 0.2s ease;
-    height: 180px;
-    margin: 0 auto;
-  }
-  
-  .article-card:hover {
+    transition: transform 0.3s ease;
+    padding: 0;
+    margin-bottom: 20px; /* Espacement entre les cards */
+}
+
+.article-card:hover {
     transform: scale(1.02);
-  }
-  
-  .article-card img {
-    width: 30%;
+}
+
+.article-thumbnail {
+    flex: 1;
+    max-width: 33.33%;
+    overflow: hidden;
+}
+
+.article-thumbnail img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .article-content {
-    padding: 10px;
-    flex: 1;
+    border-radius: 10px 0 0 10px;
+}
+
+.article-content {
+    flex: 2;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    word-wrap: break-word;
-  }
-  
-  .article-content .star-icon {
-    width: auto;
-    height: 20px;
-    margin-right: 5px;
-  }
-  
-  .article-content h3 {
-    color: black;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-  }
-  
-  .article-content p {
-    color: #666;
-    line-height: 1.4;
+    justify-content: center;
+}
+
+.article-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #3a5676;
+}
+
+.article-content h3 a {
+    text-decoration: none;
+    color: #3a5676;
+}
+
+.article-content h3 a:hover {
+    text-decoration: underline;
+}
+
+.article-content p { 
+  font-size: 0.9rem; 
+  color: #555; 
+  margin-bottom: 10px; 
+  line-height: 1.6; } 
+
+.article-meta {
+    display: flex;
+    align-items: center;
     font-size: 0.9rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-wrap: break-word;
-  }
+    color: #777;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.article-meta .author,
+.article-meta .date {
+    font-style: italic;
+}
+
+.article-meta .date {
+    color: #555;
+}
+
+.article-meta .comments { 
+  color: #3a5676; 
+}
   </style>
 
 <body <?php body_class(); ?>>
@@ -378,41 +436,45 @@ get_header();
     </section>
 
 
-    <!-- Section "Trucs et Astuces" -->
     <section class="trucs-et-astuces py-5">
         <div class="container">
             <h2 class="fw-bold mb-4">Trucs et Astuces</h2>
-            <div class="row">
+            <div class="articles-list">
                 <?php
-                // Query pour récupérer les articles "Trucs et Astuces"
+                // Query pour récupérer les 3 derniers articles des catégories spécifiques
                 $args = array(
-                    'post_type'      => 'post',  // Type de publication standard 'post' pour les articles
+                    'post_type'      => 'post',  // Type de publication standard 'post'
                     'posts_per_page' => 3,       // Limite à 3 articles
                     'orderby'        => 'date',  // Trier par date
                     'order'          => 'DESC',  // Du plus récent au plus ancien
-                    'category_name'  => 'trucs-et-astuces'  // Catégorie spécifique "Trucs et Astuces"
+                    'category_name'  => 'alternatives-vegetales, astuces, materiels, stop-au-gaspillage'  // Les catégories spécifiques
                 );
                 $articles = new WP_Query($args);
 
                 if ($articles->have_posts()) :
                     while ($articles->have_posts()) : $articles->the_post(); ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="article-card">
+                        <div class="article-card d-flex">
+                            <div class="article-thumbnail">
                                 <?php if (has_post_thumbnail()) : ?>
-                                    <div class="article-thumbnail">
-                                        <?php the_post_thumbnail('medium'); ?>
-                                    </div>
+                                    <img src="<?php the_post_thumbnail_url('medium'); ?>" alt="<?php the_title(); ?>">
+                                <?php else : ?>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/photos/default.jpg" alt="Image par défaut">
                                 <?php endif; ?>
-                                <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+                            </div>
+                            <div class="article-content">
+                                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <div class="article-meta">
+                                    <span class="author">Par <?php the_author(); ?></span>
+                                    <span class="date">| Publié le <?php echo get_the_date(); ?></span>
+                                </div>
                                 <p><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
-                                <a href="<?php the_permalink(); ?>" class="btn btn-primary">Lire la suite</a>
                             </div>
                         </div>
                     <?php endwhile;
                     wp_reset_postdata();
-                    else : ?>
-                        <p>Aucun artcile trouvé.</p>
-                    <?php endif; ?>
+                else : ?>
+                    <p>Aucun article trouvé dans les catégories sélectionnées.</p>
+                <?php endif; ?>
             </div>
         </div>
     </section>
