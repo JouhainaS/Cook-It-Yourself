@@ -3,6 +3,152 @@
 get_header();
 ?>
 
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+    }
+
+    .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .card {
+        width: 260px; /* Réduction de la largeur des cartes */
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        text-decoration: none; /* Supprime la décoration par défaut */
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin-bottom: 5px;
+        text-decoration: none; /* Par défaut, pas de soulignement */
+    }
+
+    .card-title:hover {
+        text-decoration: underline; /* Soulignement au survol du titre */
+    }
+
+    .recipe-meta {
+        color: #000;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        font-weight: normal; /* Texte non gras */
+    }
+
+    .recipe-meta .author {
+        color: black;
+        display: block;
+    }
+
+    .recipe-meta .time {
+        margin-top: 3px;
+        display: block;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .rating .star {
+        font-size: 1.2rem;
+        color: #ffc107;
+    }
+
+    .rating .rating-value {
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .filters {
+        padding: 15px;
+        background-color: white;
+    }
+
+    .filters h4 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #000;
+        text-align: left;
+    }
+
+    .filter-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .filter-section h5 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #000;
+        text-align: left;
+    }
+
+    .filter-options {
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .filter-options.expanded {
+        max-height: 500px;
+    }
+
+    .filter-section input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: #A8BAA7;
+    }
+
+    label {
+        font-size: 0.9rem;
+        color: #000;
+    }
+
+    .toggle-more {
+        background: none;
+        border: none;
+        color: #3498db;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-top: 10px;
+        text-decoration: underline;
+    }
+
+    .toggle-more:hover {
+        color: #2c3e50;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <!-- Sidebar des filtres -->
@@ -57,68 +203,29 @@ get_header();
                     'Ingrédients' => [
                         'Poulet' => 'poulet',
                         'Poisson' => 'poisson',
-                        'Bœuf' => 'boeuf',
-                        'Œufs' => 'oeufs',
+                        'Boeuf' => 'boeuf',
                         'Riz' => 'riz',
                         'Pommes de terre' => 'pommes-de-terre',
                         'Carottes' => 'carottes',
                         'Tomates' => 'tomates',
                         'Oignons' => 'oignons',
-                        'Ail' => 'ail',
-                        'Épinards' => 'epinards',
-                        'Champignons' => 'champignons',
-                        'Lait' => 'lait',
-                        'Fromage' => 'fromage',
-                        'Crème fraîche' => 'creme-fraiche',
-                        'Pain' => 'pain',
-                        'Pâtes' => 'pates',
-                        'Haricots verts' => 'haricots-verts',
-                        'Lentilles' => 'lentilles',
-                        'Pois chiches' => 'pois-chiches',
-                        'Maïs' => 'mais',
-                        'Beurre' => 'beurre',
-                        'Huile d\'olive' => 'huile-d-olive',
-                        'Sel' => 'sel',
-                        'Poivre' => 'poivre',
-                        'Paprika' => 'paprika',
-                        'Curry' => 'curry',
-                        'Basilic' => 'basilic',
-                        'Persil' => 'persil',
-                        'Thym' => 'thym',
-                        'Citron' => 'citron',
-                        'Miel' => 'miel',
-                        'Chocolat' => 'chocolat',
-                        'Sucre' => 'sucre',
-                        'Farine' => 'farine',
-                        'Levure' => 'levure',
-                        'Pommes' => 'pommes',
-                        'Bananes' => 'bananes',
-                        'Fraises' => 'fraises',
-                        'Framboises' => 'framboises',
-                        'Noix' => 'noix',
-                        'Amandes' => 'amandes',
-                        'Noisettes' => 'noisettes',
-                        'Yaourt' => 'yaourt',
-                        'Saumon' => 'saumon',
-                        'Crevettes' => 'crevettes',
-                        'Thon' => 'thon',
-                        'Courgettes' => 'courgettes',
-                        'Aubergines' => 'aubergines',
-                        'Poivrons' => 'poivrons',
-                        'Brocoli' => 'brocoli',
-                        'Chou-fleur' => 'chou-fleur',
                     ],
                 ];
 
                 foreach ($filter_data as $section_title => $options) : ?>
                     <div class="filter-section">
                         <h5><?php echo $section_title; ?> :</h5>
-                        <?php foreach ($options as $label => $value) : ?>
-                            <div>
-                                <input type="checkbox" name="<?php echo strtolower(str_replace(' ', '_', $section_title)); ?>[]" value="<?php echo $value; ?>" id="<?php echo strtolower($section_title . '_' . $value); ?>">
-                                <label for="<?php echo strtolower($section_title . '_' . $value); ?>"><?php echo $label; ?></label>
-                            </div>
-                        <?php endforeach; ?>
+                        <div class="filter-options" id="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">
+                            <?php foreach ($options as $label => $value) : ?>
+                                <div>
+                                    <input type="checkbox" name="<?php echo strtolower(str_replace(' ', '_', $section_title)); ?>[]" value="<?php echo $value; ?>" id="<?php echo strtolower($section_title . '_' . $value); ?>">
+                                    <label for="<?php echo strtolower($section_title . '_' . $value); ?>"><?php echo $label; ?></label>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php if (count($options) > 3) : ?>
+                            <button type="button" class="toggle-more" data-target="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">Afficher plus</button>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -127,134 +234,83 @@ get_header();
         <!-- Liste des recettes -->
         <div class="col-md-9">
             <h1 class="mb-4">Nos Recettes</h1>
-            <div class="row">
+            <div class="grid-container">
                 <?php
-                // Arguments de la requête WP_Query
-                $args = [
+                $query = new WP_Query([
                     'post_type' => 'recipe',
-                    'post_status' => 'publish',
                     'posts_per_page' => 9,
                     'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
-                ];
+                ]);
 
-                // Requête principale
-                $recipe_query = new WP_Query($args);
-
-                // Vérification des résultats
-                if ($recipe_query->have_posts()) :
-                    while ($recipe_query->have_posts()) :
-                        $recipe_query->the_post();
+                if ($query->have_posts()) :
+                    while ($query->have_posts()) : $query->the_post();
+                        $total_time = get_post_meta(get_the_ID(), 'total_time', true);
+                        $rating = get_post_meta(get_the_ID(), 'rating', true) ?: 4;
                 ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="card shadow-sm">
+                        <a href="<?php the_permalink(); ?>" class="card-link">
+                            <div class="card">
                                 <?php if (has_post_thumbnail()) : ?>
-                                    <a href="<?php the_permalink(); ?>">
-                                        <?php the_post_thumbnail('medium', ['class' => 'card-img-top']); ?>
-                                    </a>
+                                    <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top" alt="<?php the_title(); ?>">
+                                <?php else : ?>
+                                    <div class="placeholder" style="height: 180px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #aaa;">Image indisponible</div>
                                 <?php endif; ?>
+
                                 <div class="card-body">
-                                    <h5 class="card-title text-truncate"><?php the_title(); ?></h5>
-                                    <p class="card-text">
-                                        <strong>Auteur :</strong> <?php the_author(); ?><br>
-                                        <strong>Portions :</strong> <?php echo get_post_meta(get_the_ID(), 'portions', true); ?><br>
-                                        <strong>Difficulté :</strong> <?php echo ucfirst(get_post_meta(get_the_ID(), 'difficulty', true)); ?><br>
-                                        <strong>Temps de Préparation :</strong> <?php echo get_post_meta(get_the_ID(), 'prep_time', true); ?> min
+                                    <h5 class="card-title"><?php the_title(); ?></h5>
+                                    <p class="recipe-meta">
+                                        <span class="author">Par COOK'S NAME</span>
+                                        <span class="time">Temps total : <?php echo $total_time ?: 'N/A'; ?> min</span>
                                     </p>
-                                    <a href="<?php the_permalink(); ?>" class="btn btn-primary btn-sm">Voir la recette</a>
+                                    <div class="rating">
+                                        <?php for ($i = 1; $i <= 5; $i++) {
+                                            echo $i <= $rating ? '<span class="star">&#9733;</span>' : '<span class="star">&#9734;</span>';
+                                        } ?>
+                                        <span class="rating-value">(<?php echo $rating; ?>)</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                 <?php
                     endwhile;
 
-                    // Pagination
                     echo '<div class="col-12">';
-                    echo '<nav class="pagination justify-content-center">';
                     echo paginate_links([
-                        'total' => $recipe_query->max_num_pages,
+                        'total' => $query->max_num_pages,
                         'prev_text' => __('&larr; Précédent', 'textdomain'),
                         'next_text' => __('Suivant &rarr;', 'textdomain'),
                     ]);
-                    echo '</nav>';
                     echo '</div>';
+
+                    wp_reset_postdata();
                 else :
                     echo '<p>Aucune recette trouvée.</p>';
                 endif;
-
-                wp_reset_postdata();
                 ?>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Styles intégrés -->
-<style>
-    .card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButtons = document.querySelectorAll('.toggle-more');
 
-    .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
 
-    .card-title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .card-text {
-        font-size: 0.9rem;
-        color: #555;
-    }
-
-    .filters {
-
-        padding: 15px;
-        background-color: white;
-    }
-
-    .filters h4 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        color: #000;
-        text-align: left;
-    }
-
-    .filter-section {
-        margin-bottom: 1.5rem;
-    }
-
-    .filter-section h5 {
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-        color: #000;
-        text-align: left;
-    }
-
-    .filter-section div {
-        margin-bottom: 0.5rem;
-    }
-
-    .filter-section input[type="checkbox"] {
-        margin-right: 8px;
-    }
-
-    label {
-        font-size: 0.9rem;
-        color: #000;
-    }
-    
-    /* Style de la case à cocher */
-    .filter-section input[type="checkbox"] {
-        accent-color: #A8BAA7; /* Change la couleur de fond de la case cochée */
-    }
-
-</style>
+                if (targetElement.classList.contains('expanded')) {
+                    targetElement.classList.remove('expanded');
+                    this.textContent = 'Afficher plus';
+                } else {
+                    targetElement.classList.add('expanded');
+                    this.textContent = 'Afficher moins';
+                }
+            });
+        });
+    });
+</script>
 
 <?php
 get_footer();

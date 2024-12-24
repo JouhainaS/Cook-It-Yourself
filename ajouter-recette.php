@@ -107,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="form-container">
     <h1>Ajouter une recette</h1>
     <style scoped>
+        
         .form-container {
             width: 90%;
             max-width: 1000px;
@@ -117,14 +118,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .form-container h1 {
             text-align: center;
-            color: #333;
+            color: #3A5676;
         }
         .form-container label {
             font-weight: semi-bold;
             margin-top: 15px;
+            margin-bottom: 10px; /* Ajout d'espace entre le titre et le paragraphe explicatif */
             display: block;
             color: #000;
         }
+
+        .form-container p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 15px; /* Ajout d'espace en dessous du paragraphe explicatif */
+        }
+
         .form-container input, .form-container select, .form-container textarea, .form-container button {
             width: 100%;
             padding: 10px;
@@ -225,6 +235,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .ingredient-input.element {
             flex: 1.7; /* Plus grand pour l'ingrédient */
         }
+
+        button#add-step,
+        button#add-ingredient {
+            background-color: transparent; /* Supprime le fond */
+            color: #A8BAA7; /* Couleur du texte */
+            font-weight: bold; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            text-align: left; 
+            padding: 0; 
+            border: none; /* Supprime la bordure */
+            box-shadow: none; /* Supprime les ombres éventuelles */
+            outline: none; /* Supprime l'encadré lors du focus */
+        }
+
+        button#add-ingredient:hover,
+        button#add-step:hover {
+            text-decoration: underline; /* Ajout de soulignement sur hover */
+        }
+
         button.cancel {
             background-color: white;
             color: #5692B2;
@@ -255,13 +285,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-color: #407899;
         }
 
-        div .cancelorsubmit {
+        div.cancelorsubmit {
             display: flex;
             gap: 10px;
-            justify-content: flex-start;
+            justify-content: flex-end; /* Aligne les boutons à droite */
             margin-top: 20px;
+            margin-bottom: 20px;
         }
-                
+
+        button.cancel, button.submit {
+            width: 200px; /* Réduction de la largeur des boutons */
+        }
+
+
         .items-list {
             display: flex;
             flex-wrap: wrap;
@@ -302,6 +338,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
         }
 
+        .form-container input,
+        .form-container select,
+        .form-container textarea,
+        button#add-ingredient,
+        button#add-step {
+            border-radius: 10px; 
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 1rem;
+            margin-top: 5px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .form-container input:focus,
+        .form-container select:focus,
+        .form-container textarea:focus {
+            outline: none;
+            border-color: #A8BAA7;
+        }
+
+        
 
     </style>
 
@@ -313,12 +371,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="POST" enctype="multipart/form-data">
         <label for="title">Titre de la recette *</label>
-        <input type="text" name="title" id="title" required>
+        <input type="text" name="title" placeholder="Entre le titre de ta recette"  id="title" required>
 
         <label for="description">Description *</label>
-        <textarea name="description" id="description" rows="4" required></textarea>
+        <textarea name="description" placeholder="Décris ta recette de manière à faire saliver !" id="description" rows="4" required></textarea>
 
         <label for="image">Ajouter une photo *</label>
+
         <div class="image-upload">
             <label class="image-upload-label" for="image">
                 <span>+ Ajouter une photo</span>
@@ -327,7 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <label for="portions">Portions *</label>
-        <input type="number" name="portions" id="portions" required>
+        <input type="number" placeholder="Entre le titre de ta recette" name="portions" id="portions" required>
 
         <label for="prep_hours">Temps de Préparation *</label>
         <div class="dynamic-field">
@@ -349,6 +408,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
 
         <label for="ingredients">Ingrédients *</label>
+        <p style="font-size: 0.9rem; color: #555; margin-top: -10px; margin-bottom: 10px;">
+            Liste tes ingrédients un par un, en précisant les quantités (1, 2) et les mesures (tasses, cuillères). N’hésite pas à laisser libre cours à ta créativité et à donner des détails pour que ta recette soit encore plus claire et savoureuse !
+        </p>
         <div id="ingredients-wrapper">
             <div class="ingredient-group">
                 <input type="text" name="quantity[]" placeholder="Qté" class="ingredient-input quantity">
@@ -367,13 +429,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" id="add-ingredient">+ Ajouter un ingrédient</button>
 
         <label>Instructions *</label>
+        <p style="font-size: 0.9rem; color: #555; margin-top: -10px; margin-bottom: 10px;">
+            Décompose ta recette en instructions claires, étape par étape.
+        </p>
         <div id="steps-wrapper">
             <textarea name="steps[]" placeholder="Étape 1"></textarea>
         </div>
         <button type="button" id="add-step">+ Ajouter une étape</button>
 
+
         <label for="tips">Tips</label>
-        <textarea name="tips" id="tips"></textarea>
+        <textarea name="tips" placeholder="Partage tes secrets de cuisine ! Que ce soit des astuces pour un meilleur résultat au four, des substitutions d'ingrédients ou des conseils pratiques pour réussir ta recette à coup sûr. Toute info qui peut faire de ton plat un vrai succès est la bienvenue !" id="tips"></textarea>
 
         <div class="items-container">
             <label>Type de repas :</label>
