@@ -38,47 +38,54 @@ get_header();
 
     <div class="recipe-details">
         <div class="detail">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/preparation-time.svg" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/temps-preparation.svg" alt="">
             <p>Temps de préparation</p>
             <span>10 mins</span>
         </div>
         <div class="detail">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/cooking-time.svg" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/temps-cuisson.svg" alt="">
             <p>Temps de cuisson</p>
             <span>20 mins</span>
         </div>
         <div class="detail">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/total-time.svg" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/temps-total.svg" alt="">
             <p>Temps total</p>
             <span>30 mins</span>
         </div>
         <div class="detail">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/servings.svg" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/portions.svg" alt="">
             <p>Portions</p>
             <span>4</span>
         </div>
     </div>
 
-    <div class="ingredients">
-        <h2>Ingrédients</h2>
-        <ul>
-            <?php 
-            $ingredients = get_post_meta(get_the_ID(), 'ingredients', true);
-            if (is_array($ingredients)) {
-                foreach ($ingredients as $ingredient) {
-                    echo '<li>' . esc_html($ingredient) . '</li>';
+    <div class="recipe-content">
+        <div class="ingredients">
+            <h2>Ingrédients</h2>
+            <ul>
+                <?php 
+                $ingredients = get_post_meta(get_the_ID(), 'ingredients', true);
+                if (is_array($ingredients)) {
+                    foreach ($ingredients as $ingredient) {
+                        echo '<li>' . esc_html($ingredient) . '</li>';
+                    }
+                } else {
+                    echo '<li>Aucun ingrédient trouvé.</li>';
                 }
-            } else {
-                echo '<li>Aucun ingrédient trouvé.</li>';
-            }
-            ?>
-        </ul>
+                ?>
+            </ul>
+        </div>
+
+        <div class="chef-tips">
+            <h2>Astuces du chef</h2>
+            <ul>
+                <li>Lorem ipsum dolor sit amet consectetur. Cras magna morbi mi lectus erat.</li>
+                <li>Lectus elit urna porta amet commodo pharetra dapibus. Eget in curabitur tortor habitant.</li>
+                <li>Risus habitant et ac sed purus. Turpis duis dui viverra risus scelerisque.</li>
+            </ul>
+        </div>
     </div>
 
-    <div class="chef-tips">
-        <h2>Astuces du chef</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras magna morbi mi lectus erat.</p>
-    </div>
 
     <div class="instructions">
         <h2>Instructions</h2>
@@ -123,9 +130,16 @@ get_header();
     .recipe-header h1 {
         font-size: 2.5rem;
         font-weight: bold;
-        color: #3A5676; /* Changement de couleur */
+        color: #3A5676; 
         margin-bottom: 10px;
         text-align: center;
+    }
+
+    h2 {
+        font-size: 1.5rem; 
+        color: #3A5676;
+        margin-bottom: 15px; 
+        font-weight: 400px; 
     }
 
     .recipe-header .author {
@@ -170,14 +184,32 @@ get_header();
         gap: 20px;
         margin-bottom: 20px;
         justify-content: space-around;
+        background-color: #EBF4E7; 
+        border-radius: 12px; 
+        padding: 20px; 
     }
 
     .recipe-details .detail {
         text-align: center;
-        background-color: #fff;
         padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex: 1;
+    }
+
+    .recipe-details .detail img {
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    .recipe-details .detail p {
+        font-size: 0,8rem;
+        font-weight: 400px;
+        margin: 5px 0;
+        color: black;
+    }
+
+    .recipe-details .detail span {
+        font-size: 0.8rem;
+        color: #A8BAA7;
     }
 
     .ingredients ul {
@@ -215,16 +247,65 @@ get_header();
     }
 
     .chef-tips {
-        background-color: #f8f0e3;
-        padding: 15px;
-        border-left: 4px solid #ffb53d;
-        border-radius: 8px;
+        background-color: #F4EFEB; 
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 5px solid #FFB53D;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
     }
 
     .chef-tips h2 {
+        font-size: 1.5rem;
+        color: #3A5676;
+        margin-bottom: 15px;
+        font-weight: 400px;
+    }
+
+    .chef-tips ul {
+        list-style: disc inside;
+        padding: 0;
+        margin: 0; 
+        color: #333;
+        line-height: 1.8;
+    }
+
+    .chef-tips ul li {
+        margin-bottom: 10px;
+    }
+
+    .recipe-content {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .recipe-content .ingredients,
+    .recipe-content .chef-tips {
+        flex: 1; 
+    }
+
+    .recipe-content .ingredients ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .recipe-content .ingredients ul li {
+        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .recipe-content .chef-tips {
+        background-color: #f8f0e3;
+        padding: 15px;
+        border-left: 4px solid #ffb53d;
+        border-radius: 8px;
+    }
+
+    .recipe-content .chef-tips h2 {
         margin-top: 0;
     }
+
 </style>
 
 <?php
