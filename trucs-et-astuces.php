@@ -18,6 +18,10 @@ get_header();
     color: #3a5676;
 }
 
+.category-section {
+    margin-bottom: 60px; 
+}
+
 /* Titre des sections */
 .category-section h2 {
     text-align: left; /* Alignement à gauche */
@@ -37,7 +41,7 @@ get_header();
 .article {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
     overflow: hidden;
     transition: transform 0.3s ease;
 }
@@ -88,7 +92,7 @@ get_header();
     align-items: stretch;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
     overflow: hidden;
     transition: transform 0.3s ease;
     margin-bottom: 10px;
@@ -198,18 +202,17 @@ get_header();
 .materiels-section .article {
     background-color: white;
     border-radius: 15px;
-    border: 1px solid #ddd;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stop-gaspillage-section .article:hover,
 .materiels-section .article:hover {
     transform: scale(1.03);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
 }
 
 .stop-gaspillage-section .article img,

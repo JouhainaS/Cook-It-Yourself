@@ -70,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <strong>Temps de Préparation:</strong> $prep_hours h $prep_minutes min <br>
             <strong>Temps de Cuisson:</strong> $cook_hours h $cook_minutes min ($cook_style) <br>
             <strong>Temps Total:</strong> $total_hours h $total_minutes min <br>
-            <strong>Température:</strong> $temperature °C <br>
             <strong>Difficulté:</strong> $difficulty <br>
             <strong>Ingrédients:</strong><pre>$ingredients_data</pre><br>
             <strong>Étapes:</strong><pre>$steps_data</pre><br>
@@ -78,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <strong>Type de repas:</strong> $meal_type <br>
             <strong>Type de cuisson:</strong> $cook_type <br>
             <strong>Type de cuisine:</strong> $cuisine_type <br>
-            <strong>Allergies:</strong> $allergies <br>
             <strong>Régime Alimentaire:</strong> $diet_type <br>
             <strong>Budget:</strong> $budget
         ";

@@ -94,7 +94,7 @@ get_header();
  
  .hero-section .search-bar:focus {
    outline: none;
-   box-shadow: 0 0 10px rgba(86, 146, 178, 0.5);
+   box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
  }
  
  .hero-section {
@@ -124,7 +124,7 @@ get_header();
    background-color: white;
    border-radius: 10px;
    overflow: hidden;
-   box-shadow: 0 2px 4px rgba(86, 146, 178, 0.1);
+   box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
    width: 16rem;
    text-align: left;
    transition: transform 0.2s ease;
@@ -228,7 +228,8 @@ get_header();
     align-items: stretch;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(86, 146, 178, 0.41);
+
     overflow: hidden;
     transition: transform 0.3s ease;
     padding: 0;

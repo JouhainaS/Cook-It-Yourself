@@ -26,14 +26,14 @@ get_header();
     font-size: 2.5rem;
     color: #3a5676;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .apropos-page h2 {
     font-size: 2rem;
     color: #3a5676;
     margin-bottom: 15px;
-    text-align: center;
+    text-align: left;
 }
 
 .apropos-page h3 {
