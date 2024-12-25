@@ -62,9 +62,16 @@ get_header();
     <div class="ingredients">
         <h2>Ingrédients</h2>
         <ul>
-            <?php foreach (get_post_meta(get_the_ID(), 'ingredients', true) as $ingredient): ?>
-                <li><?php echo $ingredient; ?></li>
-            <?php endforeach; ?>
+            <?php 
+            $ingredients = get_post_meta(get_the_ID(), 'ingredients', true);
+            if (is_array($ingredients)) {
+                foreach ($ingredients as $ingredient) {
+                    echo '<li>' . esc_html($ingredient) . '</li>';
+                }
+            } else {
+                echo '<li>Aucun ingrédient trouvé.</li>';
+            }
+            ?>
         </ul>
     </div>
 
@@ -76,9 +83,16 @@ get_header();
     <div class="instructions">
         <h2>Instructions</h2>
         <ol>
-            <?php foreach (get_post_meta(get_the_ID(), 'instructions', true) as $step): ?>
-                <li><?php echo $step; ?></li>
-            <?php endforeach; ?>
+            <?php 
+            $instructions = get_post_meta(get_the_ID(), 'instructions', true);
+            if (is_array($instructions)) {
+                foreach ($instructions as $step) {
+                    echo '<li>' . esc_html($step) . '</li>';
+                }
+            } else {
+                echo '<li>Aucune instruction trouvée.</li>';
+            }
+            ?>
         </ol>
     </div>
 
@@ -109,6 +123,7 @@ get_header();
     .recipe-header h1 {
         font-size: 2.5rem;
         font-weight: bold;
+        color: #3A5676; /* Changement de couleur */
         margin-bottom: 10px;
         text-align: center;
     }

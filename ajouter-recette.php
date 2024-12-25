@@ -1,5 +1,5 @@
 <?php
-/** Template Name: AjouterRecette - Page */
+/** Template Name: AjouterRecette - Page **/
 get_header();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -70,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <strong>Temps de Préparation:</strong> $prep_hours h $prep_minutes min <br>
             <strong>Temps de Cuisson:</strong> $cook_hours h $cook_minutes min ($cook_style) <br>
             <strong>Temps Total:</strong> $total_hours h $total_minutes min <br>
-            <strong>Température:</strong> $temperature °C <br>
             <strong>Difficulté:</strong> $difficulty <br>
             <strong>Ingrédients:</strong><pre>$ingredients_data</pre><br>
             <strong>Étapes:</strong><pre>$steps_data</pre><br>
@@ -78,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <strong>Type de repas:</strong> $meal_type <br>
             <strong>Type de cuisson:</strong> $cook_type <br>
             <strong>Type de cuisine:</strong> $cuisine_type <br>
-            <strong>Allergies:</strong> $allergies <br>
             <strong>Régime Alimentaire:</strong> $diet_type <br>
             <strong>Budget:</strong> $budget
         ";
@@ -107,25 +105,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="form-container">
     <h1>Ajouter une recette</h1>
     <style scoped>
+        
         .form-container {
             width: 90%;
             max-width: 1000px;
             margin: auto;
             background: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
         }
         .form-container h1 {
             text-align: center;
-            color: #333;
+            color: #3A5676;
         }
         .form-container label {
-            font-weight: bold;
+            font-weight: semi-bold;
             margin-top: 15px;
+            margin-bottom: 10px; /* Ajout d'espace entre le titre et le paragraphe explicatif */
             display: block;
-            color: #555;
+            color: #000;
         }
+
+        .form-container p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 15px; /* Ajout d'espace en dessous du paragraphe explicatif */
+        }
+
         .form-container input, .form-container select, .form-container textarea, .form-container button {
             width: 100%;
             padding: 10px;
@@ -179,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             height: 200px;
             background-color: #f4f8f6;
             border: 2px dashed #d1e7dd;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             margin-top: 10px;
             color: #6c757d;
@@ -194,6 +201,164 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .form-container .image-upload-label {
             display: inline-block;
         }
+
+        .ingredient-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        #ingredients-wrapper {
+            margin-top: 10px;
+        }
+
+
+        .ingredient-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .ingredient-input.quantity {
+            flex: 0.5; /* Pour que le champ Quantité soit plus petit */
+        }
+
+        .ingredient-input.measure {
+            flex: 0.8; /* Taille intermédiaire pour la mesure */
+        }
+
+        .ingredient-input.element {
+            flex: 1.7; /* Plus grand pour l'ingrédient */
+        }
+
+        button#add-step,
+        button#add-ingredient {
+            background-color: transparent; /* Supprime le fond */
+            color: #A8BAA7; /* Couleur du texte */
+            font-weight: bold; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            text-align: left; 
+            padding: 0; 
+            border: none; /* Supprime la bordure */
+            box-shadow: none; /* Supprime les ombres éventuelles */
+            outline: none; /* Supprime l'encadré lors du focus */
+        }
+
+        button#add-ingredient:hover,
+        button#add-step:hover {
+            text-decoration: underline; /* Ajout de soulignement sur hover */
+        }
+
+        button.cancel {
+            background-color: white;
+            color: #5692B2;
+            border: 1px solid #5692B2;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border-radius: 30px; /* Ajout de l'arrondi */
+            transition: all 0.3s ease;
+        }
+
+        button.cancel:hover {
+            background-color: #F4F9FC;
+            color: #407899;
+        }
+
+        button.submit {
+            background-color: #5692B2;
+            color: white;
+            border: 1px solid #5692B2;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border-radius: 30px; /* Ajout de l'arrondi */
+            transition: all 0.3s ease;
+        }
+
+        button.submit:hover {
+            background-color: #407899;
+            border-color: #407899;
+        }
+
+        div.cancelorsubmit {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end; /* Aligne les boutons à droite */
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        button.cancel, button.submit {
+            width: 200px; /* Réduction de la largeur des boutons */
+        }
+
+
+        .items-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 10px 0 20px;
+        }
+
+        .items-list label {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #A8BAA7;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .items-list label:hover {
+            background-color: #EBF4E7;
+            border-color: #A8BAA7;
+        }
+
+        .items-list input[type="checkbox"] {
+            display: none;
+        }
+
+        .items-list input[type="checkbox"]:checked + span {
+            font-weight: bold;
+            color: #A8BAA7;
+        }
+
+        .items-list input[type="checkbox"]:checked + span::before {
+            content: "✓ ";
+            color: #A8BAA7;
+            font-weight: bold;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea,
+        button#add-ingredient,
+        button#add-step {
+            border-radius: 10px; 
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 1rem;
+            margin-top: 5px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .form-container input:focus,
+        .form-container select:focus,
+        .form-container textarea:focus {
+            outline: none;
+            border-color: #A8BAA7;
+        }
+
+        
+
     </style>
 
     <?php if (!empty($message)) : ?>
@@ -204,12 +369,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="POST" enctype="multipart/form-data">
         <label for="title">Titre de la recette *</label>
-        <input type="text" name="title" id="title" required>
+        <input type="text" name="title" placeholder="Entre le titre de ta recette"  id="title" required>
 
         <label for="description">Description *</label>
-        <textarea name="description" id="description" rows="4" required></textarea>
+        <textarea name="description" placeholder="Décris ta recette de manière à faire saliver !" id="description" rows="4" required></textarea>
 
         <label for="image">Ajouter une photo *</label>
+
         <div class="image-upload">
             <label class="image-upload-label" for="image">
                 <span>+ Ajouter une photo</span>
@@ -218,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <label for="portions">Portions *</label>
-        <input type="number" name="portions" id="portions" required>
+        <input type="number" placeholder="Entre le titre de ta recette" name="portions" id="portions" required>
 
         <label for="prep_hours">Temps de Préparation *</label>
         <div class="dynamic-field">
@@ -230,14 +396,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="dynamic-field">
             <input type="number" name="cook_hours" placeholder="Hrs" required>
             <input type="number" name="cook_minutes" placeholder="Mins" required>
-            <select name="cook_style" required>
-                <option value="low">Cuisson lente</option>
-                <option value="high">Cuisson haute</option>
-            </select>
         </div>
-
-        <label for="temperature">Température (°C)</label>
-        <input type="number" name="temperature">
 
         <label for="difficulty">Difficulté *</label>
         <select name="difficulty" required>
@@ -246,31 +405,179 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="difficile">Difficile</option>
         </select>
 
-        <label>Ingrédients *</label>
+        <label for="ingredients">Ingrédients *</label>
+        <p style="font-size: 0.9rem; color: #555; margin-top: -10px; margin-bottom: 10px;">
+            Liste tes ingrédients un par un, en précisant les quantités (1, 2) et les mesures (tasses, cuillères). N’hésite pas à laisser libre cours à ta créativité et à donner des détails pour que ta recette soit encore plus claire et savoureuse !
+        </p>
         <div id="ingredients-wrapper">
-            <div class="dynamic-field">
-                <input type="text" name="quantity[]" placeholder="Quantité">
-                <select name="measure[]">
+            <div class="ingredient-group">
+                <input type="text" name="quantity[]" placeholder="Qté" class="ingredient-input quantity">
+                <select name="measure[]" class="ingredient-input measure">
                     <option value="g">g</option>
                     <option value="kg">kg</option>
                     <option value="ml">ml</option>
+                    <option value="l">l</option>
+                    <option value="càc">càc</option>
+                    <option value="càs">càs</option>
+                    <option value="unité">unité</option>
                 </select>
-                <input type="text" name="ingredient[]" placeholder="Ingrédient">
+                <input type="text" name="ingredient[]" placeholder="Élément" class="ingredient-input element">
             </div>
         </div>
         <button type="button" id="add-ingredient">+ Ajouter un ingrédient</button>
 
         <label>Instructions *</label>
+        <p style="font-size: 0.9rem; color: #555; margin-top: -10px; margin-bottom: 10px;">
+            Décompose ta recette en instructions claires, étape par étape.
+        </p>
         <div id="steps-wrapper">
             <textarea name="steps[]" placeholder="Étape 1"></textarea>
         </div>
         <button type="button" id="add-step">+ Ajouter une étape</button>
 
-        <label for="tips">Tips</label>
-        <textarea name="tips" id="tips"></textarea>
 
-        <button type="submit">Soumettre la recette</button>
+        <label for="tips">Tips</label>
+        <textarea name="tips" placeholder="Partage tes secrets de cuisine ! Que ce soit des astuces pour un meilleur résultat au four, des substitutions d'ingrédients ou des conseils pratiques pour réussir ta recette à coup sûr. Toute info qui peut faire de ton plat un vrai succès est la bienvenue !" id="tips"></textarea>
+
+        <div class="items-container">
+            <label>Type de repas :</label>
+            <div class="items-list">
+                <label>
+                    <input type="checkbox" name="type_de_repas[]" value="Petit déjeuner">
+                    <span>Petit déjeuner</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_repas[]" value="Déjeuner">
+                    <span>Déjeuner</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_repas[]" value="Dîner">
+                    <span>Dîner</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_repas[]" value="Dessert">
+                    <span>Dessert</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_repas[]" value="Boissons">
+                    <span>Boissons</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="items-container">
+            <label>Type de cuisson :</label>
+            <div class="items-list">
+                <label>
+                    <input type="checkbox" name="type_de_cuisson[]" value="Micro-ondes">
+                    <span>Micro-ondes</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_cuisson[]" value="Four">
+                    <span>Four</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_cuisson[]" value="Plaque de cuisson">
+                    <span>Plaque de cuisson</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_cuisson[]" value="Sans cuisson">
+                    <span>Sans cuisson</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_cuisson[]" value="Friteuse">
+                    <span>Friteuse</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="type_de_cuisson[]" value="Grill">
+                    <span>Grill</span>
+                </label>
+            </div>
+        </div>
+
+
+        <!-- Cuisine -->
+        <label>Cuisine :</label>
+        <div class="items-list">
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Pakistanais">
+                <span>Pakistanais</span>
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Italien">
+                <span>Italien</span>
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Américain">
+                <span>Américain</span>
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Méditerranéen">
+                <span>Méditerranéen</span>
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Asiatique">
+                <span>Asiatique</span>
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Orientale">
+                <span>Orientale</span>
+            </label>
+        </div>
+
+        <!-- Régime alimentaire -->
+        <label>Régime alimentaire :</label>
+        <div class="items-list">
+            <label>
+                <input type="checkbox" name="regime_alimentaire[]" value="Végétarien">
+                <span>Végétarien</span>
+            </label>
+            <label>
+                <input type="checkbox" name="regime_alimentaire[]" value="Vegan">
+                <span>Vegan</span>
+            </label>
+            <label>
+                <input type="checkbox" name="regime_alimentaire[]" value="Healthy">
+                <span>Healthy</span>
+            </label>
+            <label>
+                <input type="checkbox" name="regime_alimentaire[]" value="Sans sucre">
+                <span>Sans sucre</span>
+            </label>
+            <label>
+                <input type="checkbox" name="regime_alimentaire[]" value="Halal">
+                <span>Halal</span>
+            </label>
+            <label>
+                <input type="checkbox" name="regime_alimentaire[]" value="Casher">
+                <span>Casher</span>
+            </label>
+        </div>
+
+        <!-- Budget -->
+        <label>Budget :</label>
+        <div class="items-list">
+            <label>
+                <input type="checkbox" name="budget[]" value="0 - 5 €">
+                <span>0 - 5 €</span>
+            </label>
+            <label>
+                <input type="checkbox" name="budget[]" value="5 - 10 €">
+                <span>5 - 10 €</span>
+            </label>
+            <label>
+                <input type="checkbox" name="budget[]" value="10 - 15 €">
+                <span>10 - 15 €</span>
+            </label>
+        </div>
+
+
+        <div class=cancelorsubmit>
+            <button type="button" class="cancel" onclick="window.location.href='<?php echo site_url('/'); ?>'">Annuler</button>
+            <button type="submit" class="submit">Soumettre</button>
+        </div>
     </form>
+
 </div>
 
 <script>

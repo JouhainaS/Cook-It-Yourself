@@ -4,7 +4,7 @@
     Perdu ?
 
     <a href="<?php echo home_url('/'); ?>">
-        Page home
+        Page accueil
     </a>
 </div>
 

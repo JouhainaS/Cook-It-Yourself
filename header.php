@@ -14,7 +14,7 @@ get_header(); // Charge le header du site WordPress (fichier header.php)
     
     <!-- Intégration du CSS de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>/* Global Styles */
+    <style>
  *,
  *::before,
  *::after {
@@ -197,7 +197,8 @@ get_header(); // Charge le header du site WordPress (fichier header.php)
      }
   } 
  </style>
-    <?php wp_head(); ?> 
+
+    <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
@@ -205,77 +206,52 @@ get_header(); // Charge le header du site WordPress (fichier header.php)
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg py-3 custom-navbar">
         <div class="container">
-        <!-- Logo Section -->
-        <a class="navbar-brand d-flex align-items-center me-4" href="<?php echo home_url('/'); ?>">
-            <?php
-            if (function_exists('the_custom_logo') && has_custom_logo()) {
-                the_custom_logo();
-            } else {
-                // Affiche le logo par défaut si aucun logo personnalisé n'est défini
-                ?>
-                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logo/logo_horizontal.svg" alt="Cook It Yourself Logo" class="logo-image me-2">
+            <!-- Logo Section -->
+            <a class="navbar-brand d-flex align-items-center me-4" href="<?php echo home_url('/'); ?>">
                 <?php
-            }
-            ?>
-        </a>
-
+                if (function_exists('the_custom_logo') && has_custom_logo()) {
+                    the_custom_logo();
+                } else {
+                    // Affiche le logo par défaut si aucun logo personnalisé n'est défini
+                    ?>
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logo/logo_horizontal.svg" alt="Cook It Yourself Logo" class="logo-image me-2">
+                    <?php
+                }
+                ?>
+            </a>
 
             <!-- Toggle button for mobile view -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-                <!-- Menu -->
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav me-auto">
-                        <!-- Dropdown Menu for Recipe Categories -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                RECETTES
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php
-                                // Liste des slugs des catégories de recettes à afficher
-                                $recipe_categories = array('dejeuner', 'dessert', 'boisson', 'petit-dejeuner', 'diner');
-                                
-                                // Afficher les sous-catégories de recettes uniquement
-                                $categories = get_categories(array(
-                                    'taxonomy' => 'category',      // Taxonomie 'category'
-                                    'hide_empty' => false,         // Inclure même les catégories vides
-                                    'slug' => $recipe_categories   // Filtrer uniquement par slugs des catégories spécifiques
-                                ));
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'primary_menu', // Nom de l'emplacement défini dans functions.php
+                    'container'      => false,         // Pas de conteneur HTML
+                    'menu_class'     => 'navbar-nav me-auto', // Classes CSS personnalisées
+                    'fallback_cb'    => false          // Pas de menu par défaut
+                ));
+                ?>
+            </div>
 
-                                foreach ($categories as $category) {
-                                    echo '<li><a class="dropdown-item" href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></li>';
-                                }
-                                ?>
-                            </ul>
-                        </li>
+            <!-- Search Bar -->
+            <form role="search" method="get" class="d-flex align-items-center me-3" action="<?php echo home_url('/'); ?>">
+                <input class="form-control rounded-pill search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
+            </form>
 
-                        <!-- Lien vers "Trucs et Astuces" -->
-                        <li class="nav-item">
-                            <a class="nav-link fw-normal custom-link" href="<?php echo site_url('/trucs-et-astuces'); ?>">TRUCS ET ASTUCES</a>
-                        </li>
+            <!-- Add Recipe Button -->
+            <a href="<?php echo site_url('/ajouter-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
 
-                        <!-- Lien vers la page "À Propos" -->
-                        <li class="nav-item">
-                            <a class="nav-link fw-normal custom-link" href="<?php echo site_url('/about-page'); ?>">À PROPOS</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Search Bar -->
-                <form role="search" method="get" class="d-flex align-items-center me-3" action="<?php echo home_url('/'); ?>">
-                    <input class="form-control rounded-pill search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
-                </form>
-                
-                <!-- Add Recipe Button -->
-                <a href="<?php echo site_url('/ajouter-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
-
-                <!-- Profile Icon -->
-                <div class="profile-icon d-flex align-items-center ms-3">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
-                </div>
+            <!-- Profile Icon -->
+            <div class="profile-icon d-flex align-items-center ms-3">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
             </div>
         </div>
     </nav>
+
+    <?php wp_footer(); ?>
+</body>
+</html>
