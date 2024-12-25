@@ -3,7 +3,7 @@
 get_header();
 ?>
 
-<style> /* Global Styles */
+<style> 
 .apropos-page body {
     font-family: 'Poppins', sans-serif;
     margin: ;
@@ -13,7 +13,6 @@ get_header();
     line-height: 1.6;
 }
 
-/* Main Section */
 .apropos-page main {
     padding: 40px 20px;
     max-width: 1200px;
@@ -21,11 +20,11 @@ get_header();
     background-color: white;
 }
 
-
 .apropos-page h1 {
     font-size: 2.5rem;
     color: #3a5676;
     text-align: center;
+    margin-top: 60px; 
     margin-bottom: 60px;
 }
 
@@ -50,7 +49,6 @@ get_header();
     line-height: 1.8;
 }
 
-/* Lists */
 .apropos-page ul {
     list-style-type: disc;
     margin: 20px 0;
@@ -63,7 +61,6 @@ get_header();
     margin-bottom: 10px;
 }
 
-/* Buttons */
 .apropos-page .btn {
     background-color: #ffb053;
     color: white;
@@ -80,7 +77,6 @@ get_header();
     background-color: #dc9340;
 }
 
-/* Images */
 .apropos-page img {
     max-width: 100%;
     height: auto;
@@ -90,42 +86,40 @@ get_header();
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Dividers */
-.apropos-page .intro, .what, .why, .together, .objectif {
+
+.apropos-page .intro, .what, .why, .together{
     margin-bottom: 40px;
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
 }
 
-/* Together Section */
 .apropos-page .together {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px; /* Espacement entre l'image et le texte */
+    gap: 20px; 
     margin-bottom: 40px;
 }
 
 .apropos-page .together-content {
-    flex: 1; /* Le texte prendra 50% ou s'ajustera */
+    flex: 1;
     max-width: 50%;
 }
 
 .apropos-page .together-image {
-    flex: 1; /* L'image prendra 50% ou s'ajustera */
+    flex: 1; 
     max-width: 50%;
     display: flex;
-    justify-content: center; /* Centrer l'image horizontalement */
+    justify-content: center; 
 }
 
 .apropos-page .together img {
-    max-width: 100%; /* L'image ne dépasse pas son conteneur */
+    max-width: 100%; 
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Call-to-Action */
 .apropos-page .objectif p {
     font-size: 1.2rem;
     font-weight: bold;
@@ -137,10 +131,14 @@ get_header();
     text-align: center;
     display: block;
     margin: 0 auto;
+    margin-bottom: 40px; 
     max-width: 200px;
 }
 
-/* Container for Dynamic Content */
+.apropos-page .img {
+    box-shadow: 0px 1px 4px rgba(86, 146, 178, 0.45);
+}
+
 .apropos-page .container {
     padding: 20px;
     margin-top: 40px;
@@ -150,10 +148,51 @@ get_header();
 }
 .container {
     max-width: 1200px;
-    margin: 0 auto; /* Centre le conteneur */
+    margin: 0 auto; 
     padding-left: 20px;
     padding-right: 20px;
 }
+.time-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; 
+    margin: 40px 0;
+    text-align: center;
+}
+
+.time-box {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-box img {
+    height: auto;
+    max-height: 80px;
+    width: auto; 
+    margin-bottom: 10px; 
+    border: none;
+    box-shadow: none; 
+}
+
+
+
+.time-box h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #8DA08D;
+    margin-bottom: 5px;
+}
+
+.time-box p {
+    font-size: 1rem;
+    color: black;
+    margin: 0;
+}
+
 
 /* Media Queries */
 @media (max-width: 768px) {
@@ -183,12 +222,12 @@ get_header();
     }
 
     .together {
-        flex-direction: column; /* Les éléments seront empilés */
-        text-align: center; /* Centrer le texte */
+        flex-direction: column; 
+        text-align: center; 
     }
 
     .together-content, .together-image {
-        max-width: 100%; /* Les éléments prennent toute la largeur */
+        max-width: 100%; 
     }
 }
 </style> 
@@ -197,7 +236,8 @@ get_header();
 <h1>Cook'It Yourself : la cuisine étudiante, fun et accessible</h1>
 
 <div class="intro">
-  <h2>Hey ! Bienvenue sur Cook'It Yourself</h2>
+<h2>Hey ! 👋 Bienvenue sur Cook'It Yourself</h2>
+
   <h3>Une plateforme pour galérer moins en cuisine et manger mieux sans exploser ton budget.</h3>
   <p><strong>Pourquoi on fait tout ça ?</strong>
   <br>Parce qu’être étudiant, c’est jongler entre les cours, le boulot et les petits moyens. Cuisiner ne doit pas être une galère. On t’aide à bien manger tout en t’amusant, avec une communauté trop cool.</p>
@@ -211,12 +251,24 @@ get_header();
 
 <div class="why">
   <h3>Pourquoi tu vas kiffer ?</h3>
-  <p><strong>Des solutions pour toutes les galères.</strong>
-  <ul>
-    <li>Rapide et efficace : Des recettes prêtes en 20 minutes max.</li>
-    <li>Pour tout le monde : Végé, végan ou petit budget, on a ce qu’il te faut.</li>
-    <li>Trop pratique : Cherche des idées avec les ingrédients qui traînent dans ton frigo.</li>
-  </ul>
+  <div class="time-section">
+    <div class="time-box">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/rapide.svg" alt="Rapide et efficace">
+        <h4>Rapide et efficace</h4>
+        <p>Des recettes prêtes en 20 minutes max.</p>
+    </div>
+    <div class="time-box">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/ttlemonde.svg" alt="Pour tout le monde">
+        <h4>Pour tout le monde</h4>
+        <p>Végé, végan ou petit budget, on a ce qu’il te faut.</p>
+    </div>
+    <div class="time-box">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/frigo.svg" alt="Trop pratique">
+        <h4>Trop pratique</h4>
+        <p>Cherche des idées avec les ingrédients qui traînent dans ton frigo.</p>
+    </div>
+</div>
+
 </div>
 
 <div class="together">
