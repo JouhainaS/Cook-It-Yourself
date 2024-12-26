@@ -642,59 +642,58 @@ get_header();
 
 
 @media (max-width: 768px) {
-    .recipe-page {
-        padding: 10px;
-    }
-
-    .recipe-details .detail {
-        flex: 1 1 100%;
+    .recipe-header h1 {
+        font-size: 2rem;
     }
 
     .recipe-header .rating .star {
         font-size: 1.2rem;
     }
-}
 
-@media (max-width: 480px) {
-    .recipe-page h1 {
-        font-size: 1.8rem;
-    }
-
-    .recipe-page h2 {
-        font-size: 1.5rem;
-    }
-
-    .recipe-instructions ol li {
-        padding-left: 20px;
-    }
-
-    .recipe-instructions ol li::before {
-        width: 25px;
-        height: 25px;
-        font-size: 0.9rem;
+    .recipe-details {
+        flex-wrap: wrap;
+        gap: 30px;
     }
 
     .recipe-details .detail {
-        flex: 1 1 100%;
+        width: 48%;
     }
 
-    .add-review .stars label {
-        font-size: 1.2rem;
+    .social-share {
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Réduction de l'espace entre les boutons */
+        flex-wrap: wrap;
     }
 
-    .recipe-actions {
-        flex-direction: column;
+    .social-share a {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
         align-items: center;
-        gap: 20px;
+        justify-content: center;
+    }
+
+    .social-share img {
+        width: 16px; 
+        height: 16px;
     }
 
     .print-button {
-        width: 100%;
-        justify-content: center;
+        padding: 5px 10px; 
+        font-size: 0.8rem; 
+    }
+
+    .add-review textarea {
+        font-size: 0.9rem;
+    }
+
+    .add-review button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
     }
 }
-
-@media print {
 
 @media print {
     /* Cache tout sauf la partie à imprimer */
