@@ -174,8 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             align-items: center;
             height: 200px;
-            background-color: #f4f8f6;
-            border: 2px dashed #d1e7dd;
+            background-color: #EBF4E7;
+            border: 2px dashed #BBD6B0;
             border-radius: 10px;
             cursor: pointer;
             margin-top: 10px;
@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 16px;
         }
         .form-container .image-upload:hover {
-            background-color: #e9f5f0;
+            background-color:rgb(219, 230, 215);
         }
         .form-container .image-upload input {
             display: none;
@@ -242,6 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         button#add-step:hover {
             text-decoration: underline;
         }
+
 
         button.cancel {
             background-color: white;
@@ -346,6 +347,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             outline: none;
             border-color: #A8BAA7;
         }
+   
     </style>
 
     <?php if (!empty($message)) : ?>
