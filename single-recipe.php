@@ -47,7 +47,7 @@ get_header();
 
     <div class="recipe-image">
         <?php if (has_post_thumbnail()): ?>
-            <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
+            <?php the_post_thumbnail('large', ['class' => 'custom-img']); ?>
         <?php endif; ?>
     </div>
 

@@ -55,7 +55,17 @@ get_header();
     }
 
     .card-title:hover {
-        text-decoration: underline; /* Soulignement au survol du titre */
+        text-decoration: none; /* Pas de soulignement au survol */
+        color: #5692B2; /* Change la couleur au survol */
+    }
+
+    a {
+        text-decoration: none; /* Supprime la décoration par défaut des liens */
+        color: inherit; /* Utilise la couleur par défaut du texte */
+    }
+
+    a:hover {
+        text-decoration: none; /* Pas de soulignement au survol des liens */
     }
 
     .recipe-meta {
@@ -250,11 +260,10 @@ get_header();
                         <a href="<?php the_permalink(); ?>" class="card-link">
                             <div class="card">
                                 <?php if (has_post_thumbnail()) : ?>
-                                    <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top" alt="<?php the_title(); ?>">
+                                    <?php the_post_thumbnail('large', ['class' => 'custom-img']); ?>
                                 <?php else : ?>
                                     <div class="placeholder" style="height: 180px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #aaa;">Image indisponible</div>
                                 <?php endif; ?>
-
                                 <div class="card-body">
                                     <h5 class="card-title"><?php the_title(); ?></h5>
                                     <p class="recipe-meta">

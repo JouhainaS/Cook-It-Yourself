@@ -414,7 +414,7 @@ get_header();
                 </a>
                 <!-- Déjeuner -->
                 <a href="<?php echo home_url('dejeuner.php'); ?>" class="category-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dej.svg" alt="Déjeuner" class="category-icon">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dejeuner.svg" alt="Déjeuner" class="category-icon">
                     <span>Déjeuner</span>
                 </a>
                 <!-- Dîner -->

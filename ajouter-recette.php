@@ -1,5 +1,5 @@
 <?php
-/** Template Name: ajouter-recette **/
+/** Template Name: ajouter-recette - Page **/
 get_header();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
