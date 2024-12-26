@@ -275,3 +275,11 @@ function save_comment_rating($comment_id) {
     }
 }
 add_action('comment_post', 'save_comment_rating');
+
+function force_content_headings_to_h2($content) {
+    // Convertit les balises <h1>...<h6> en <h2> uniquement dans the_content
+    $content = preg_replace('/<h[1-6]([^>]*)>/i', '<h2$1>', $content);
+    $content = preg_replace('/<\/h[1-6]>/i', '</h2>', $content);
+    return $content;
+}
+add_filter('the_content', 'force_content_headings_to_h2');

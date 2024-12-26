@@ -339,8 +339,6 @@ get_header();
     margin-top: 10px;
 }
 
-
-
 .recipe-actions {
     display: flex;
     align-items: center;
