@@ -50,6 +50,34 @@ get_header();
             <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
         <?php endif; ?>
     </section>
+    
+    <section class="recipe-actions-section">
+        <div class="container">
+            <div class="recipe-actions">
+                <!-- Bouton IMPRIMER -->
+                <button class="print-button" onclick="printSpecificSections();">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/imprimer.svg" alt="Imprimer">
+                    <span>IMPRIMER</span>
+                </button>
+
+                <!-- Partage sur les réseaux sociaux -->
+                <div class="social-share">
+                    <a href="#=<?php echo urlencode(get_permalink()); ?>" target="_blank" title="Partager sur TikTok">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/tiktok-vert.svg" alt="TikTok">
+                    </a>
+                    <a href="#=<?php echo urlencode(get_permalink()); ?>" target="_blank" title="Partager sur Pinterest">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/pinterest-vert.svg" alt="Pinterest">
+                    </a>
+                    <a href="#=<?php echo urlencode(get_permalink()); ?>" target="_blank" title="Partager sur Instagram">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/insta-vert.svg" alt="Instagram">
+                    </a>
+                    <a href="mailto:?subject=Découvrez cette recette&body=Voici une recette qui pourrait vous plaire : <?php echo get_permalink(); ?>" title="Envoyer par e-mail">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/mail-vert.svg" alt="E-mail">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Section Description -->
     <section class="recipe-description">
@@ -103,7 +131,6 @@ get_header();
                 ?>
             </span>
         </div>
-
     </section>
 
     <!-- Section Ingrédients -->
@@ -274,20 +301,20 @@ get_header();
 
 /* Section recipe-header */ 
 .recipe-header {
-    text-align: center; /* Centrer le texte horizontalement */
-    padding: 20px; /* Ajouter un peu de padding */
+    text-align: center; 
+    padding: 20px; 
 }
 
 .recipe-header h1 {
     font-size: 2.5rem;
-    margin-bottom: 10px; /* Espacement entre le titre et les autres éléments */
+    margin-bottom: 10px;
 }
 
 .recipe-header .rating {
     display: flex;
-    justify-content: center; /* Centrer les étoiles et la note */
+    justify-content: center;
     align-items: center;
-    gap: 5px; /* Espacement entre les étoiles et le texte */
+    gap: 5px; 
     margin-top: 10px;
 }
 
@@ -313,42 +340,103 @@ get_header();
 }
 
 
+
+.recipe-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.print-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #A8BAA7;
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #A8BAA7;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.print-button:hover {
+    background-color: #EBF4E7;
+    color: #3A5676;
+}
+
+.print-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.social-share {
+    display: flex;
+    gap: 15px;
+}
+
+.social-share a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #A8BAA7;
+    border-radius: 50%;
+    background-color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.social-share a:hover {
+    background-color: #EBF4E7;
+    border-color: #3A5676;
+}
+
+.social-share img {
+    width: 20px;
+    height: 20px;
+}
+
 /* Section Détails */
 .recipe-details {
     display: flex;
-    justify-content: center; /* Centrer les éléments horizontalement */
-    align-items: center; /* Centrer les éléments verticalement */
-    background-color: #EBF4E7; /* Fond vert clair */
-    border-radius: 12px; /* Coins arrondis */
-    padding: 20px; /* Espacement interne */
-    gap: 20px; /* Espacement entre les éléments */
+    justify-content: center;
+    align-items: center; 
+    background-color: #EBF4E7; 
+    border-radius: 12px; 
+    padding: 20px;
+    gap: 20px; 
 }
 
 .recipe-details .detail {
-    text-align: center; /* Centrer le contenu à l'intérieur de chaque détail */
-    display: flex; /* Utiliser flexbox pour centrer verticalement */
-    flex-direction: column; /* Empile les éléments verticalement */
-    align-items: center; /* Centre les éléments horizontalement */
-    justify-content: center; /* Centre les éléments verticalement */
+    text-align: center;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
     padding: 10px;
-    flex: 1; /* Tous les détails occupent un espace égal */
+    flex: 1; 
 }
 
 .recipe-details .detail img {
     height: 60px;
-    margin-bottom: 10px; /* Espacement entre l'image et le texte */
+    margin-bottom: 10px; 
 }
 
 .recipe-details .detail p {
-    font-size: 1rem; /* Taille de police pour le titre */
-    font-weight: bold; /* Titre en gras */
-    margin: 5px 0; /* Espacement vertical */
-    color: #3A5676; /* Couleur sombre pour le titre */
+    font-size: 1rem;
+    font-weight: bold; 
+    margin: 5px 0; 
+    color: #5692B2;
 }
 
 .recipe-details .detail span {
-    font-size: 0.9rem; /* Taille de police pour le sous-titre */
-    color: #A8BAA7; /* Couleur douce pour les sous-titres */
+    font-size: 0.9rem; 
+    color: #3A5676; 
 }
 
 /* Section Image */
@@ -552,16 +640,6 @@ get_header();
     color: #A8BAA7;
 }
 
-/* Responsiveness */
-@media (max-width: 1024px) {
-    .recipe-details {
-        flex-wrap: wrap;
-    }
-
-    .recipe-details .detail {
-        flex: 1 1 calc(50% - 10px);
-    }
-}
 
 @media (max-width: 768px) {
     .recipe-page {
@@ -603,10 +681,153 @@ get_header();
     .add-review .stars label {
         font-size: 1.2rem;
     }
+
+    .recipe-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .print-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media print {
+
+@media print {
+    /* Cache tout sauf la partie à imprimer */
+    body * {
+        visibility: hidden;
+    }
+
+    .recipe-page,
+    .recipe-page * {
+        visibility: visible;
+    }
+
+    .recipe-page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    /* Ajuste la section des détails */
+    .recipe-details {
+        display: flex;
+        justify-content: space-between; 
+        gap: 10px;
+        padding: 10px;
+        background: none; 
+        border: none; 
+    }
+
+    .recipe-details .detail {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .recipe-details .detail p {
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #000;
+        margin: 0;
+    }
+
+    .recipe-details .detail span {
+        font-size: 0.9rem;
+        color: #000;
+    }
+
+    /* Ajuste la section de l'image */
+    .recipe-image img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Cache les icônes dans la section des détails */
+    .recipe-details .detail img {
+        display: none;
+    }
+
+    /* Ajuste la section Description */
+    .recipe-description p {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+
+    /* Ajuste la section des astuces du chef */
+    .chef-tips {
+        border: none;
+        padding: 10px;
+        background: none;
+    }
+
+    .chef-tips h2 {
+        font-size: 1.2rem;
+        color: #000;
+    }
+
+    .chef-tips p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
 }
 
 
+
 </style>
+
+<script>
+    function printSpecificSections() {
+        const originalContent = document.body.innerHTML;
+
+        // Sélection des sections désirées
+        const header = document.querySelector('.recipe-header').outerHTML;
+        const image = document.querySelector('.recipe-image').outerHTML;
+        const details = document.querySelector('.recipe-details').cloneNode(true);
+        const description = document.querySelector('.recipe-description').outerHTML;
+        const ingredients = document.querySelector('.recipe-ingredients').outerHTML;
+        const instructions = document.querySelector('.recipe-instructions').outerHTML;
+        const tips = document.querySelector('.chef-tips').outerHTML;
+
+        // Suppression des icônes dans les détails
+        const detailIcons = details.querySelectorAll('img');
+        detailIcons.forEach(icon => icon.remove());
+
+        // Contenu imprimable
+        const printableContent = `
+            <div class="printable-recipe">
+                ${header}
+                ${image}
+                ${description}
+                ${details.outerHTML}
+                ${ingredients}
+                ${instructions}
+                ${tips}
+            </div>
+        `;
+
+        // Remplacement du contenu
+        document.body.innerHTML = printableContent;
+
+        // Impression
+        window.print();
+
+        // Restaurer le contenu original
+        document.body.innerHTML = originalContent;
+        location.reload();
+    }
+</script>
 
 <?php
 get_footer();
