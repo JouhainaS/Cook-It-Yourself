@@ -1,5 +1,5 @@
 <?php
-/* Template : accueil */
+/* Template : Index - Page */
 get_header(); 
 ?>
 <style>/* Section Hero */
@@ -94,7 +94,7 @@ get_header();
  
  .hero-section .search-bar:focus {
    outline: none;
-   box-shadow: 0px 1px 4px rgba(86, 146, 178, 0.45);
+   box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
  }
  
  .hero-section {
@@ -124,7 +124,7 @@ get_header();
    background-color: white;
    border-radius: 10px;
    overflow: hidden;
-   box-shadow: 0px 1px 4px rgba(86, 146, 178, 0.45);
+   box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
    width: 16rem;
    text-align: left;
    transition: transform 0.2s ease;
@@ -228,7 +228,7 @@ get_header();
     align-items: stretch;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0px 1px 4px rgba(86, 146, 178, 0.45);
+    box-shadow: 0 4px 10px rgba(86, 146, 178, 0.41);
 
     overflow: hidden;
     transition: transform 0.3s ease;
@@ -414,7 +414,7 @@ get_header();
                 </a>
                 <!-- Déjeuner -->
                 <a href="<?php echo home_url('dejeuner.php'); ?>" class="category-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dej.svg" alt="Déjeuner" class="category-icon">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dejeuner.svg" alt="Déjeuner" class="category-icon">
                     <span>Déjeuner</span>
                 </a>
                 <!-- Dîner -->
@@ -464,10 +464,6 @@ get_header();
                             </div>
                             <div class="article-content">
                                 <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <div class="article-meta">
-                                    <span class="author">Par <?php the_author(); ?></span>
-                                    <span class="date">| Publié le <?php echo get_the_date(); ?></span>
-                                </div>
                                 <p><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
                             </div>
                         </div>

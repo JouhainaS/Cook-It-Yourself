@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <style>
-    /* Style global de la page */
+
     .article-page {
         font-family: 'Poppins', sans-serif;
         color: #333;
@@ -19,7 +19,6 @@
         margin-bottom: 20px;
     }
 
-    /* Tous les titres dans le contenu de l'article */
     .custom-content h2 {
         font-size: 1.5rem;
         color: #3A5676;
@@ -31,48 +30,45 @@
     .custom-content img {
         width: 100%;
         height: auto;
-        object-fit: cover; /* Ajuste l'image pour qu'elle remplisse son conteneur */
-        border-radius: 15px; /* Ajout de coins arrondis */
-        margin: 20px 0; /* Espace autour de l'image (facultatif) */
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optionnel : effet d'ombre */
+        object-fit: cover; 
+        border-radius: 15px; 
+        margin: 20px 0; 
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* Arrondi pour les images dans les cartes */
     .related-articles .article-thumbnail img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 10px 10px 0 0; /* Arrondi uniquement sur les coins supérieurs */
+        border-radius: 10px 10px 0 0;
     }
     .related-articles .article-thumbnail {
             width: 100%;
-            height: 50%; /* L'image occupe la moitié de la carte */
+            height: 50%;
             overflow: hidden;
         }
 
-    /* Espacement entre les éléments de liste */
     .article-page ul,
     .article-page ol {
-        margin-top: 20px; /* Espace au-dessus de la liste */
-        margin-bottom: 20px; /* Espace en-dessous de la liste */
-        padding-left: 20px; /* Indentation pour les listes */
+        margin-top: 20px; 
+        margin-bottom: 20px;
+        padding-left: 20px; 
     }
 
     .article-page ul li,
     .article-page ol li {
-        margin-bottom: 10px; /* Espacement entre les éléments */
-        line-height: 1.8; /* Interligne pour une meilleure lisibilité */
+        margin-bottom: 10px; 
+        line-height: 1.8; 
     }
 
-    /* Disposition des cartes : flex pour affichage horizontal */
     .related-articles .articles-list {
-        display: flex; /* Utilisation de flexbox */
-        flex-wrap: nowrap; /* Pas de retour à la ligne */
-        gap: 15px; /* Espacement entre les cartes */
-        overflow-x: auto; /* Scroll horizontal si nécessaire */
+        display: flex; 
+        flex-wrap: nowrap;
+        gap: 15px; 
+        overflow-x: auto;
         padding-bottom: 10px;
-        scroll-snap-type: x mandatory; /* Snap scrolling activé */
-        max-width: 100%; /* Empêche les débordements */
+        scroll-snap-type: x mandatory; 
+        max-width: 100%;
     }
 
     /* Styles individuels des cartes */
