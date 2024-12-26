@@ -664,3 +664,20 @@ h6 { font-size: 1rem; }
     }
  }
  
+ .search-bar {
+  width: 100%;
+  max-width: 800px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #333;
+}
+.search-bar::placeholder {
+  color: #aaa;
+}
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
