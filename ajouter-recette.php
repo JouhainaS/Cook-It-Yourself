@@ -11,22 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prep_minutes = sanitize_text_field($_POST['prep_minutes']);
     $cook_hours = sanitize_text_field($_POST['cook_hours']);
     $cook_minutes = sanitize_text_field($_POST['cook_minutes']);
-    $cook_style = sanitize_text_field($_POST['cook_style']);
-    $total_hours = sanitize_text_field($_POST['total_hours']);
-    $total_minutes = sanitize_text_field($_POST['total_minutes']);
-    $temperature = sanitize_text_field($_POST['temperature']);
     $difficulty = sanitize_text_field($_POST['difficulty']);
     $ingredients = $_POST['ingredient'] ?? [];
     $quantities = $_POST['quantity'] ?? [];
     $measures = $_POST['measure'] ?? [];
     $steps = $_POST['steps'] ?? [];
     $tips = sanitize_textarea_field($_POST['tips']);
-    $meal_type = sanitize_text_field($_POST['meal_type']);
-    $cook_type = sanitize_text_field($_POST['cook_type']);
-    $cuisine_type = sanitize_text_field($_POST['cuisine_type']);
-    $allergies = isset($_POST['allergies']) ? implode(', ', $_POST['allergies']) : '';
-    $diet_type = sanitize_text_field($_POST['diet_type']);
-    $budget = sanitize_text_field($_POST['budget']);
+    $meal_types = $_POST['type_de_repas'] ?? [];
+    $cook_types = $_POST['type_de_cuisson'] ?? [];
+    $cuisines = $_POST['cuisine'] ?? [];
+    $diets = $_POST['regime_alimentaire'] ?? [];
+    $budgets = $_POST['budget'] ?? [];
 
     // Gestion de l'image
     $attachment_id = null;
@@ -50,40 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!empty($title) && !empty($description)) {
-        // Préparer les données des ingrédients et étapes
-        $ingredients_data = '';
-        foreach ($ingredients as $key => $ingredient) {
-            $quantity = $quantities[$key] ?? '';
-            $measure = $measures[$key] ?? '';
-            $ingredients_data .= "$quantity $measure $ingredient\n";
-        }
-
-        $steps_data = '';
-        foreach ($steps as $key => $step) {
-            $steps_data .= "Étape " . ($key + 1) . ": $step\n";
-        }
-
-        // Stocker toutes les données comme contenu
-        $post_content = "
-            <strong>Description:</strong> $description <br>
-            <strong>Portions:</strong> $portions <br>
-            <strong>Temps de Préparation:</strong> $prep_hours h $prep_minutes min <br>
-            <strong>Temps de Cuisson:</strong> $cook_hours h $cook_minutes min ($cook_style) <br>
-            <strong>Temps Total:</strong> $total_hours h $total_minutes min <br>
-            <strong>Difficulté:</strong> $difficulty <br>
-            <strong>Ingrédients:</strong><pre>$ingredients_data</pre><br>
-            <strong>Étapes:</strong><pre>$steps_data</pre><br>
-            <strong>Tips:</strong> $tips <br>
-            <strong>Type de repas:</strong> $meal_type <br>
-            <strong>Type de cuisson:</strong> $cook_type <br>
-            <strong>Type de cuisine:</strong> $cuisine_type <br>
-            <strong>Régime Alimentaire:</strong> $diet_type <br>
-            <strong>Budget:</strong> $budget
-        ";
-
         $post_id = wp_insert_post([
             'post_title' => $title,
-            'post_content' => $post_content,
+            'post_content' => $description,
             'post_type' => 'recipe',
             'post_status' => 'publish',
         ]);
@@ -92,6 +56,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($attachment_id) {
                 set_post_thumbnail($post_id, $attachment_id);
             }
+
+            // Enregistrement des métadonnées
+            update_post_meta($post_id, 'portions', $portions);
+            update_post_meta($post_id, 'prep_time', "$prep_hours:$prep_minutes");
+            update_post_meta($post_id, 'cook_time', "$cook_hours:$cook_minutes");
+            update_post_meta($post_id, 'difficulty', $difficulty);
+            update_post_meta($post_id, 'tips', $tips);
+            update_post_meta($post_id, 'meal_types', $meal_types);
+            update_post_meta($post_id, 'cook_types', $cook_types);
+            update_post_meta($post_id, 'cuisines', $cuisines);
+            update_post_meta($post_id, 'diets', $diets);
+            update_post_meta($post_id, 'budgets', $budgets);
+
+            // Enregistrement des ingrédients
+            $ingredients_data = [];
+            foreach ($ingredients as $key => $ingredient) {
+                $ingredients_data[] = [
+                    'ingredient' => sanitize_text_field($ingredient),
+                    'quantity' => sanitize_text_field($quantities[$key] ?? ''),
+                    'measure' => sanitize_text_field($measures[$key] ?? ''),
+                ];
+            }
+            update_post_meta($post_id, 'ingredients', $ingredients_data);
+
+            // Enregistrement des étapes
+            update_post_meta($post_id, 'steps', array_map('sanitize_textarea_field', $steps));
+
             $message = "Recette ajoutée avec succès !";
         } else {
             $error = "Erreur lors de l'ajout de la recette.";
@@ -105,7 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="form-container">
     <h1>Ajouter une recette</h1>
     <style scoped>
-        
         .form-container {
             width: 90%;
             max-width: 1000px;
@@ -121,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .form-container label {
             font-weight: semi-bold;
             margin-top: 15px;
-            margin-bottom: 10px; /* Ajout d'espace entre le titre et le paragraphe explicatif */
+            margin-bottom: 10px;
             display: block;
             color: #000;
         }
@@ -130,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 0.9rem;
             color: #555;
             margin-top: 0;
-            margin-bottom: 15px; /* Ajout d'espace en dessous du paragraphe explicatif */
+            margin-bottom: 15px;
         }
 
         .form-container input, .form-container select, .form-container textarea, .form-container button {
@@ -223,34 +213,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .ingredient-input.quantity {
-            flex: 0.5; /* Pour que le champ Quantité soit plus petit */
+            flex: 0.5;
         }
 
         .ingredient-input.measure {
-            flex: 0.8; /* Taille intermédiaire pour la mesure */
+            flex: 0.8;
         }
 
         .ingredient-input.element {
-            flex: 1.7; /* Plus grand pour l'ingrédient */
+            flex: 1.7;
         }
 
         button#add-step,
         button#add-ingredient {
-            background-color: transparent; /* Supprime le fond */
-            color: #A8BAA7; /* Couleur du texte */
+            background-color: transparent;
+            color: #A8BAA7;
             font-weight: bold; 
             font-size: 1rem; 
             cursor: pointer; 
             text-align: left; 
             padding: 0; 
-            border: none; /* Supprime la bordure */
-            box-shadow: none; /* Supprime les ombres éventuelles */
-            outline: none; /* Supprime l'encadré lors du focus */
+            border: none;
+            box-shadow: none;
+            outline: none;
         }
 
         button#add-ingredient:hover,
         button#add-step:hover {
-            text-decoration: underline; /* Ajout de soulignement sur hover */
+            text-decoration: underline;
         }
 
         button.cancel {
@@ -259,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: 1px solid #5692B2;
             padding: 8px 16px;
             font-size: 0.9rem;
-            border-radius: 30px; /* Ajout de l'arrondi */
+            border-radius: 30px;
             transition: all 0.3s ease;
         }
 
@@ -274,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: 1px solid #5692B2;
             padding: 8px 16px;
             font-size: 0.9rem;
-            border-radius: 30px; /* Ajout de l'arrondi */
+            border-radius: 30px;
             transition: all 0.3s ease;
         }
 
@@ -286,13 +276,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         div.cancelorsubmit {
             display: flex;
             gap: 10px;
-            justify-content: flex-end; /* Aligne les boutons à droite */
+            justify-content: flex-end; 
             margin-top: 20px;
             margin-bottom: 20px;
         }
 
         button.cancel, button.submit {
-            width: 200px; /* Réduction de la largeur des boutons */
+            width: 200px; 
         }
 
 
@@ -356,9 +346,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             outline: none;
             border-color: #A8BAA7;
         }
-
-        
-
     </style>
 
     <?php if (!empty($message)) : ?>
@@ -369,10 +356,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="POST" enctype="multipart/form-data">
         <label for="title">Titre de la recette *</label>
-        <input type="text" name="title" placeholder="Entre le titre de ta recette"  id="title" required>
+        <input type="text" name="title" placeholder="Entrez le titre" id="title" required>
 
         <label for="description">Description *</label>
-        <textarea name="description" placeholder="Décris ta recette de manière à faire saliver !" id="description" rows="4" required></textarea>
+        <textarea name="description" placeholder="Décrivez votre recette" id="description" rows="4" required></textarea>
 
         <label for="image">Ajouter une photo *</label>
 
@@ -383,36 +370,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label>
         </div>
 
-        <label for="portions">Portions *</label>
-        <input type="number" placeholder="Entre le titre de ta recette" name="portions" id="portions" required>
-
-        <label for="prep_hours">Temps de Préparation *</label>
+        <label for="prep_time">Temps de préparation *</label>
         <div class="dynamic-field">
-            <input type="number" name="prep_hours" placeholder="Hrs" required>
-            <input type="number" name="prep_minutes" placeholder="Mins" required>
+            <input type="number" name="prep_hours" placeholder="Heures" required>
+            <input type="number" name="prep_minutes" placeholder="Minutes" required>
         </div>
 
-        <label for="cook_hours">Temps de Cuisson *</label>
+        <label for="cook_time">Temps de cuisson *</label>
         <div class="dynamic-field">
-            <input type="number" name="cook_hours" placeholder="Hrs" required>
-            <input type="number" name="cook_minutes" placeholder="Mins" required>
+            <input type="number" name="cook_hours" placeholder="Heures" required>
+            <input type="number" name="cook_minutes" placeholder="Minutes" required>
+        </div>
+
+        <label for="cook_time">Portions *</label>
+        <div class="dynamic-field">
+            <input type="number" name="portions" placeholder=" personnes" required>
         </div>
 
         <label for="difficulty">Difficulté *</label>
-        <select name="difficulty" required>
+        <select name="difficulty" id="difficulty" required>
             <option value="facile">Facile</option>
             <option value="moyen">Moyen</option>
             <option value="difficile">Difficile</option>
         </select>
 
         <label for="ingredients">Ingrédients *</label>
-        <p style="font-size: 0.9rem; color: #555; margin-top: -10px; margin-bottom: 10px;">
-            Liste tes ingrédients un par un, en précisant les quantités (1, 2) et les mesures (tasses, cuillères). N’hésite pas à laisser libre cours à ta créativité et à donner des détails pour que ta recette soit encore plus claire et savoureuse !
-        </p>
         <div id="ingredients-wrapper">
             <div class="ingredient-group">
-                <input type="text" name="quantity[]" placeholder="Qté" class="ingredient-input quantity">
-                <select name="measure[]" class="ingredient-input measure">
+                <input type="text" name="quantity[]" placeholder="Quantité">
+                <select name="measure[]">
                     <option value="g">g</option>
                     <option value="kg">kg</option>
                     <option value="ml">ml</option>
@@ -421,23 +407,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="càs">càs</option>
                     <option value="unité">unité</option>
                 </select>
-                <input type="text" name="ingredient[]" placeholder="Élément" class="ingredient-input element">
+                <input type="text" name="ingredient[]" placeholder="Ingrédient">
             </div>
         </div>
         <button type="button" id="add-ingredient">+ Ajouter un ingrédient</button>
 
-        <label>Instructions *</label>
-        <p style="font-size: 0.9rem; color: #555; margin-top: -10px; margin-bottom: 10px;">
-            Décompose ta recette en instructions claires, étape par étape.
-        </p>
+        <label for="steps">Instructions *</label>
         <div id="steps-wrapper">
             <textarea name="steps[]" placeholder="Étape 1"></textarea>
         </div>
         <button type="button" id="add-step">+ Ajouter une étape</button>
 
-
-        <label for="tips">Tips</label>
-        <textarea name="tips" placeholder="Partage tes secrets de cuisine ! Que ce soit des astuces pour un meilleur résultat au four, des substitutions d'ingrédients ou des conseils pratiques pour réussir ta recette à coup sûr. Toute info qui peut faire de ton plat un vrai succès est la bienvenue !" id="tips"></textarea>
+        <label for="tips">Astuces du chef</label>
+        <textarea name="tips" placeholder="Vos conseils" id="tips"></textarea>
 
         <div class="items-container">
             <label>Type de repas :</label>
@@ -577,27 +559,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="submit">Soumettre</button>
         </div>
     </form>
-
 </div>
 
 <script>
-    document.getElementById('add-ingredient').addEventListener('click', function() {
+    document.getElementById('add-ingredient').addEventListener('click', function () {
         const wrapper = document.getElementById('ingredients-wrapper');
         const div = document.createElement('div');
-        div.className = 'dynamic-field';
+        div.className = 'ingredient-group';
         div.innerHTML = `
             <input type="text" name="quantity[]" placeholder="Quantité">
             <select name="measure[]">
                 <option value="g">g</option>
                 <option value="kg">kg</option>
                 <option value="ml">ml</option>
+                <option value="l">l</option>
+                <option value="càc">càc</option>
+                <option value="càs">càs</option>
+                <option value="unité">unité</option>
             </select>
             <input type="text" name="ingredient[]" placeholder="Ingrédient">
         `;
         wrapper.appendChild(div);
     });
 
-    document.getElementById('add-step').addEventListener('click', function() {
+    document.getElementById('add-step').addEventListener('click', function () {
         const wrapper = document.getElementById('steps-wrapper');
         const textarea = document.createElement('textarea');
         textarea.name = "steps[]";
@@ -609,3 +594,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php
 get_footer();
 ?>
+
