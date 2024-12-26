@@ -35,7 +35,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 15px 0; /* Augmentation de la hauteur du header */
+    padding: 10px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -49,17 +49,17 @@ body {
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .logo-image {
-    height: 50px; /* Agrandir la taille du logo */
+    height: 40px;
 }
 
 /* Menu */
 .navbar-nav {
     display: flex;
-    gap: 30px; /* Espacement plus large entre les liens */
+    gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -69,9 +69,10 @@ body {
 .navbar-nav a {
     color: #3a5676;
     text-decoration: none;
-    font-weight: 600; /* Texte légèrement plus gras */
-    font-size: 1.2rem; /* Taille de police augmentée */
+    font-weight: 500;
+    font-size: 1rem;
     transition: color 0.3s;
+    display: inline-block;
     text-align: center;
 }
 
@@ -82,23 +83,23 @@ body {
 /* Search Bar */
 .search-form {
     flex: 1;
-    max-width: 500px; /* Barre de recherche légèrement plus large */
+    max-width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 30px; /* Espacement latéral augmenté */
+    margin: 0 20px;
 }
 
 .search-bar {
     width: 100%;
-    padding: 15px 20px; /* Augmenter la hauteur et le padding */
-    border-radius: 25px; /* Coins légèrement plus arrondis */
+    padding: 10px 20px;
+    border-radius: 20px;
     border: 1px solid #ddd;
     background-image: url('<?php echo get_template_directory_uri(); ?>/assets/icones/loupe.svg');
     background-repeat: no-repeat;
-    background-position: 15px center; /* Ajustement de l'icône */
-    background-size: 25px; /* Icône légèrement agrandie */
-    font-size: 1rem; /* Texte légèrement plus grand */
+    background-position: 10px center;
+    background-size: 20px;
+    font-size: 0.9rem;
     color: #5692B2;
     transition: box-shadow 0.3s ease;
 }
@@ -113,9 +114,9 @@ body {
     background-color: #ffb053;
     color: #fff;
     border: none;
-    padding: 15px 25px; /* Bouton plus large et plus haut */
-    border-radius: 25px; /* Coins arrondis plus marqués */
-    font-size: 1.2rem; /* Taille de texte augmentée */
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
     white-space: nowrap;
@@ -133,8 +134,8 @@ body {
 }
 
 .profile-icon img {
-    width: 50px; /* Taille de l'icône augmentée */
-    height: 50px; /* Taille de l'icône augmentée */
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -152,7 +153,7 @@ body {
         position: absolute;
         top: 70px;
         right: 0;
-        width: 250px; /* Menu déroulant plus large */
+        width: 200px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
@@ -173,7 +174,6 @@ body {
     }
 }
 </style>
-
 
 
     <?php wp_head(); ?>
