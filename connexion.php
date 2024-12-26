@@ -4,144 +4,126 @@ get_header();
 ?>
 
 <style>
-/* Reprend le style général que nous avons déjà créé */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Désactive le scroll */
+}
+
 .page-wrapper {
+    height: 100%; /* Prend toute la hauteur de la fenêtre */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    background-color: #f8f8f8;
 }
 
 .form-wrapper {
     width: 400px;
     background-color: #ffffff;
-    border: 1px solid #b2d8b2;
-    border-radius: 4px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Restes des styles inchangés */
+form h2 {
+    font-size: 24px;
+    color: #3a5676;
+    margin-bottom: 20px;
 }
 
 form input[type="text"],
 form input[type="password"] {
-    width: 90%;
+    width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    background-color: #f9fff9;
     font-size: 16px;
+    color: #333;
+}
+
+form input:focus {
+    border-color: #5692b2;
+    box-shadow: 0 0 8px rgba(86, 146, 178, 0.5);
+    outline: none;
 }
 
 form button {
-    width: 150px;
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
     font-size: 16px;
-    border: 1px solid #b2d8b2;
-    background-color: transparent;
-    color: #333;
-    border-radius: 4px;
+    border: none;
+    border-radius: 30px;
+    background-color: #5692b2;
+    color: white;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 form button:hover {
-    background-color: #b2d8b2;
-    color: #fff;
+    background-color: #407899;
+}
+
+.form-footer {
+    margin-top: 20px;
+}
+
+.form-footer a {
+    text-decoration: none;
+    color: #5692b2;
+    font-size: 14px;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
 }
 
 .error-message {
-    color: red;
+    color: #e53935;
+    margin-bottom: 15px;
     font-size: 14px;
-    margin-top: 10px;
+    text-align: left;
 }
 </style>
 
-<main>
-  <div class="page-wrapper">
+<div class="page-wrapper">
     <div class="form-wrapper">
-      <form method="post" action="">
-          <h2>Connexion</h2>
-          <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-          <input type="password" name="password" placeholder="Mot de passe" required>
-          <button type="submit" name="login">Se connecter</button>
-      </form>
+        <form method="post" action="">
+            <h2>Connexion</h2>
+            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" name="login">Se connecter</button>
+        </form>
 
-      <?php
-      if (isset($_POST['login'])) {
-          // Récupération des identifiants
-          $creds = array(
-              'user_login'    => sanitize_text_field($_POST['username']),
-              'user_password' => $_POST['password'],
-              'remember'      => true,
-          );
+        <div class="form-footer">
+            <a href="<?php echo site_url('/inscription'); ?>">Pas encore inscrit ? Créez un compte</a>
+            <br>
+            <a href="<?php echo wp_lostpassword_url(); ?>">Mot de passe oublié ?</a>
+        </div>
 
-          // Connexion utilisateur
-          $user = wp_signon($creds, false);
+        <?php
+        if (isset($_POST['login'])) {
+            $creds = [
+                'user_login'    => sanitize_text_field($_POST['username']),
+                'user_password' => $_POST['password'],
+                'remember'      => true,
+            ];
 
-          if (is_wp_error($user)) {
-              echo "<p class='error-message'>Nom d'utilisateur ou mot de passe incorrect.</p>";
-          } else {
-              // Redirection vers la page d'accueil après connexion
-              wp_safe_redirect(home_url());
-              exit; // Assurez-vous de quitter après la redirection
-          }
-      }
-      ?>
+            $user = wp_signon($creds, false);
+
+            if (is_wp_error($user)) {
+                echo "<p class='error-message'>Nom d'utilisateur ou mot de passe incorrect.</p>";
+            } else {
+                wp_safe_redirect(home_url());
+                exit;
+            }
+        }
+        ?>
     </div>
-  </div>
-</main>
+</div>
 
-<style>
-/* Reprend le style général que nous avons déjà créé */
-.page-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.form-wrapper {
-    width: 400px;
-    background-color: #ffffff;
-    border: 1px solid #b2d8b2;
-    border-radius: 4px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-form input[type="text"],
-form input[type="password"] {
-    width: 90%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    background-color: #f9fff9;
-    font-size: 16px;
-}
-
-form button {
-    width: 150px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #b2d8b2;
-    background-color: transparent;
-    color: #333;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-form button:hover {
-    background-color: #b2d8b2;
-    color: #fff;
-}
-
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-}
-</style>
+<?php get_footer(); ?>
