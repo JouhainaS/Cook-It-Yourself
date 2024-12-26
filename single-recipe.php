@@ -4,9 +4,10 @@ get_header();
 ?>
 
 <div class="recipe-page">
-    <div class="recipe-header">
+    
+    <!-- Section Header -->
+    <section class="recipe-header">
         <h1><?php the_title(); ?></h1>
-
         <div class="rating">
             <?php
             // Récupérer les commentaires approuvés pour cette recette
@@ -36,27 +37,28 @@ get_header();
             ?>
             <span class="rating-value">(<?php echo $average_rating; ?> / 5)</span>
         </div>
-
         <div class="recipe-meta">
-            <span class="author">By <span class="author-name">COOK'S NAME</span></span>
+            <span class="author">Par <span class="author-name"> NOM DU CHEF</span></span>
             <span class="separator">|</span>
             <span class="date"><?php echo get_the_date('j F Y'); ?></span>
         </div>
-        
-    </div>
+    </section>
 
-    <div class="recipe-image">
+    <!-- Section Image -->
+    <section class="recipe-image">
         <?php if (has_post_thumbnail()): ?>
             <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
         <?php endif; ?>
-    </div>
+    </section>
 
-    <div class="overview">
+    <!-- Section Description -->
+    <section class="recipe-description">
         <h2>Description</h2>
         <p><?php echo wp_trim_words(get_the_content(), 50); ?></p>
-    </div>
+    </section>
 
-    <div class="recipe-details">
+    <!-- Section Details -->
+    <section class="recipe-details">
         <div class="detail">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/temps-preparation.svg" alt="">
             <p>Temps de préparation</p>
@@ -101,9 +103,11 @@ get_header();
                 ?>
             </span>
         </div>
-    </div>
 
-    <div class="ingredients">
+    </section>
+
+    <!-- Section Ingrédients -->
+    <section class="recipe-ingredients">
         <h2>Ingrédients</h2>
         <ul>
             <?php 
@@ -120,9 +124,9 @@ get_header();
             }
             ?>
         </ul>
-    </div>
+    </section>
 
-    <div class="chef-tips">
+    <section class="chef-tips">
         <h2>Astuces du chef</h2>
         <p>
             <?php 
@@ -130,79 +134,55 @@ get_header();
             echo !empty($tips) ? esc_html($tips) : 'Aucune astuce fournie.';
             ?>
         </p>
-    </div>
+    </section>
 
-    <div class="instructions">
+    <!-- Section Instructions -->
+    <section class="recipe-instructions">
         <h2>Instructions</h2>
         <ol>
             <?php 
             $steps = get_post_meta(get_the_ID(), 'steps', true);
             if (is_array($steps)) {
                 foreach ($steps as $step) {
-                    echo '<li>' . esc_html($step) . '</li>';
+                    echo '<li><p>' . esc_html($step) . '</p></li>';
                 }
             } else {
-                echo '<li>Aucune instruction trouvée.</li>';
+                echo '<li><p>Aucune instruction trouvée.</p></li>';
             }
             ?>
         </ol>
-    </div>
+    </section>
 
-    <div class="tags">
-        <h2>Tags</h2>
-        <div class="tag-list">
-            <?php
-            $meal_types = get_post_meta(get_the_ID(), 'meal_types', true);
-            $cook_types = get_post_meta(get_the_ID(), 'cook_types', true);
-            $cuisines = get_post_meta(get_the_ID(), 'cuisines', true);
-            $diets = get_post_meta(get_the_ID(), 'diets', true);
+    <!-- Section Avis -->
+    <section class="recipe-reviews">
+    <h2>
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/comment.svg" alt="Comment Icon" class="icon">
+            Avis (<?php echo get_comments_number(); ?>)
+        </h2>
+        
+        <!-- Formulaire d'ajout de commentaire -->
+        <div class="add-review">
+            <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post">
+                <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
+                
+                <div class="rating">
+                    <label for="rating">Votre évaluation : <span>(Requis)</span></label>
+                    <div class="stars">
+                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                            <input type="radio" id="star-<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" />
+                            <label for="star-<?php echo $i; ?>" class="star">&#9733;</label>
+                        <?php endfor; ?>
+                    </div>
+                </div>
 
-            $all_tags = [
-                'Types de repas' => $meal_types,
-                'Types de cuisson' => $cook_types,
-                'Cuisines' => $cuisines,
-                'Régimes alimentaires' => $diets
-            ];
+                <div class="comment">
+                    <label for="comment">Votre avis : <span>(Optionnel)</span></label>
+                    <textarea id="comment" name="comment" placeholder="Partagez votre avis !"></textarea>
+                </div>
 
-            foreach ($all_tags as $category => $tags) {
-                if (is_array($tags)) {
-                    echo '<strong>' . esc_html($category) . ':</strong> ';
-                    foreach ($tags as $tag) {
-                        echo '<span class="tag">' . esc_html($tag) . '</span> ';
-                    }
-                    echo '<br>';
-                }
-            }
-            ?>
+                <button type="submit">Publier l'avis</button>
+            </form>
         </div>
-    </div>
-
-    <div class="recipe-reviews">
-    <h2>Avis (<?php echo get_comments_number(); ?>)</h2>
-    
-    <!-- Formulaire d'ajout de commentaire -->
-    <div class="add-review">
-        <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post">
-            <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
-            
-            <div class="rating">
-        <label for="rating">Votre évaluation : <span>(Requis)</span></label>
-        <div class="stars">
-            <?php for ($i = 1; $i <= 5; $i++) : ?>
-                <input type="radio" id="star-<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" />
-                <label for="star-<?php echo $i; ?>" class="star">&#9733;</label>
-            <?php endfor; ?>
-        </div>
-    </div>
-
-            <div class="comment">
-                <label for="comment">Votre avis : <span>(Optionnel)</span></label>
-                <textarea id="comment" name="comment" placeholder="Partagez votre avis !"></textarea>
-            </div>
-
-            <button type="submit">Publier l'avis</button>
-        </form>
-    </div>
 
     <!-- Liste des commentaires -->
     <div class="comments-list">
@@ -242,322 +222,389 @@ get_header();
         ?>
     </div>
 
+    </section>
+
 </div>
 
 <style>
 
-    .recipe-page {
-        font-family: 'Poppins', sans-serif;
-        color: #333;
-        padding: 20px;
-        background-color: #fff;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
+.recipe-page {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    padding: 20px;
+    background-color: #fff;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.recipe-page h1,
+.recipe-page h2,
+.recipe-page h3,
+.recipe-page h4,
+.recipe-page h5,
+.recipe-page h6 {
+    margin-bottom: 20px;
+    color: #3A5676;
+}
+
+.recipe-page h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.recipe-page h2 {
+    font-size: 1.8rem;
+    text-align: left;
+}
+
+.recipe-page p {
+    font-size: 1rem;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.recipe-page section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+/* Section recipe-header */ 
+.recipe-header {
+    text-align: center; /* Centrer le texte horizontalement */
+    padding: 20px; /* Ajouter un peu de padding */
+}
+
+.recipe-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px; /* Espacement entre le titre et les autres éléments */
+}
+
+.recipe-header .rating {
+    display: flex;
+    justify-content: center; /* Centrer les étoiles et la note */
+    align-items: center;
+    gap: 5px; /* Espacement entre les étoiles et le texte */
+    margin-top: 10px;
+}
+
+.recipe-header .rating .star {
+    font-size: 1.5rem;
+    color: #ddd;
+}
+
+.recipe-header .rating .star.filled {
+    color: #A8BAA7;
+}
+
+.recipe-header .rating-value {
+    font-size: 1rem;
+    color: #333;
+}
+
+.recipe-header .recipe-meta {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: center; 
+    margin-top: 10px;
+}
 
 
-    .breadcrumb {
-        font-size: 0.9rem;
-        color: #888;
-        margin-bottom: 20px;
-    }
+/* Section Détails */
+.recipe-details {
+    display: flex;
+    justify-content: center; /* Centrer les éléments horizontalement */
+    align-items: center; /* Centrer les éléments verticalement */
+    background-color: #EBF4E7; /* Fond vert clair */
+    border-radius: 12px; /* Coins arrondis */
+    padding: 20px; /* Espacement interne */
+    gap: 20px; /* Espacement entre les éléments */
+}
 
-    .recipe-header h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #3A5676; 
-        margin-bottom: 10px;
-        text-align: center;
-    }
+.recipe-details .detail {
+    text-align: center; /* Centrer le contenu à l'intérieur de chaque détail */
+    display: flex; /* Utiliser flexbox pour centrer verticalement */
+    flex-direction: column; /* Empile les éléments verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    justify-content: center; /* Centre les éléments verticalement */
+    padding: 10px;
+    flex: 1; /* Tous les détails occupent un espace égal */
+}
 
-    h2 {
-        font-size: 1.5rem; 
-        color: #3A5676;
-        margin-bottom: 15px; 
-        font-weight: 400px; 
-    }
+.recipe-details .detail img {
+    height: 60px;
+    margin-bottom: 10px; /* Espacement entre l'image et le texte */
+}
 
-    
-    .recipe-header .author {
-        font-size: 0.9rem;
-        color: #888;
-        text-align: center;
-    }
+.recipe-details .detail p {
+    font-size: 1rem; /* Taille de police pour le titre */
+    font-weight: bold; /* Titre en gras */
+    margin: 5px 0; /* Espacement vertical */
+    color: #3A5676; /* Couleur sombre pour le titre */
+}
 
-    .recipe-header .rating {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin-top: 10px;
-        justify-content: center;
-    }
+.recipe-details .detail span {
+    font-size: 0.9rem; /* Taille de police pour le sous-titre */
+    color: #A8BAA7; /* Couleur douce pour les sous-titres */
+}
 
-    .recipe-header .rating .star {
-        font-size: 1.5rem;
-        color: #ddd;
-    }
+/* Section Image */
+.recipe-image img {
+    width: 100%;
+    height: auto;
+    max-height: 500px; 
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover; 
+}
 
-    .recipe-header .rating .star.filled {
-        color: #ffc107;
-    }
+/* Section Ingrédients */
+.recipe-ingredients ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-    .recipe-image {
-        margin: 20px 0;
-        border-radius: 10px;
-        overflow: hidden;
-        text-align: center;
-    }
+.recipe-ingredients ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+    color: #333;
+}
 
-    .overview {
-        background-color: none; /* Supprime le fond bleu */
-        padding: 15px; /* Conservez le padding si nécessaire */
-        border-radius: 8px; /* Conservez les coins arrondis si nécessaire */
-    }
+.recipe-ingredients ul li:last-child {
+    border-bottom: none;
+}
+
+/* Section Instructions */
+.recipe-instructions ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: step;
+}
+
+.recipe-instructions ol li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-left: 40px;
+}
+
+.recipe-instructions ol li::before {
+    content: counter(step);
+    counter-increment: step;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    color: white;
+    background-color: #5692B2;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.recipe-instructions ol li p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Section Astuces du chef */
+.chef-tips {
+    background-color: white;
+    border: 2px solid #A8BAA7;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+    text-align: left;
+    max-width: 100%;
+
+}
+
+.chef-tips h2 {
+    color: #A8BAA7;
+    text-align: center;
+    margin-bottom: 10px;
+}
 
 
+/* Section Avis */
+.recipe-reviews {
+    background-color: white;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+}
+
+.recipe-reviews h2 .icon {
+    height: 2rem;
+    width: auto;
+}
+
+/* Section Commentaires */
+.add-review {
+    background-color: #EBF4E7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.add-review form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.add-review label {
+    font-size: 1rem;
+    color: black;
+}
+
+.add-review textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    min-height: 80px;
+    border-radius: 10px;
+}
+
+.add-review button {
+    background-color: #5692B2;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.add-review button:hover {
+    background-color: #407899;
+}
+
+/* Liste des commentaires */
+.comments-list .comment-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comments-list .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.comments-list .comment-header .comment-author {
+    font-size: 1rem;
+    color: #333;
+}
+
+.comments-list .comment-header .comment-date {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.comments-list .comment-body p {
+    color: #555;
+}
+
+/* Étoiles de notation */
+.recipe-header .rating .star,
+.comment-rating .star {
+    font-size: 1.5rem;
+    color: #ddd;
+    transition: color 0.3s;
+}
+
+.recipe-header .rating .star.filled,
+.comment-rating .star.filled {
+    color: #A8BAA7;
+}
+
+.add-review .stars {
+    display: flex;
+    gap: 5px;
+}
+
+.add-review .stars input[type="radio"] {
+    display: none;
+}
+
+.add-review .stars label {
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.add-review .stars input[type="radio"]:checked ~ label,
+.add-review .stars input[type="radio"]:checked ~ label ~ label {
+    color: #A8BAA7;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
     .recipe-details {
-        display: flex;
-        gap: 20px;
-        margin-bottom: 20px;
-        justify-content: space-around;
-        background-color: #EBF4E7; 
-        border-radius: 12px; 
-        padding: 20px; 
+        flex-wrap: wrap;
     }
 
     .recipe-details .detail {
-        text-align: center;
+        flex: 1 1 calc(50% - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .recipe-page {
         padding: 10px;
-        flex: 1;
     }
 
-    .recipe-details .detail img {
-        height: 60px;
-        margin-bottom: 10px;
+    .recipe-details .detail {
+        flex: 1 1 100%;
     }
 
-    .recipe-details .detail p {
-        font-size: 0,8rem;
-        font-weight: 400px;
-        margin: 5px 0;
-        color: black;
+    .recipe-header .rating .star {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .recipe-page h1 {
+        font-size: 1.8rem;
     }
 
-    .recipe-details .detail span {
-        font-size: 0.8rem;
-        color: #A8BAA7;
+    .recipe-page h2 {
+        font-size: 1.5rem;
     }
 
-    .ingredients ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .ingredients ul li {
-        padding: 5px 0;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .instructions ol {
-        list-style: decimal inside;
+    .recipe-instructions ol li {
         padding-left: 20px;
     }
 
-    .tags .tag-list {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
+    .recipe-instructions ol li::before {
+        width: 25px;
+        height: 25px;
+        font-size: 0.9rem;
     }
 
-    .tags .tag {
-        background-color: white; 
-        color: #A8BAA7; 
-        padding: 5px 15px; 
-        border-radius: 20px; 
-        font-size: 0.9rem; 
-        border: 1px solid #A8BAA7; 
-        transition: background-color 0.3s, color 0.3s; 
-    }
-
-    .tags .tag:hover {
-        background-color: #EBF4E7; 
-        color: #A8BAA7; 
-        border-color: #A8BAA7; 
-    }
-
-
-    .chef-tips {
-        background-color: #F4EFEB; 
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 5px solid #FFB53D;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-
-    .chef-tips h2 {
-        font-size: 1.8rem;
-        color: #3A5676;
-        margin-bottom: 15px;
-        font-weight: 400px;
-    }
-
-    .chef-tips ul {
-        list-style: disc inside;
-        padding: 0;
-        margin: 0; 
-        color: #333;
-        line-height: 1.8;
-    }
-
-    .chef-tips ul li {
-        margin-bottom: 10px;
-    }
-
-    .recipe-content {
-        display: flex;
-        gap: 20px; /* Espacement entre "Ingrédients" et "Astuces du chef" */
-        margin-bottom: 20px;
-    }
-
-    .recipe-content .ingredients,
-    .recipe-content .chef-tips {
-        flex: 1; /* Prend un espace égal */
-    }
-
-
-    .recipe-content .ingredients ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .recipe-content .ingredients ul li {
-        padding: 5px 0;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .recipe-content .chef-tips {
-        background-color: #f8f0e3;
-        padding: 15px;
-        border-left: 4px solid #ffb53d;
-        border-radius: 8px;
-    }
-
-    .recipe-content .chef-tips h2 {
-        margin-top: 0;
-    }
-    
-    h2 {
-        text-align: left; /* Aligne tous les titres <h2> à gauche */
-        margin-bottom: 15px;
-        font-size: 1.5rem; 
-        font-weight: 400; 
-    }
-
-    .recipe-reviews {
-        background-color: white;
-        padding: 20px;
-        margin-top: 30px;
-        border-radius: 8px;
-    }
-
-    .recipe-reviews h2 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        color: #333;
-    }
-
-    .add-review {
-        background-color: #EBF4E7;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-
-    .add-review form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .add-review label,
-    .comments-list .comment-header .comment-author,
-    .comments-list .comment-header .comment-date {
-        font-size: 1rem;
-        color: #555;
-    }
-
-    .add-review .stars {
-        display: flex;
-        gap: 5px;
-    }
-
-    .add-review .stars input[type="radio"] {
-        display: none;
+    .recipe-details .detail {
+        flex: 1 1 100%;
     }
 
     .add-review .stars label {
-        font-size: 1.5rem;
-        color: #ddd;
-        cursor: pointer;
-        transition: color 0.3s;
+        font-size: 1.2rem;
     }
+}
 
-    .add-review .stars input[type="radio"]:checked ~ label,
-    .add-review .stars input[type="radio"]:checked ~ label ~ label {
-        color: #ffc107;
-    }
-
-    .add-review textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        font-size: 1rem;
-        min-height: 80px;
-        border-radius: 10px;
-    }
-
-    .add-review button {
-        background-color: #5692B2;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 30px;
-        font-size: 1rem;
-        cursor: pointer;
-    }
-
-    .add-review button:hover {
-        background-color: #407899;
-    }
-
-    .comments-list .comment-item {
-        padding: 15px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .comments-list .comment-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-
-    .comments-list .comment-body p {
-        color: #555;
-    }
-
-    .recipe-header .rating .star,
-    .comment-rating .star {
-        font-size: 1.5rem;
-        color: #ddd;
-        transition: color 0.3s;
-    }
-
-    .recipe-header .rating .star.filled,
-    .comment-rating .star.filled {
-        color: #ffc107;
-    }
 
 </style>
 
