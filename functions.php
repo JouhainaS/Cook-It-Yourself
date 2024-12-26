@@ -265,3 +265,13 @@ function custom_login_handler() {
     }
 }
 add_action('init', 'custom_login_handler');
+
+function save_comment_rating($comment_id) {
+    if (isset($_POST['rating']) && $_POST['rating'] !== '') {
+        $rating = intval($_POST['rating']);
+        if ($rating >= 1 && $rating <= 5) {
+            add_comment_meta($comment_id, 'rating', $rating);
+        }
+    }
+}
+add_action('comment_post', 'save_comment_rating');
