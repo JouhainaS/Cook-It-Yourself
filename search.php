@@ -83,6 +83,27 @@
     color: #aaa;
     text-align: center;
 }
+a {
+    text-decoration: none; /* Supprime le soulignement */
+    color: inherit; /* Hérite de la couleur par défaut du texte */
+}
+
+a:visited {
+    text-decoration: none; /* Pas de soulignement pour les liens visités */
+    color: inherit; /* Maintient la même couleur après visite */
+}
+
+a:hover,
+a:focus {
+    text-decoration: none; /* Pas de soulignement au survol ou au focus */
+    color: #5692B2; /* Couleur personnalisée au survol ou focus */
+}
+
+a:active {
+    text-decoration: none; /* Pas de soulignement lorsqu'il est actif */
+    color: inherit; /* Même couleur que l'état normal */
+}
+
 </style>
 
 <div class="container py-5">
