@@ -31,7 +31,7 @@ get_header();
 
     .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .card img {
@@ -51,28 +51,28 @@ get_header();
         font-size: 1.3rem;
         color: #2c3e50;
         margin-bottom: 5px;
-        text-decoration: none; /* Par défaut, pas de soulignement */
+        text-decoration: none;
     }
 
     .card-title:hover {
-        text-decoration: none; /* Pas de soulignement au survol */
-        color: #5692B2; /* Change la couleur au survol */
+        text-decoration: none;
+        color: #5692B2;
     }
 
     a {
-        text-decoration: none; /* Supprime la décoration par défaut des liens */
-        color: inherit; /* Utilise la couleur par défaut du texte */
+        text-decoration: none;
+        color: inherit;
     }
 
     a:hover {
-        text-decoration: none; /* Pas de soulignement au survol des liens */
+        text-decoration: none;
     }
 
     .recipe-meta {
         color: #000;
         font-size: 0.9rem;
         margin-bottom: 10px;
-        font-weight: normal; /* Texte non gras */
+        font-weight: normal;
     }
 
     .recipe-meta .author {

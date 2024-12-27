@@ -41,7 +41,7 @@ get_header();
 .article {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+    box-shadow:0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
 }
@@ -92,7 +92,7 @@ get_header();
     align-items: stretch;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
     margin-bottom: 10px;
@@ -205,14 +205,14 @@ get_header();
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+    box-shadow:0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stop-gaspillage-section .article:hover,
 .materiels-section .article:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .stop-gaspillage-section .article img,
@@ -231,10 +231,179 @@ get_header();
 }
 
 /* Responsive */
+
 @media (max-width: 768px) {
+    .trucs-et-astuces-page {
+        padding: 20px;
+    }
+
+    .trucs-et-astuces-page h1 {
+        font-size: 2rem;
+    }
+
+    .category-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .articles {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .article {
+        margin: 0 auto;
+    }
+
+    .astuces-section .article-card {
+        display: flex;
+        flex-direction: row; /* Image à gauche, contenu à droite */
+        align-items: stretch;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 0;
+        height: 0px; /* Augmente la hauteur des cartes */
+    }
+
+    .astuces-section .article-thumbnail {
+        flex: 0 0 33.33%; /* L'image reste sur 1/3 */
+        max-width: 33.33%;
+        height: 100%; /* Ajuste la hauteur de l'image à celle de la carte */
+        overflow: hidden;
+    }
+
+    .astuces-section .article-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Centre et recadre l'image */
+    }
+
+    .astuces-section .article-content {
+        flex: 1; /* Le contenu occupe les 2/3 restants */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Aligne le contenu et les métadonnées */
+        height: 100%; /* S'assure que le contenu remplit la carte */
+    }
+
+    .astuces-section .article-content h3 {
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: bold;
+        line-height: 1.4;
+    }
+
+    .astuces-section .article-content p {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 15px;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limite la description à 3 lignes */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .stop-gaspillage-section .articles,
     .materiels-section .articles {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-wrap: nowrap; 
+        overflow-x: auto; 
+        gap: 15px; 
+        padding-bottom: 10px; 
+        scroll-snap-type: x mandatory;
+    }
+
+    .stop-gaspillage-section .article,
+    .materiels-section .article {
+        flex: 0 0 300px; 
+        height: auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden; 
+        scroll-snap-align: start; 
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .stop-gaspillage-section .article img,
+    .materiels-section .article img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover; 
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Contenu de la carte */
+    .stop-gaspillage-section .article h3,
+    .materiels-section .article h3 {
+        font-size: 1.2rem;
+        margin: 10px 15px;
+        color: #333;
+    }
+
+    .stop-gaspillage-section .article h3 a,
+    .materiels-section .article h3 a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .stop-gaspillage-section .article h3 a:hover,
+    .materiels-section .article h3 a:hover {
+        text-decoration: underline;
+        color: #5692B2;
+    }
+
+    /* Texte et description */
+    .stop-gaspillage-section .article p,
+    .materiels-section .article p {
+        font-size: 0.9rem;
+        color: #555;
+        margin: 10px 15px 15px;
+    }
+
+    /* Scrollbar personnalisée */
+    .stop-gaspillage-section .articles::-webkit-scrollbar,
+    .materiels-section .articles::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .stop-gaspillage-section .articles::-webkit-scrollbar-thumb,
+    .materiels-section .articles::-webkit-scrollbar-thumb {
+        background: #5692B2;
+        border-radius: 4px;
+    }
+
+    .stop-gaspillage-section .articles::-webkit-scrollbar-track,
+    .materiels-section .articles::-webkit-scrollbar-track {
+        background: #ddd;
+    }
+
+
+    .alternatives-vegetales-section .content-wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .alternatives-vegetales-section .image-container {
+        max-width: 100%;
+    }
+
+    .alternatives-vegetales-section .articles-container {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    .article img {
+        height: 150px;
     }
 
     .stop-gaspillage-section .article img,
@@ -242,6 +411,8 @@ get_header();
         height: 150px;
     }
 }
+
+
 
 
 </style>
@@ -269,10 +440,6 @@ get_header();
                             </div>
                             <div class="article-content">
                                 <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <div class="article-meta">
-                                    <span class="author">Par <?php the_author(); ?></span>
-                                    <span class="date">| Publié le <?php echo get_the_date(); ?></span>
-                                </div>
                                 <p><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
                             </div>
                         </div>

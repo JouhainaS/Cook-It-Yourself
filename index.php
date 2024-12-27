@@ -25,7 +25,6 @@ get_header();
    margin-bottom: 1rem;
    text-align: left;
    color: #3a5676;
-   font-weight: 400;
  }
  
  h1 { font-size: 2.5rem; }
@@ -56,7 +55,7 @@ get_header();
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: rgba(255, 176, 83, 0.24);
+   background-color: 0 4px 10px rgba(0, 0, 0, 0.1);
    z-index: 1;
  }
  
@@ -94,7 +93,7 @@ get_header();
  
  .hero-section .search-bar:focus {
    outline: none;
-   box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
  }
  
  .hero-section {
@@ -124,7 +123,7 @@ get_header();
    background-color: white;
    border-radius: 10px;
    overflow: hidden;
-   box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
    width: 16rem;
    text-align: left;
    transition: transform 0.2s ease;
@@ -219,8 +218,8 @@ get_header();
   /* article section*/
   .articles-list { 
     display: flex; 
-    flex-direction: column; /* Empile les cartes verticalement */ 
-    gap: 20px; /* Ajoute un espacement vertical entre les cartes */ 
+    flex-direction: column; 
+    gap: 20px; 
   }
 
   .article-card {
@@ -228,12 +227,12 @@ get_header();
     align-items: stretch;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(86, 146, 178, 0.41);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
     overflow: hidden;
     transition: transform 0.3s ease;
     padding: 0;
-    margin-bottom: 20px; /* Espacement entre les cards */
+    margin-bottom: 20px; 
 }
 
 .article-card:hover {
@@ -330,11 +329,11 @@ get_header();
                 <?php
                 // Query pour récupérer les recettes les mieux notées
                 $args = array(
-                    'post_type' => 'recette', // Type de publication 'recette'
-                    'posts_per_page' => 4,    // Limite à 4 recettes
-                    'meta_key' => 'rating',   // Trier par champ personnalisé 'rating'
-                    'orderby' => 'meta_value_num', // Trier par valeur numérique
-                    'order' => 'DESC'         // Par ordre décroissant (les mieux notées en premier)
+                    'post_type' => 'recette', 
+                    'posts_per_page' => 4,   
+                    'meta_key' => 'rating',
+                    'orderby' => 'meta_value_num',
+                    'order' => 'DESC'
                 );
                 $query = new WP_Query($args);
 
@@ -365,23 +364,23 @@ get_header();
                                             <?php 
                                             $rating = get_post_meta(get_the_ID(), 'rating', true); 
                                             if ($rating) {
-                                                $full_stars = floor($rating); // Nombre d'étoiles pleines
-                                                $half_star = ($rating - $full_stars) >= 0.5; // Étoile à moitié pleine ?
-                                                $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0); // Étoiles vides
+                                                $full_stars = floor($rating); 
+                                                $half_star = ($rating - $full_stars) >= 0.5;
+                                                $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0);
 
                                                 // Générer les étoiles pleines
                                                 for ($i = 0; $i < $full_stars; $i++) {
-                                                    echo '<span class="text-warning">&#9733;</span>'; // Étoile pleine
+                                                    echo '<span class="text-warning">&#9733;</span>';
                                                 }
 
                                                 // Générer l'étoile à moitié pleine si applicable
                                                 if ($half_star) {
-                                                    echo '<span class="text-warning">&#9734;</span>'; // Étoile à moitié pleine
+                                                    echo '<span class="text-warning">&#9734;</span>';
                                                 }
 
                                                 // Générer les étoiles vides
                                                 for ($i = 0; $i < $empty_stars; $i++) {
-                                                    echo '<span class="text-muted">&#9734;</span>'; // Étoile vide
+                                                    echo '<span class="text-muted">&#9734;</span>';
                                                 }
                                             } else {
                                                 echo 'Non notée';
@@ -444,11 +443,11 @@ get_header();
                 <?php
                 // Query pour récupérer les 3 derniers articles des catégories spécifiques
                 $args = array(
-                    'post_type'      => 'post',  // Type de publication standard 'post'
-                    'posts_per_page' => 3,       // Limite à 3 articles
-                    'orderby'        => 'date',  // Trier par date
-                    'order'          => 'DESC',  // Du plus récent au plus ancien
-                    'category_name'  => 'alternatives-vegetales, astuces, materiels, stop-au-gaspillage'  // Les catégories spécifiques
+                    'post_type'      => 'post',
+                    'posts_per_page' => 3,
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                    'category_name'  => 'alternatives-vegetales, astuces, materiels, stop-au-gaspillage'
                 );
                 $articles = new WP_Query($args);
 

@@ -15,7 +15,7 @@ get_header();
 
 .apropos-page main {
     padding: 40px 20px;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: auto;
     background-color: white;
 }

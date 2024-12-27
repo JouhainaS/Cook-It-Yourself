@@ -4,7 +4,6 @@ get_header();
 ?>
 
 <style> 
-
 /* Sidebar Styles */
  
  .body-wrapper {
@@ -167,6 +166,7 @@ get_header();
         margin-bottom: 0;
         color: black;
       } </style>
+      
 <div class="body-wrapper">
     <!-- Sidebar -->
     <div class="sidebar">

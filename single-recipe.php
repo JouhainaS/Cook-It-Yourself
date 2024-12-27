@@ -660,7 +660,7 @@ get_header();
     .social-share {
         display: flex;
         justify-content: center;
-        gap: 10px; /* Réduction de l'espace entre les boutons */
+        gap: 10px;
         flex-wrap: wrap;
     }
 
@@ -777,10 +777,6 @@ get_header();
         line-height: 1.5;
     }
 }
-
-}
-
-
 
 </style>
 

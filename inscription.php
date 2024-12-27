@@ -49,7 +49,7 @@ form input[type="password"] {
 
 form input:focus {
     border-color: #5692b2;
-    box-shadow: 0 0 8px rgba(86, 146, 178, 0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     outline: none;
 }
 

@@ -75,31 +75,31 @@
     .related-articles .article-card {
         background-color: #fff;
         border-radius: 15px;
-        box-shadow: 0px 0px 14px rgba(86, 146, 178, 0.41);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        width: 280px; /* Largeur des cartes */
-        height: 400px; /* Hauteur des cartes */
-        margin-bottom: 20px; /* Ajoute un espace en dessous de chaque carte */
-        scroll-snap-align: start; /* Aligne les cartes sur le conteneur */
+        width: 280px; 
+        height: 400px;
+        margin-bottom: 20px;
+        scroll-snap-align: start;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .related-articles .article-card:hover {
         transform: scale(1.05);
-        box-shadow: 0px 0px 20px rgba(86, 146, 178, 0.5);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .related-articles .container {
-        max-width: 1000px; /* Limite la largeur à 1000px */
-        margin: 0 auto; /* Centre horizontalement le contenu */
-        padding: 0 15px; /* Ajoute un peu d'espace sur les côtés */
+        max-width: 1000px; 
+        margin: 0 auto; 
+        padding: 0 15px; 
     }
 
     /* Contenu dans les cartes */
     .related-articles .article-content {
         padding: 20px;
-        height: 50%; /* Le contenu occupe l'autre moitié */
+        height: 50%; 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -134,11 +134,11 @@
 
     /* Scrollbar personnalisé */
     .related-articles .articles-list::-webkit-scrollbar {
-        height: 8px; /* Taille de la scrollbar */
+        height: 8px;
     }
 
     .related-articles .articles-list::-webkit-scrollbar-thumb {
-        background: #5692B2; /* Couleur de la scrollbar */
+        background: #5692B2; 
         border-radius: 4px;
     }
 
@@ -147,26 +147,26 @@
     }
 
     .section-divider {
-        width: 100%; /* Ligne pleine largeur du container */
-        height: 2px; /* Ligne fine */
-        background-color: #e0e0e0; /* Gris clair */
-        border: none; /* Supprime les styles par défaut de <hr> */
-        margin: 20px 0; /* Espacement au-dessus et en dessous */
+        width: 100%; 
+        height: 2px;
+        background-color: #e0e0e0;
+        border: none;
+        margin: 20px 0;
     }
 
     /* Responsive : ajustement en mobile */
     @media (max-width: 768px) {
         .related-articles .article-card {
             flex: 0 0 300px;
-            height: 400px; /* Hauteur fixe en mobile */
+            height: 400px;
         }
 
         .related-articles .article-thumbnail {
-            height: 50%; /* L'image occupe la moitié de la carte */
+            height: 50%;
         }
 
         .related-articles .article-content {
-            height: 50%; /* Le contenu occupe l'autre moitié */
+            height: 50%;
         }
 
         .related-articles .articles-list{
