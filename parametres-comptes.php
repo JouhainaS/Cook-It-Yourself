@@ -10,9 +10,9 @@ get_header(); ?>
         <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
         <aside>
             <ul>
-                <li><a href="<?php echo get_permalink(get_page_by_path('modifier-profil')); ?>" class="sidebar-link">Modifier le profil</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('parametres-compte')); ?>" class="sidebar-link active">Paramètres du compte</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('mes-publications')); ?>" class="sidebar-link">Mes publications</a></li>
+                <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-profil'))); ?>" class="sidebar-link">Modifier le profil</a></li>
+                <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('parametres-compte'))); ?>" class="sidebar-link active">Paramètres du compte</a></li>
+                <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('mes-publications'))); ?>" class="sidebar-link">Mes publications</a></li>
             </ul>
         </aside>
     </div>
@@ -29,7 +29,7 @@ get_header(); ?>
                     <form class="account-form" method="POST" action="">
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">E-mail</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="alinadcruz@example.com" required>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="<?php echo esc_attr(wp_get_current_user()->user_email); ?>" required>
                         </div>
                         
                         <h4 class="form-label mt-4">Mot de passe</h4>
@@ -38,7 +38,7 @@ get_header(); ?>
                             Un lien de réinitialisation sera envoyé à ton adresse e-mail pour garantir la sécurité de ton compte.
                         </p> 
                         
-                        <button type="submit" class="btn-password">Réinitialiser le mot de passe</button>
+                        <button type="button" class="btn-password" onclick="alert('Un email de réinitialisation a été envoyé !')">Réinitialiser le mot de passe</button>
                     </form>
                 </div>
             </div>
@@ -132,24 +132,6 @@ get_header(); ?>
     margin-bottom: 15px;
 }
 
-.btn-update {
-    background-color: #5692B2;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-update:hover {
-    background-color: #3f6e87;
-    transform: scale(1.05);
-}
-
-.btn-update:focus {
-    outline: none;
-}
-
 .btn-password {
     background-color: #5692B2;
     color: white;
@@ -183,29 +165,6 @@ h4.form-label {
 
 .account-form {
     margin-bottom: 40px;
-}
-
-.password-title {
-    margin-top: 0;
-}
-
-#prenom {
-    margin-bottom: 40px;
-}
-
-.publish-recipe {
-    font-size: 1.2rem;
-    color: black;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 50px;
-}
-
-.publish-recipe p {
-    margin-bottom: 0;
-    color: black;
 }
 </style>
 
