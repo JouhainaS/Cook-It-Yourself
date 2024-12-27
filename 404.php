@@ -5,7 +5,7 @@ get_header(); ?>
 <div class="container text-center" style="padding: 100px 20px;">
     <!-- Image -->
     <div style="margin: 20px 0;">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/404.svg" alt="404 Image" style="max-width: 100%; height: auto;">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/404.svg" alt="404 Image" style="max-width: 100px; height: auto;">
     </div>
 
     <h1>OUPS ! Perdu ?</h1>
