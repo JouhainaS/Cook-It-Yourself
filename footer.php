@@ -20,7 +20,7 @@
  /* Typography & General Layout */
  h1, h2, h3, h4, h5, h6 {
    margin-bottom: 1rem;
-   text-align: center;  /* Centrer tous les titres (h1, h2, h3, h4, h5, h6) */
+   text-align: center;
    color: #3a5676;
    font-weight: 400;
  }
@@ -40,7 +40,7 @@
   }
 
   .footer-container h5 {
-    text-align: center;  /* Centrer le titre des sections dans le footer */
+    text-align: center; 
     color: white;
   }
 
@@ -84,7 +84,7 @@
     font-size: 12px;
     display: flex;
     align-items: center;
-    justify-content: center;  /* Centrer les éléments du bas du footer */
+    justify-content: center;
   }
 
   .social-media a {
@@ -172,9 +172,9 @@
                         <div class="col-md-2 text-center text-md-end">
                             <h5 class="footer-heading">ALLER À</h5>
                             <ul class="list-unstyled">
-                                <li><a href="recettes.html" class="footer-link">Recettes</a></li>
-                                <li><a href="articles.html" class="footer-link">Articles</a></li>
-                                <li><a href="a-propos.html" class="footer-link">À propos</a></li>
+                                <li><a href="<?php echo site_url('/recettes'); ?>" class="footer-link">Recettes</a></li>
+                                <li><a href="<?php echo site_url('/trucs-et-astuces'); ?>" class="footer-link">Trucs et astuces</a></li>
+                                <li><a href="<?php echo site_url('/a-propos'); ?>" class="footer-link">À propos</a></li>
                             </ul>
                         </div>
                         <!-- Section 4: Legal -->
@@ -182,7 +182,7 @@
                             <h5 class="footer-heading">SUPPORT JURIDIQUE</h5>
                             <ul class="list-unstyled">
                                 <li><a href="conditions-utilisation.html" class="footer-link">Conditions d’utilisation</a></li>
-                                <li><a href="politique-confidentialite.html" class="footer-link">Politique de confidentialité</a></li>
+                                <li><a href="politique-confidentialite.html" class="footer-link">Mentions légales</a></li>
                                 <li><a href="ajouter-recette.html" class="btn mt-3">+ AJOUTER UNE RECETTE</a></li>
                             </ul>
                         </div>
