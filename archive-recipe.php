@@ -157,100 +157,149 @@ get_header();
     .toggle-more:hover {
         color: #2c3e50;
     }
+
+    .filter-button {
+        display: block;
+        margin: 20px 0;
+        padding: 10px 20px;
+        background-color: #5692B2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .filter-button:hover {
+        background-color: #407899;
+    }
+
+    .reset-button {
+        display: block;
+        margin: 10px 0;
+        padding: 10px 20px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .reset-button:hover {
+        background-color: #c0392b;
+    }
 </style>
 
 <div class="container">
     <div class="row">
         <!-- Sidebar des filtres -->
         <div class="col-md-3">
-            <div class="filters">
-                <h4>Filtrer par</h4>
+            <form method="get" id="filter-form">
+                <div class="filters">
+                    <h4>Filtrer par</h4>
 
-                <!-- Boucle dynamique pour générer des sections de filtres -->
-                <?php
-                $filter_data = [
-                    'Difficulté' => [
-                        'Facile' => 'facile',
-                        'Moyen' => 'moyen',
-                        'Difficile' => 'difficile',
-                    ],
-                    'Type de repas' => [
-                        'Petit déjeuner' => 'petit-dejeuner',
-                        'Déjeuner' => 'dejeuner',
-                        'Dîner' => 'diner',
-                        'Dessert' => 'dessert',
-                        'Boissons' => 'boissons',
-                    ],
-                    'Type de cuisson' => [
-                        'Micro-ondes' => 'micro-ondes',
-                        'Four' => 'four',
-                        'Plaque de cuisson' => 'plaque-de-cuisson',
-                        'Sans cuisson' => 'sans-cuisson',
-                        'Friteuse' => 'friteuse',
-                        'Grill' => 'grill',
-                    ],
-                    'Cuisine' => [
-                        'Pakistanais' => 'pakistanais',
-                        'Italien' => 'italien',
-                        'Américain' => 'americain',
-                        'Méditerranéen' => 'mediterraneen',
-                        'Asiatique' => 'asiatique',
-                        'Orientale' => 'orientale',
-                    ],
-                    'Régime alimentaire' => [
-                        'Végétarien' => 'vegetarien',
-                        'Vegan' => 'vegan',
-                        'Healthy' => 'healthy',
-                        'Sans sucre' => 'sans-sucre',
-                        'Halal' => 'halal',
-                        'Casher' => 'casher',
-                    ],
-                    'Budget' => [
-                        '0 - 5 €' => '0-5€',
-                        '5 - 10 €' => '5-10€',
-                        '10 - 15 €' => '10-15€',
-                    ],
-                    'Ingrédients' => [
-                        'Poulet' => 'poulet',
-                        'Poisson' => 'poisson',
-                        'Boeuf' => 'boeuf',
-                        'Riz' => 'riz',
-                        'Pommes de terre' => 'pommes-de-terre',
-                        'Carottes' => 'carottes',
-                        'Tomates' => 'tomates',
-                        'Oignons' => 'oignons',
-                    ],
-                ];
+                    <!-- Boucle dynamique pour générer des sections de filtres -->
+                    <?php
+                    $filter_data = [
+                        'Difficulté' => [
+                            'Facile' => 'facile',
+                            'Moyen' => 'moyen',
+                            'Difficile' => 'difficile',
+                        ],
+                        'Type de repas' => [
+                            'Petit déjeuner' => 'petit-dejeuner',
+                            'Déjeuner' => 'dejeuner',
+                            'Dîner' => 'diner',
+                            'Dessert' => 'dessert',
+                            'Boissons' => 'boissons',
+                        ],
+                        'Type de cuisson' => [
+                            'Micro-ondes' => 'micro-ondes',
+                            'Four' => 'four',
+                            'Plaque de cuisson' => 'plaque-de-cuisson',
+                            'Sans cuisson' => 'sans-cuisson',
+                            'Friteuse' => 'friteuse',
+                            'Grill' => 'grill',
+                        ],
+                        'Cuisine' => [
+                            'Pakistanais' => 'pakistanais',
+                            'Italien' => 'italien',
+                            'Américain' => 'americain',
+                            'Méditerranéen' => 'mediterraneen',
+                            'Asiatique' => 'asiatique',
+                            'Orientale' => 'orientale',
+                        ],
+                        'Régime alimentaire' => [
+                            'Végétarien' => 'vegetarien',
+                            'Vegan' => 'vegan',
+                            'Healthy' => 'healthy',
+                            'Sans sucre' => 'sans-sucre',
+                            'Halal' => 'halal',
+                            'Casher' => 'casher',
+                        ],
+                        'Budget' => [
+                            '0 - 5 €' => '0-5€',
+                            '5 - 10 €' => '5-10€',
+                            '10 - 15 €' => '10-15€',
+                        ],
+                    ];
 
-                foreach ($filter_data as $section_title => $options) : ?>
-                    <div class="filter-section">
-                        <h5><?php echo $section_title; ?> :</h5>
-                        <div class="filter-options" id="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">
-                            <?php foreach ($options as $label => $value) : ?>
-                                <div>
-                                    <input type="checkbox" name="<?php echo strtolower(str_replace(' ', '_', $section_title)); ?>[]" value="<?php echo $value; ?>" id="<?php echo strtolower($section_title . '_' . $value); ?>">
-                                    <label for="<?php echo strtolower($section_title . '_' . $value); ?>"><?php echo $label; ?></label>
-                                </div>
-                            <?php endforeach; ?>
+                    foreach ($filter_data as $section_title => $options) : ?>
+                        <div class="filter-section">
+                            <h5><?php echo $section_title; ?> :</h5>
+                            <div class="filter-options" id="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">
+                                <?php foreach ($options as $label => $value) : ?>
+                                    <div>
+                                        <input type="checkbox" name="<?php echo strtolower(str_replace(' ', '_', $section_title)); ?>[]" value="<?php echo $value; ?>" id="<?php echo strtolower($section_title . '_' . $value); ?>">
+                                        <label for="<?php echo strtolower($section_title . '_' . $value); ?>"><?php echo $label; ?></label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php if (count($options) > 3) : ?>
+                                <button type="button" class="toggle-more" data-target="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">Afficher plus</button>
+                            <?php endif; ?>
                         </div>
-                        <?php if (count($options) > 3) : ?>
-                            <button type="button" class="toggle-more" data-target="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">Afficher plus</button>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+                    <?php endforeach; ?>
+
+                    <!-- Boutons pour appliquer et réinitialiser les filtres -->
+                    <button class="filter-button" type="submit">Appliquer les filtres</button>
+                    <button class="reset-button" type="button" onclick="window.location.href=window.location.pathname">Réinitialiser les filtres</button>
+                </div>
+            </form>
         </div>
 
         <!-- Liste des recettes -->
         <div class="col-md-9">
             <h1 class="mb-4">Nos Recettes</h1>
-            <div class="grid-container">
+            <div class="grid-container" id="recipes-list">
                 <?php
-                $query = new WP_Query([
+                $meta_query = [];
+
+                if (!empty($_GET)) {
+                    foreach ($_GET as $key => $values) {
+                        if (is_array($values)) {
+                            foreach ($values as $value) {
+                                $meta_query[] = [
+                                    'key' => $key,
+                                    'value' => $value,
+                                    'compare' => 'LIKE',
+                                ];
+                            }
+                        }
+                    }
+                }
+
+                $query_args = [
                     'post_type' => 'recipe',
                     'posts_per_page' => 9,
                     'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
-                ]);
+                    'meta_query' => $meta_query,
+                ];
+
+                $query = new WP_Query($query_args);
 
                 if ($query->have_posts()) :
                     while ($query->have_posts()) : $query->the_post();
@@ -324,3 +373,4 @@ get_header();
 <?php
 get_footer();
 ?>
+
