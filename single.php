@@ -1,4 +1,6 @@
-<?php get_header(); ?>
+<?php 
+/* Template Name: single-article*/
+get_header(); ?>
 
 <style>
 

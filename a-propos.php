@@ -217,7 +217,7 @@ get_header();
     }
 
     .apropos-page .together {
-        flex-direction: column; /* Colonne sur mobile */
+        flex-direction: column; 
      
     }
 
@@ -226,7 +226,7 @@ get_header();
     }
 
     .apropos-page .time-section {
-        flex-direction: column; /* Une boîte par ligne sur mobile */
+        flex-direction: column; 
     }
 
     .apropos-page .time-box {

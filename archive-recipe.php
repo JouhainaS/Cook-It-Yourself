@@ -17,7 +17,7 @@ get_header();
     }
 
     .card {
-        width: 260px; /* Réduction de la largeur des cartes */
+        width: 260px; 
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         overflow: hidden;
@@ -26,7 +26,7 @@ get_header();
         flex-direction: column;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         position: relative;
-        text-decoration: none; /* Supprime la décoration par défaut */
+        text-decoration: none;
     }
 
     .card:hover {
@@ -65,14 +65,14 @@ get_header();
     }
 
     a:hover {
-        text-decoration: none;
+        text-decoration: none; 
     }
 
     .recipe-meta {
         color: #000;
         font-size: 0.9rem;
         margin-bottom: 10px;
-        font-weight: normal; /* Texte non gras */
+        font-weight: normal;
     }
 
     .recipe-meta .author {

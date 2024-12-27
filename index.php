@@ -103,82 +103,82 @@ get_header();
    margin-bottom: 40px;
  }
 
-
- .index-page .top-rated-recipes {
-  padding: 60px 0;
+/* SECTION TOP-RATED RECIPES */
+.index-page .top-rated-recipes {
+  padding: 60px 0; /* Ajoute un espace vertical (haut et bas) pour séparer visuellement la section des recettes les mieux notées. */
 }
 
 .index-page .top-rated-recipes .container {
-  max-width: 1000px; /* Aligne avec la classe .container */
-  margin: 0 auto;
-  padding: 0 15px;
+  max-width: 1000px; /* Définit la largeur maximale de la section pour limiter la largeur totale. */
+  margin: 0 auto; /* Centre le contenu horizontalement. */
+  padding: 0 15px; /* Ajoute un espacement horizontal interne pour éviter que le contenu touche les bords. */
 }
 
 .index-page .top-rated-recipes .row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  align-items: center;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  display: flex; /* Utilise Flexbox pour organiser les éléments enfants en ligne. */
+  flex-wrap: wrap; /* Permet aux cartes de passer à la ligne suivante si elles ne tiennent pas sur une seule. */
+  gap: 20px; /* Ajoute un espace uniforme entre les cartes. */
+  justify-content: space-between; /* Distribue les cartes avec des espaces égaux entre elles. */
+  align-items: center; /* Aligne les cartes verticalement au centre (utile si elles ont des hauteurs différentes). */
 }
 
-
-.index-page .card {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
+/* INDIVIDUAL CARDS */
+.index-page .top-rated-recipes .card {
+  width: 300px; 
+  background-color: #fff; 
+  border-radius: 15px;
+  overflow: hidden; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 16rem;
-  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
+  text-align: center; 
+}
+
+.index-page .top-rated-recipes .card:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
+}
+
+.index-page .top-rated-recipes .card-img-top {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.index-page .top-rated-recipes .card-body {
+  padding: 20px;
+}
+
+.index-page .top-rated-recipes .card-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: #3a5676;
+  margin-bottom: 10px;
+}
+
+.index-page .top-rated-recipes .card-text {
+  font-family: 'Arial', sans-serif;
+  color: black; 
+  font-size: 0.95rem;
+  margin-bottom: 10px; 
+}
+
+.index-page .top-rated-recipes .text-warning {
+  color: #ffc107; 
+}
+
+.index-page .top-rated-recipes .text-muted {
+  color: #ddd; 
+}
+
+.index-page .top-rated-recipes .card-link {
+  text-decoration: none;
+  color: inherit; 
   transition: transform 0.2s ease;
 }
 
-.index-page .card:hover {
-  transform: scale(1.05);
-}
-
-.index-page .card .card-body {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.index-page .card img {
-  width: 100%;
-  margin-bottom: 0;
-  border-radius: 10px 10px 0 0;
-}
-
-.index-page .card-content h3 {
-  color: black;
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-}
-
-.index-page .card-content p {
-  color: #666;
-  line-height: 1.4;
-  font-size: 0.9rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.index-page .card-title {
-  font-size: 1.25rem;
-  margin: 0;
-  text-decoration: none;
-}
-
-.index-page .card .star-icon {
-  width: auto;
-  height: 20px;
-  margin-right: 5px;
+.index-page .top-rated-recipes .card-link:hover {
+  text-decoration: underline; 
+  color: #3a5676; 
 }
 
 .index-page .categories {
@@ -427,84 +427,84 @@ get_header();
     </header>
 
  
-    <!-- Section des Recettes les mieux notées -->
-    <section class="top-rated-recipes py-5">
-        <div class="container">
-            <h2 >Les mieux notées</h2>
-            <div class="row">
-                <?php
-                // Query pour récupérer les recettes les mieux notées
-                $args = array(
-                    'post_type' => 'recette', 
-                    'posts_per_page' => 4,   
-                    'meta_key' => 'rating',
-                    'orderby' => 'meta_value_num',
-                    'order' => 'DESC'
-                );
-                $query = new WP_Query($args);
+<!-- Section des Recettes les mieux notées -->
+<section class="top-rated-recipes py-5">
+    <div class="container">
+        <h2>Les mieux notées</h2>
+        <div class="row">
+            <?php
+            global $wpdb;
 
-                if ($query->have_posts()) :
-                    while ($query->have_posts()) : $query->the_post(); ?>
-                        <div class="col-md-3 d-flex justify-content-center">
-                            <a href="<?php the_permalink(); ?>" class="card-link">
-                                <div class="card">
-                                    <?php if (has_post_thumbnail()) : ?>
-                                        <?php the_post_thumbnail('medium', ['class' => 'card-img-top']); ?>
-                                    <?php else : ?>
-                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/photos/default.jpg" alt="Image par défaut" class="card-img-top">
-                                    <?php endif; ?>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?php the_title(); ?></h5>
-                                        <p class="card-text">
-                                            <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" class="text-decoration-none text-muted">Par <?php the_author(); ?></a>
-                                        </p>
-                                        <p class="card-text">
-                                            <strong>Temps de préparation :</strong> 
-                                            <?php 
-                                            $temps_de_preparation = get_post_meta(get_the_ID(), 'temps_de_preparation', true); 
-                                            echo $temps_de_preparation ? $temps_de_preparation : 'Non spécifié';
-                                            ?>
-                                        </p>
-                                        <p class="card-text">
-                                            <strong>Note :</strong>
-                                            <?php 
-                                            $rating = get_post_meta(get_the_ID(), 'rating', true); 
-                                            if ($rating) {
-                                                $full_stars = floor($rating); 
-                                                $half_star = ($rating - $full_stars) >= 0.5;
-                                                $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0);
+            // Requête SQL pour calculer la moyenne des notes
+            $query = "
+                SELECT p.ID, p.post_title, p.post_author, AVG(meta.meta_value) AS average_rating
+                FROM {$wpdb->posts} p
+                INNER JOIN {$wpdb->comments} c ON p.ID = c.comment_post_ID
+                INNER JOIN {$wpdb->commentmeta} meta ON c.comment_ID = meta.comment_id
+                WHERE p.post_type = 'recipe' 
+                  AND meta.meta_key = 'rating'
+                  AND c.comment_approved = 1
+                GROUP BY p.ID
+                ORDER BY average_rating DESC
+                LIMIT 4
+            ";
 
-                                                // Générer les étoiles pleines
-                                                for ($i = 0; $i < $full_stars; $i++) {
-                                                    echo '<span class="text-warning">&#9733;</span>';
-                                                }
+            $top_recipes = $wpdb->get_results($query);
 
-                                                // Générer l'étoile à moitié pleine si applicable
-                                                if ($half_star) {
-                                                    echo '<span class="text-warning">&#9734;</span>';
-                                                }
+            if (!empty($top_recipes)) :
+                foreach ($top_recipes as $recipe) : 
+                    // Récupérer le temps total et l'auteur
+                    $prep_time = get_post_meta($recipe->ID, 'prep_time', true);
+                    $cook_time = get_post_meta($recipe->ID, 'cook_time', true);
 
-                                                // Générer les étoiles vides
-                                                for ($i = 0; $i < $empty_stars; $i++) {
-                                                    echo '<span class="text-muted">&#9734;</span>';
-                                                }
-                                            } else {
-                                                echo 'Non notée';
-                                            }
-                                            ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
+                    // Calcul du temps total en minutes
+                    $prep_minutes = explode(':', $prep_time);
+                    $cook_minutes = explode(':', $cook_time);
+                    $total_minutes = ($prep_minutes[0] * 60 + $prep_minutes[1]) + ($cook_minutes[0] * 60 + $cook_minutes[1]);
+
+                    $author_name = get_the_author_meta('display_name', $recipe->post_author);
+            ?>
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <div class="card">
+                            <?php if (has_post_thumbnail($recipe->ID)) : ?>
+                                <?php echo get_the_post_thumbnail($recipe->ID, 'medium', ['class' => 'card-img-top']); ?>
+                            <?php else : ?>
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/photos/default.jpg" alt="Image par défaut" class="card-img-top">
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <!-- Lien appliqué uniquement au titre -->
+                                <h5 class="card-title">
+                                    <a href="<?php echo get_permalink($recipe->ID); ?>" class="card-link">
+                                        <?php echo esc_html($recipe->post_title); ?>
+                                    </a>
+                                </h5>
+                                <p class="card-text">
+                                    <strong>Par :</strong> <?php echo esc_html($author_name); ?>
+                                </p>
+                                <p class="card-text">
+                                    <strong>Temps total :</strong> <?php echo $total_minutes ? $total_minutes . ' min' : 'Non spécifié'; ?>
+                                </p>
+                                <p class="card-text">
+                                    <strong>Note moyenne :</strong>
+                                    <?php
+                                    $average_rating = round($recipe->average_rating, 1);
+                                    for ($i = 1; $i <= 5; $i++) {
+                                        echo $i <= $average_rating ? '<span class="text-warning">&#9733;</span>' : '<span class="text-muted">&#9734;</span>';
+                                    }
+                                    echo " ($average_rating)";
+                                    ?>
+                                </p>
+                            </div>
                         </div>
-                    <?php endwhile;
-                    wp_reset_postdata();
-                else : ?>
-                    <p>Aucune recette trouvée.</p>
-                <?php endif; ?>
-            </div>
+                    </div>
+            <?php 
+                endforeach;
+            else : ?>
+                <p>Aucune recette trouvée.</p>
+            <?php endif; ?>
         </div>
-    </section>
+    </div>
+</section>
 
         <!-- Section des Catégories -->
     <section class="categories py-5">
