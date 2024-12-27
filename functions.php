@@ -275,13 +275,11 @@ function save_comment_rating($comment_id) {
     }
 }
 add_action('comment_post', 'save_comment_rating');
-function add_recipe_meta() {
-    register_post_type('recipe', [
-        'label' => 'Recettes',
-        'public' => true,
-        'supports' => ['title', 'editor', 'thumbnail', 'custom-fields'],
-        'has_archive' => true,
-    ]);
-}
-add_action('init', 'add_recipe_meta');
 
+function force_content_headings_to_h2($content) {
+    // Convertit les balises <h1>...<h6> en <h2> uniquement dans the_content
+    $content = preg_replace('/<h[1-6]([^>]*)>/i', '<h2$1>', $content);
+    $content = preg_replace('/<\/h[1-6]>/i', '</h2>', $content);
+    return $content;
+}
+add_filter('the_content', 'force_content_headings_to_h2');
