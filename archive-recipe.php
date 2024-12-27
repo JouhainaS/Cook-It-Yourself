@@ -17,7 +17,7 @@ get_header();
     }
 
     .card {
-        width: 260px; 
+        width: 260px; /* Réduction de la largeur des cartes */
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         overflow: hidden;
@@ -26,12 +26,12 @@ get_header();
         flex-direction: column;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         position: relative;
-        text-decoration: none;
+        text-decoration: none; /* Supprime la décoration par défaut */
     }
 
     .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
 
     .card img {
@@ -51,28 +51,28 @@ get_header();
         font-size: 1.3rem;
         color: #2c3e50;
         margin-bottom: 5px;
-        text-decoration: none;
+        text-decoration: none; /* Par défaut, pas de soulignement */
     }
 
     .card-title:hover {
-        text-decoration: none;
-        color: #5692B2;
+        text-decoration: none; /* Pas de soulignement au survol */
+        color: #5692B2; /* Change la couleur au survol */
     }
 
     a {
-        text-decoration: none;
-        color: inherit;
+        text-decoration: none; /* Supprime la décoration par défaut des liens */
+        color: inherit; /* Utilise la couleur par défaut du texte */
     }
 
     a:hover {
-        text-decoration: none; 
+        text-decoration: none; /* Pas de soulignement au survol des liens */
     }
 
     .recipe-meta {
         color: #000;
         font-size: 0.9rem;
         margin-bottom: 10px;
-        font-weight: normal;
+        font-weight: normal; /* Texte non gras */
     }
 
     .recipe-meta .author {
@@ -157,6 +157,7 @@ get_header();
     .toggle-more:hover {
         color: #2c3e50;
     }
+    
 </style>
 
 <div class="container">
