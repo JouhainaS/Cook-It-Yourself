@@ -182,12 +182,12 @@
                             <h5 class="footer-heading">SUPPORT JURIDIQUE</h5>
                             <ul class="list-unstyled">
                                 <li><a href="conditions-utilisation.html" class="footer-link">Conditions d’utilisation</a></li>
-                                <li><a href="politique-confidentialite.html" class="footer-link">Mentions légales</a></li>
-                                <li><a href="ajouter-recette.html" class="btn mt-3">+ AJOUTER UNE RECETTE</a></li>
+                                <li><a href="<?php echo site_url('/mentions-legales'); ?>" class="footer-link">Mentions légales</a></li>
+                                <li><a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn mt-3">+ AJOUTER UNE RECETTE</a></li>
                             </ul>
                         </div>
                     </div>
-        
+                    
                     <hr class="footer-line">
         
                     <!-- Bottom Footer -->

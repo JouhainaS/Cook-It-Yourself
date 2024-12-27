@@ -1,12 +1,8 @@
 <?php
-/**
- * Template Name: Mentions Légales
- */
+/** Template Name: Mentions Légales */
+get_header(); ?>
 
-get_header();
-?>
-
-<?php body_class(); ?>>
+<body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
 
     <div class="container mt-5 mb-5">
@@ -17,7 +13,7 @@ get_header();
             <h2>Informations de la Société</h2>
             <p><strong>Nom de la société :</strong> Cook'It Yourself</p>
             <p><strong>Forme juridique :</strong> Société à Responsabilité Limitée (SRL)</p>
-            <p><strong>Adresse postale du siège social :</strong> Rue de la Cuisine 42, 1030 Bruxelles</p>
+            <p><strong>Adresse postale du siège social :</strong> Rue de la Cuisine 42, 1030 Schaerbeek</p>
             <p><strong>Téléphone :</strong> +32 484 45 67 89</p>
             <p><strong>E-mail :</strong> <a href="mailto:contact@cookityourself.com">contact@cookityourself.com</a></p>
         </section>
@@ -32,7 +28,8 @@ get_header();
             <h2>Droits d'auteur</h2>
             <p>Tous les contenus présents sur ce site (textes, images, vidéos, graphismes) sont la propriété exclusive de Cook'It Yourself ou de tiers ayant autorisé leur utilisation. Toute reproduction, même partielle, est strictement interdite sans autorisation préalable.</p>
         </section>
-
     </div>
-<?php wp_footer(); ?>
 
+    <?php wp_footer(); ?>
+</body>
+</html>
