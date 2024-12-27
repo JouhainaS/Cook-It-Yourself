@@ -1,5 +1,5 @@
 <?php
-/* Template Name: Mes Publications */
+/* Template Name: Mes Publications - Page */
 
 get_header(); ?>
 
