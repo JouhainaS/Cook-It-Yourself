@@ -2,39 +2,48 @@
 /* Template : Index - Page */
 get_header(); 
 ?>
-<style>/* Section Hero */
- *,
- *::before,
- *::after {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
- 
- body {
-   font-family: 'Poppins', sans-serif;
-   background-color: white;
-   color: black;
-   margin: 0;
-   padding: 0;
-   padding-top: 80px;
- }
- 
- /* Typography & General Layout */
- h1, h2, h3, h4, h5, h6 {
-   margin-bottom: 1rem;
-   text-align: left;
-   color: #3a5676;
- }
- 
- h1 { font-size: 2.5rem; }
- h2 { font-size: 2rem; }
- h3 { font-size: 1.75rem; }
- h4 { font-size: 1.5rem; }
- h5 { font-size: 1.25rem; }
- h6 { font-size: 1rem; }
- 
- .hero-section {
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  color: black;
+  margin: 0;
+  padding: 0;
+  padding-top: 80px;
+}
+.top-rated-recipes h2,
+.categories h2,
+.trucs-et-astuces h2 {
+  text-align: center;
+  margin-bottom: 20px; /* Pour un espacement agréable sous le titre */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  text-align: left;
+  color: #3a5676;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+.hero-section {
    position: relative;
    height: 70vh;
    display: flex;
@@ -99,211 +108,312 @@ get_header();
  .hero-section {
    margin-bottom: 40px;
  }
- 
- /* Top Rated Recipes Section */
- .top-rated-recipes .row {
-   display: flex;
-   flex-wrap: nowrap;
-   gap: 50px;
-   justify-content: center;
-   align-items: center;
-   overflow-x: auto;
-   padding-bottom: 10px;
- }
- 
- .top-rated-recipes h2 {
-   margin-left: 150px;
-   margin-right: 20px;
-   margin-bottom: 2rem;
- }
- 
- .card {
-   display: flex;
-   flex-direction: column;
-   background-color: white;
-   border-radius: 10px;
-   overflow: hidden;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-   width: 16rem;
-   text-align: left;
-   transition: transform 0.2s ease;
- }
- 
- .card:hover {
-   transform: scale(1.05);
- }
- 
- .card .card-body {
-   padding: 15px;
-   display: flex;
-   flex-direction: column;
-   gap: 10px;
- }
- 
- .card img {
-   width: 100%;
-   margin-bottom: 0;
-   border-radius: 10px 10px 0 0;
- }
- 
- .card-content h3 {
-   color: black;
-   font-size: 1.2rem;
-   margin-bottom: 5px;
- }
-  
-  .card-content p {
-    color: #666;
-    line-height: 1.4;
-    font-size: 0.9rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    margin: 0;
-    text-decoration: none;
-  }
-  
-  .card .star-icon {
-    width: auto;
-    height: 20px;
-    margin-right: 5px;
-  }
-  
-  /* Categories Section */
-  .categories {
-    padding: 60px 0;
-    text-align: center;
-  }
-  
-  .d-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .category-btn {
-    background-color: #EBF4E7;
-    border-radius: 70px;
-    width: 140px;
-    height: 180px;
-    margin: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    border: none;
-  }
-  
-  .category-btn:hover {
-    background-color: #d7e8d2;
-  }
-  
-  .category-btn span {
-    font-size: 1.2rem;
-    color: #3a5676;
-    font-weight: 500;
-  }
-  
-  .category-icon {
-    height: 55px;
-    object-fit: contain;
-  }
-  
-  /* article section*/
-  .articles-list { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 20px; 
-  }
 
-  .article-card {
-    display: flex;
-    align-items: stretch;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    padding: 0;
-    margin-bottom: 20px; 
+.top-rated-recipes {
+  padding: 60px 0;
+}
+
+.top-rated-recipes .container {
+  max-width: 1000px; /* Aligne avec la classe .container */
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.top-rated-recipes .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 16rem;
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card .card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card img {
+  width: 100%;
+  margin-bottom: 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-content h3 {
+  color: black;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.card-content p {
+  color: #666;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin: 0;
+  text-decoration: none;
+}
+
+.card .star-icon {
+  width: auto;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.categories {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.categories .container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 20px;
+  padding: 0 15px;
+}
+
+.category-btn {
+  flex: 0 1 auto;
+  width: 120px;
+  height: 170px;
+  background-color: #EBF4E7;
+  border-radius: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.category-btn:hover span {
+  text-decoration: underline;
+}
+
+.category-btn span {
+  font-size: 1.2rem;
+  color: #3a5676;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none
+}
+
+.category-btn:hover {
+  background-color: #d7e8d2;
+}
+
+.category-icon {
+  height: 55px;
+  object-fit: contain;
+}
+
+.articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 15px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.article-card {
+  max-width: 100%;
+  width: auto;
+  display: flex;
+  align-items: stretch;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .article-card:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 .article-thumbnail {
-    flex: 1;
-    max-width: 33.33%;
-    overflow: hidden;
+  flex: 1;
+  max-width: 33.33%;
+  overflow: hidden;
 }
 
 .article-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 0 0 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
 }
 
 .article-content {
-    flex: 2;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  flex: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .article-content h3 {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-    color: #3a5676;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #3a5676;
 }
 
 .article-content h3 a {
-    text-decoration: none;
-    color: #3a5676;
+  text-decoration: none;
+  color: #3a5676;
 }
 
 .article-content h3 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-.article-content p { 
-  font-size: 0.9rem; 
-  color: #555; 
-  margin-bottom: 10px; 
-  line-height: 1.6; } 
+.article-content p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
 
 .article-meta {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    color: #777;
-    margin-bottom: 10px;
-    display: flex;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .article-meta .author,
 .article-meta .date {
-    font-style: italic;
+  font-style: italic;
 }
 
 .article-meta .date {
-    color: #555;
+  color: #555;
 }
 
-.article-meta .comments { 
-  color: #3a5676; 
+.article-meta .comments {
+  color: #3a5676;
 }
-  </style>
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section .search-bar {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  .top-rated-recipes .row {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 20px;
+    height: 550px;
+  }
+
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .article-thumbnail {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .article-thumbnail img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .article-content {
+    flex: 1;
+    padding: 15px;
+  }
+
+  .article-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .article-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .categories {
+    padding: 40px 0;
+  }
+
+  .categories .container {
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .category-btn {
+    width: 100px;
+    height: 140px;
+    border-radius: 60px;
+  }
+
+  .category-btn span {
+    font-size: 1rem;
+  }
+
+  .category-icon {
+    height: 45px;
+  }
+}
+</style>
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?> 
@@ -324,7 +434,7 @@ get_header();
     <!-- Section des Recettes les mieux notées -->
     <section class="top-rated-recipes py-5">
         <div class="container">
-            <h2 class="fw-bold mb-4">Les mieux notées</h2>
+            <h2 >Les mieux notées</h2>
             <div class="row">
                 <?php
                 // Query pour récupérer les recettes les mieux notées
@@ -401,9 +511,9 @@ get_header();
     </section>
 
         <!-- Section des Catégories -->
-        <section class="categories py-5">
+    <section class="categories py-5">
         <div class="container">
-            <h2 class="fw-bold mb-4">Catégories</h2>
+            <h2>Catégories</h2>
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <!-- Petit déjeuner -->
                 <a href="<?php echo home_url('petit-dejeuner.php'); ?>" class="category-btn">
@@ -438,7 +548,7 @@ get_header();
 
     <section class="trucs-et-astuces py-5">
         <div class="container">
-            <h2 class="fw-bold mb-4">Trucs et Astuces</h2>
+            <h2>Trucs et Astuces</h2>
             <div class="articles-list">
                 <?php
                 // Query pour récupérer les 3 derniers articles des catégories spécifiques

@@ -30,10 +30,11 @@
     .custom-content img {
         width: 100%;
         height: auto;
+        max-height: 500px; 
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
         object-fit: cover; 
-        border-radius: 15px; 
-        margin: 20px 0; 
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .related-articles .article-thumbnail img {

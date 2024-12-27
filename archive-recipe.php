@@ -72,7 +72,7 @@ get_header();
         color: #000;
         font-size: 0.9rem;
         margin-bottom: 10px;
-        font-weight: normal;
+        font-weight: normal; /* Texte non gras */
     }
 
     .recipe-meta .author {
