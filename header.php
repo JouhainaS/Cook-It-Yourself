@@ -152,7 +152,7 @@ get_header();
 
                 <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
 
-                <a href="<?php echo site_url('/parametres-du-compte'); ?>" class="ms-auto">
+                <a href="<?php echo site_url('/modifier-profil'); ?>" class="ms-auto">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
                 </a>
             </div>
