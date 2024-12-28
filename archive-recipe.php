@@ -148,6 +148,7 @@ label {
     margin-left: 5px; 
 }
 
+
 .filter-toggle-btn {
     display: none;
     background-color: #5692B2;
