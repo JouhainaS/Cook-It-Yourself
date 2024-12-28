@@ -276,7 +276,7 @@ get_header();
                     <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logo/logo_monogramme.svg" alt="Cook It Yourself Monogram" class="logo-image">
                 </a>
 
-                <a href="<?php echo site_url('/parametres-du-compte'); ?>">
+                <a href="<?php echo site_url('/modifier-le-profil'); ?>">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
                 </a>
                 </div>
@@ -308,7 +308,7 @@ get_header();
                     <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
                 </div>
 
-                <a href="<?php echo site_url('/modifier-profil'); ?>" class="ms-auto">
+                <a href="<?php echo site_url('/modifier-le-profil'); ?>" class="ms-auto">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
                 </a>
             </div>
@@ -318,66 +318,3 @@ get_header();
     <?php wp_footer(); ?>
 </body>
 </html>
-    </style>
-
-    <?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
-    <?php wp_body_open(); ?>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg py-3 custom-navbar">
-        <div class="container">
-            <!-- Mobile Navbar -->
-            <div class="mobile-navbar d-lg-none">
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    &#9776;
-                </button>
-                
-                <a class="navbar-brand" href="<?php echo home_url('/'); ?>">
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logo/logo_monogramme.svg" alt="Cook It Yourself Monogram" class="logo-image">
-                </a>
-
-                <a href="<?php echo site_url('/parametres-du-compte'); ?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
-                </a>
-            </div>
-
-            <!-- Desktop Navbar -->
-            <div class="collapse navbar-collapse" id="navbarContent">
-
-                <a class="navbar-brand d-lg-flex d-none me-4" href="<?php echo home_url('/'); ?>">
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logo/logo_horizontal.svg" alt="Cook It Yourself Logo" class="logo-image">
-                </a>
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('/recettes'); ?>">Recettes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('/trucs-et-astuces'); ?>">Trucs et Astuces</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('/a-propos'); ?>">À Propos</a>
-                    </li>
-                </ul>
-
-                <!-- Barre de recherche et bouton -->
-                <div class="search-add-container">
-                    <form role="search" method="get" action="<?php echo home_url('/'); ?>">
-                        <input class="form-control search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
-                    </form>
-                    <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
-                </div>
-
-                <a href="<?php echo site_url('/modifier-profil'); ?>" class="ms-auto">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <?php wp_footer(); ?>
-</body>
-</html> 

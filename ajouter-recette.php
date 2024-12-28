@@ -583,7 +583,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         `;
         wrapper.appendChild(div);
     });
-
+    document.getElementById('add-step').addEventListener('click', function () {
+        const wrapper = document.getElementById('steps-wrapper');
+        const div = document.createElement('div');
+        div.className = 'step-group';
+        div.innerHTML = `
+            <textarea name="steps[]" placeholder="Étape ${wrapper.children.length + 1}"></textarea>
+        `;
+        wrapper.appendChild(div);
+    });
 </script>
 
 <?php

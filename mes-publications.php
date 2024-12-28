@@ -6,31 +6,32 @@ get_header(); ?>
 <div class="body-wrapper">
     <!-- Sidebar -->
     <div class="sidebar">
-    <h2 class="sidebar-title">Mon profil</h2>
-    <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
-    <aside>
-        <ul>
-            <li>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-profil'))); ?>" 
-                   class="sidebar-link <?php echo is_page('modifier-profil') ? 'active' : ''; ?>">
-                   Modifier le profil
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('parametres-compte'))); ?>" 
-                   class="sidebar-link <?php echo is_page('parametres-compte') ? 'active' : ''; ?>">
-                   Paramètres du compte
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('mes-publications'))); ?>" 
-                   class="sidebar-link <?php echo is_page('mes-publications') ? 'active' : ''; ?>">
-                   Mes publications
-                </a>
-            </li>
-        </ul>
-    </aside>
-</div>
+        <h2 class="sidebar-title">Mon profil</h2>
+        <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
+        <aside>
+            <ul>
+                <li>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-le-profil'))); ?>" 
+                    class="sidebar-link <?php echo is_page('modifier-le-profil') ? : ''; ?>">
+                    Modifier le profil
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('parametres-du-compte'))); ?>" 
+                    class="sidebar-link <?php echo is_page('parametres-du-compte') ?  : ''; ?>">
+                    Paramètres du compte
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('mes-publications'))); ?>" 
+                    class="sidebar-link <?php echo is_page('mes-publications') ? 'active' : ''; ?>">
+                    Mes publications
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
 
     <div class="main-content">
         <section class="profile-edit w-100">
@@ -84,6 +85,7 @@ get_header(); ?>
             </div>
 
             <div class="publish-recipe d-flex align-items-center mb-4">
+            <hr class="my-4"> 
                 <p class="mb-0">Et si tu publiais une nouvelle recette ?</p>
                 <a href="<?php echo get_permalink(get_page_by_path('ajouter-recette')); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
             </div>
@@ -211,6 +213,43 @@ get_header(); ?>
         text-align: center;
         padding: 20px 0;
     }
+
+    /* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .body-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+        box-shadow: none;
+    }
+
+    .sidebar ul li {
+        text-align: center;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .btn-update {
+        width: 100%;
+    }
+}
+
 </style>
 
 <?php get_footer(); ?>
