@@ -190,6 +190,44 @@ hr {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.body-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    min-height: 100vh; /* Assure que le body-wrapper couvre toute la hauteur */
+    position: relative; /* Nécessaire pour les positions absolues */
+}
+
+.sidebar {
+    background-color: #EBF4E7;
+    width: 250px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 100%; /* La sidebar couvre toute la hauteur de l'écran */
+    position: absolute; /* Permet de rester derrière le footer */
+    left: 0;
+    top: 0;
+    z-index: 0; /* Assure que la sidebar est derrière */
+}
+
+.main-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 50px;
+    background-color: #fff;
+    min-height: calc(100vh - 50px); /* Ajuste pour que le contenu ne dépasse pas */
+    z-index: 1; /* Le contenu est devant la sidebar */
+    position: relative;
+}
+
+footer {
+    position: relative; /* Pour forcer le footer à être au-dessus de tout */
+    z-index: 10;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
 </style>
 
 <?php get_footer(); ?>
