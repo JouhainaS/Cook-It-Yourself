@@ -81,6 +81,10 @@ get_header();
                 align-items: center;
                 width: 100%;
             }
+            
+            .navbar-collapse .profile-icon-mobile {
+                display: none;
+            }
 
             .navbar-toggler {
                 font-size: 3rem;

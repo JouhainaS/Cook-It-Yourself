@@ -56,21 +56,30 @@ get_header();
     display: block;
 }
 
-.article h3 {
+.alternatives-vegetales-section h3,
+.astuces-section .article-content h3,
+.stop-gaspillage-section .article h3,
+.materiels-section .article h3{
     font-size: 1.25rem;
     color: #333;
     margin: 10px 15px;
 }
 
 /* Style des liens des titres */
-.article-content h3 a {
-    text-decoration: none; /* Pas de soulignement par défaut */
-    color: #333; /* Couleur noire */
+.alternatives-vegetales-section h3 a,
+.astuces-section .article-content h3 a,
+.stop-gaspillage-section .article h3 a,
+.materiels-section .article h3 a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.article-content h3 a:hover {
-    text-decoration: underline; /* Soulignement au survol */
-    color: #333; /* Garde la couleur noire au survol */
+.alternatives-vegetales-section h3 a:hover,
+.astuces-section .article-content h3 a:hover,
+.stop-gaspillage-section .article h3 a:hover,
+.materiels-section .article h3 a:hover {
+    text-decoration: underline;
+    color: #5692B2;
 }
 
 /* Description des articles */
@@ -183,12 +192,6 @@ get_header();
     border-bottom: none;
 }
 
-.alternatives-vegetales-section .article h3 {
-    font-size: 1.25rem;
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: 500;
-}
 
 /* Sections 2 et 4 */
 .stop-gaspillage-section .articles,
@@ -221,13 +224,6 @@ get_header();
     height: 200px;
     object-fit: cover;
     border-bottom: 1px solid #ddd;
-}
-
-.stop-gaspillage-section .article h3,
-.materiels-section .article h3 {
-    font-size: 1.25rem;
-    color: #333;
-    margin: 15px;
 }
 
 /* Responsive */
@@ -290,25 +286,6 @@ get_header();
         height: 100%; /* S'assure que le contenu remplit la carte */
     }
 
-    .astuces-section .article-content h3 {
-        font-size: 1.1rem;
-        color: #333;
-        margin-bottom: 10px;
-        font-weight: bold;
-        line-height: 1.4;
-    }
-
-    .astuces-section .article-content p {
-        font-size: 0.9rem;
-        color: #555;
-        margin-bottom: 15px;
-        line-height: 1.6;
-        display: -webkit-box;
-        -webkit-line-clamp: 3; /* Limite la description à 3 lignes */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 
     .stop-gaspillage-section .articles,
     .materiels-section .articles {
@@ -343,6 +320,8 @@ get_header();
     }
 
     /* Contenu de la carte */
+    .alternatives-vegetales-section h3,
+    .astuces-section .article-content h3,
     .stop-gaspillage-section .article h3,
     .materiels-section .article h3 {
         font-size: 1.2rem;
@@ -350,12 +329,16 @@ get_header();
         color: #333;
     }
 
+    .alternatives-vegetales-section h3 a,
+    .astuces-section .article-content h3 a,
     .stop-gaspillage-section .article h3 a,
     .materiels-section .article h3 a {
         text-decoration: none;
         color: inherit;
     }
 
+    .alternatives-vegetales-section h3 a:hover,
+    .astuces-section .article-content h3 a:hover,
     .stop-gaspillage-section .article h3 a:hover,
     .materiels-section .article h3 a:hover {
         text-decoration: underline;
@@ -363,6 +346,8 @@ get_header();
     }
 
     /* Texte et description */
+    .alternatives-vegetales-section p,
+    .astuces-section .article-content p 
     .stop-gaspillage-section .article p,
     .materiels-section .article p {
         font-size: 0.9rem;
