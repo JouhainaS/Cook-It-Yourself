@@ -7,6 +7,70 @@ get_header();
     body {
         font-family: 'Poppins', sans-serif;
         color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .content-wrapper {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .filter-sidebar {
+        width: 25%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    .filters h4 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: #000;
+    }
+
+    .filter-section {
+        margin-bottom: 20px;
+    }
+
+    .filter-section h5 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #000;
+    }
+
+    .filter-options {
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .filter-options.expanded {
+        max-height: 500px;
+    }
+
+    .show-more {
+        font-size: 0.9rem;
+        color: #5692B2;
+        cursor: pointer;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .filter-section input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: #A8BAA7;
+    }
+
+    label {
+        font-size: 0.9rem;
+        color: #000;
+    }
+
+    .recipe-list {
+        width: 75%;
     }
 
     .grid-container {
@@ -17,7 +81,7 @@ get_header();
     }
 
     .card {
-        width: 260px; /* Réduction de la largeur des cartes */
+        width: 260px;
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         overflow: hidden;
@@ -25,8 +89,6 @@ get_header();
         display: flex;
         flex-direction: column;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        text-decoration: none; /* Supprime la décoration par défaut */
     }
 
     .card:hover {
@@ -42,47 +104,19 @@ get_header();
 
     .card-body {
         padding: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
     }
 
     .card-title {
         font-size: 1.3rem;
         color: #2c3e50;
         margin-bottom: 5px;
-        text-decoration: none; /* Par défaut, pas de soulignement */
-    }
-
-    .card-title:hover {
-        text-decoration: none; /* Pas de soulignement au survol */
-        color: #5692B2; /* Change la couleur au survol */
-    }
-
-    a {
-        text-decoration: none; /* Supprime la décoration par défaut des liens */
-        color: inherit; /* Utilise la couleur par défaut du texte */
-    }
-
-    a:hover {
-        text-decoration: none; /* Pas de soulignement au survol des liens */
+        text-decoration: none;
     }
 
     .recipe-meta {
         color: #000;
         font-size: 0.9rem;
         margin-bottom: 10px;
-        font-weight: normal; /* Texte non gras */
-    }
-
-    .recipe-meta .author {
-        color: black;
-        display: block;
-    }
-
-    .recipe-meta .time {
-        margin-top: 3px;
-        display: block;
     }
 
     .rating {
@@ -96,78 +130,85 @@ get_header();
         color: #ffc107;
     }
 
-    .rating .rating-value {
-        font-size: 0.9rem;
-        color: #555;
-    }
-
-    .filters {
-        padding: 15px;
-        background-color: white;
-    }
-
-    .filters h4 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        color: #000;
-        text-align: left;
-    }
-
-    .filter-section {
-        margin-bottom: 1.5rem;
-    }
-
-    .filter-section h5 {
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-        color: #000;
-        text-align: left;
-    }
-
-    .filter-options {
-        max-height: 100px;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-    }
-
-    .filter-options.expanded {
-        max-height: 500px;
-    }
-
-    .filter-section input[type="checkbox"] {
+    .filter-icon {
+        width: 20px;
+        height: 20px;
         margin-right: 8px;
-        accent-color: #A8BAA7;
+        vertical-align: middle; 
     }
 
-    label {
-        font-size: 0.9rem;
-        color: #000;
+    .filter-toggle-btn i {
+        margin-right: 8px; 
+        font-size: 18px; 
+        vertical-align: middle; 
     }
 
-    .toggle-more {
+    .filter-toggle-btn {
+        display: none;
+        background-color: #5692B2;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 20px;
+        font-size: 1rem;
+        text-align: center;
+        margin: 10px auto;
+        cursor: pointer;
+        width: 90%;
+    }
+
+    .filter-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 66.6%;
+        background-color: white;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        z-index: 9999;
+        padding: 20px;
+    }
+
+    .filter-overlay.active {
+        display: block;
+    }
+
+    .close-btn {
         background: none;
         border: none;
-        color: #3498db;
+        font-size: 1.5rem;
+        color: #333;
+        position: absolute;
+        top: 15px;
+        right: 15px;
         cursor: pointer;
-        font-size: 0.9rem;
-        margin-top: 10px;
-        text-decoration: underline;
     }
 
-    .toggle-more:hover {
-        color: #2c3e50;
+    @media (max-width: 768px) {
+        .content-wrapper {
+            flex-direction: column;
+        }
+
+        .filter-sidebar {
+            display: none;
+        }
+
+        .filter-toggle-btn {
+            display: block;
+        }
     }
-    
 </style>
 
 <div class="container">
     <div class="row">
-        <!-- Sidebar des filtres -->
-        <div class="col-md-3">
+        <button class="filter-toggle-btn" id="filterToggleBtn"> <img src="assets/icones/filtre.svg" alt="Filtres" class="filter-icon">Afficher les filtres </button>
+
+        <div class="filter-overlay" id="filterOverlay">
+            <button class="close-btn" id="closeFilters">&times;</button>
             <div class="filters">
                 <h4>Filtrer par</h4>
-
-                <!-- Boucle dynamique pour générer des sections de filtres -->
                 <?php
                 $filter_data = [
                     'Difficulté' => [
@@ -226,24 +267,50 @@ get_header();
                 foreach ($filter_data as $section_title => $options) : ?>
                     <div class="filter-section">
                         <h5><?php echo $section_title; ?> :</h5>
-                        <div class="filter-options" id="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">
+                        <div class="filter-options">
+                            <?php $i = 0; ?>
                             <?php foreach ($options as $label => $value) : ?>
-                                <div>
-                                    <input type="checkbox" name="<?php echo strtolower(str_replace(' ', '_', $section_title)); ?>[]" value="<?php echo $value; ?>" id="<?php echo strtolower($section_title . '_' . $value); ?>">
-                                    <label for="<?php echo strtolower($section_title . '_' . $value); ?>"><?php echo $label; ?></label>
+                                <?php $i++; ?>
+                                <div class="<?php echo $i > 3 ? 'hidden-option' : ''; ?>">
+                                    <input type="checkbox" name="<?php echo strtolower($section_title); ?>[]" value="<?php echo $value; ?>">
+                                    <label><?php echo $label; ?></label>
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <?php if (count($options) > 3) : ?>
-                            <button type="button" class="toggle-more" data-target="options-<?php echo strtolower(str_replace(' ', '-', $section_title)); ?>">Afficher plus</button>
+                        <?php if ($i > 3) : ?>
+                            <span class="show-more">Afficher plus</span>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
 
-        <!-- Liste des recettes -->
-        <div class="col-md-9">
+        <div class="content-wrapper">
+            <div class="filter-sidebar d-none d-md-block">
+                <div class="filters">
+                    <h4>Filtrer par</h4>
+                    <?php foreach ($filter_data as $section_title => $options) : ?>
+                        <div class="filter-section">
+                            <h5><?php echo $section_title; ?> :</h5>
+                            <div class="filter-options">
+                                <?php $i = 0; ?>
+                                <?php foreach ($options as $label => $value) : ?>
+                                    <?php $i++; ?>
+                                    <div class="<?php echo $i > 3 ? 'hidden-option' : ''; ?>">
+                                        <input type="checkbox" name="<?php echo strtolower($section_title); ?>[]" value="<?php echo $value; ?>">
+                                        <label><?php echo $label; ?></label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php if ($i > 3) : ?>
+                                <span class="show-more">Afficher plus</span>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div class="col-md-9">
             <h1 class="mb-4">Nos Recettes</h1>
             <div class="grid-container">
                 <?php
@@ -299,27 +366,33 @@ get_header();
             </div>
         </div>
     </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggleButtons = document.querySelectorAll('.toggle-more');
+document.addEventListener('DOMContentLoaded', function () {
+    const filterToggleBtn = document.getElementById('filterToggleBtn');
+    const filterOverlay = document.getElementById('filterOverlay');
+    const closeFilters = document.getElementById('closeFilters');
+    const showMoreButtons = document.querySelectorAll('.show-more');
 
-        toggleButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const targetId = this.getAttribute('data-target');
-                const targetElement = document.getElementById(targetId);
+    filterToggleBtn.addEventListener('click', function () {
+        filterOverlay.classList.add('active');
+    });
 
-                if (targetElement.classList.contains('expanded')) {
-                    targetElement.classList.remove('expanded');
-                    this.textContent = 'Afficher plus';
-                } else {
-                    targetElement.classList.add('expanded');
-                    this.textContent = 'Afficher moins';
-                }
-            });
+    closeFilters.addEventListener('click', function () {
+        filterOverlay.classList.remove('active');
+    });
+
+    showMoreButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const options = this.previousElementSibling;
+            options.classList.toggle('expanded');
+            this.textContent = options.classList.contains('expanded') ? 'Afficher moins' : 'Afficher plus';
         });
     });
+});
 </script>
 
 <?php
