@@ -4,13 +4,11 @@ get_header();
 ?>
 <style>
 
-/* Global Styles */
 .trucs-et-astuces-page {
     padding: 40px 20px;
     background-color: white;
 }
 
-/* Titre principal */
 .trucs-et-astuces-page h1 {
     font-size: 2.5rem;
     text-align: center;
@@ -22,22 +20,19 @@ get_header();
     margin-bottom: 60px; 
 }
 
-/* Titre des sections */
 .category-section h2 {
-    text-align: left; /* Alignement à gauche */
+    text-align: left;
     font-size: 2rem;
     color: #5692B2;
     margin-bottom: 20px;
 }
 
-/* Articles container */
 .articles {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-/* Article card styles */
 .article {
     background-color: white;
     border-radius: 10px;
@@ -65,7 +60,6 @@ get_header();
     margin: 10px 15px;
 }
 
-/* Style des liens des titres */
 .alternatives-vegetales-section h3 a,
 .astuces-section .article-content h3 a,
 .stop-gaspillage-section .article h3 a,
@@ -82,14 +76,12 @@ get_header();
     color: #5692B2;
 }
 
-/* Description des articles */
 .article p {
     font-size: 0.9rem;
     color: #555;
     margin: 0 15px 15px;
 }
 
-/* Section 1 : Astuces */
 .astuces-section .articles-list {
     display: flex;
     flex-direction: column;
@@ -132,7 +124,6 @@ get_header();
     justify-content: center;
 }
 
-/* Métadonnées */
 .article-meta {
     display: flex;
     gap: 10px;
@@ -150,7 +141,6 @@ get_header();
     color: #555;
 }
 
-/* Section 3 : Alternatives Végétales */
 .alternatives-vegetales-section {
     display: flex;
     flex-direction: column;
@@ -192,8 +182,6 @@ get_header();
     border-bottom: none;
 }
 
-
-/* Sections 2 et 4 */
 .stop-gaspillage-section .articles,
 .materiels-section .articles {
     display: grid;
@@ -226,8 +214,6 @@ get_header();
     border-bottom: 1px solid #ddd;
 }
 
-/* Responsive */
-
 @media (max-width: 768px) {
     .trucs-et-astuces-page {
         padding: 20px;
@@ -251,9 +237,47 @@ get_header();
         margin: 0 auto;
     }
 
+    .articles-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px; 
+    }
+
+    .article-card {
+        flex-direction: column; 
+        height: auto; 
+        margin: 0 auto;
+    }
+
+    .article-thumbnail {
+        width: 100%; 
+        height: auto;
+    }
+
+    .article-thumbnail img {
+        width: 100%;
+        height: auto; 
+        object-fit: cover;
+    }
+
+    .article-content {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .article-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .article-content p {
+        font-size: 0.9rem;
+        color: #555;
+    }
+
     .astuces-section .article-card {
         display: flex;
-        flex-direction: row; /* Image à gauche, contenu à droite */
+        flex-direction: row; 
         align-items: stretch;
         background-color: #fff;
         border-radius: 10px;
@@ -261,31 +285,30 @@ get_header();
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         padding: 0;
-        height: 0px; /* Augmente la hauteur des cartes */
+        height: 0px; 
     }
 
     .astuces-section .article-thumbnail {
-        flex: 0 0 33.33%; /* L'image reste sur 1/3 */
+        flex: 0 0 33.33%; 
         max-width: 33.33%;
-        height: 100%; /* Ajuste la hauteur de l'image à celle de la carte */
+        height: 100%; 
         overflow: hidden;
     }
 
     .astuces-section .article-thumbnail img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Centre et recadre l'image */
+        object-fit: cover;
     }
 
     .astuces-section .article-content {
-        flex: 1; /* Le contenu occupe les 2/3 restants */
+        flex: 1; 
         padding: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between; /* Aligne le contenu et les métadonnées */
-        height: 100%; /* S'assure que le contenu remplit la carte */
+        justify-content: space-between; 
+        height: 100%; 
     }
-
 
     .stop-gaspillage-section .articles,
     .materiels-section .articles {
@@ -319,7 +342,6 @@ get_header();
         border-bottom: 1px solid #ddd;
     }
 
-    /* Contenu de la carte */
     .alternatives-vegetales-section h3,
     .astuces-section .article-content h3,
     .stop-gaspillage-section .article h3,
@@ -345,7 +367,6 @@ get_header();
         color: #5692B2;
     }
 
-    /* Texte et description */
     .alternatives-vegetales-section p,
     .astuces-section .article-content p 
     .stop-gaspillage-section .article p,
@@ -355,7 +376,6 @@ get_header();
         margin: 10px 15px 15px;
     }
 
-    /* Scrollbar personnalisée */
     .stop-gaspillage-section .articles::-webkit-scrollbar,
     .materiels-section .articles::-webkit-scrollbar {
         height: 8px;
@@ -396,9 +416,6 @@ get_header();
         height: 150px;
     }
 }
-
-
-
 
 </style>
 

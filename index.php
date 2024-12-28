@@ -124,56 +124,77 @@ get_header();
 
 /* INDIVIDUAL CARDS */
 .index-page .top-rated-recipes .card {
-  width: 300px; 
-  background-color: #fff; 
-  border-radius: 15px;
-  overflow: hidden; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease; 
-  text-align: center; 
+    width: 260px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .index-page .top-rated-recipes .card:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.index-page .top-rated-recipes .card-img-top {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+.index-page .top-rated-recipes .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
 }
 
 .index-page .top-rated-recipes .card-body {
-  padding: 20px;
+    padding: 15px;
+}
+
+.index-page .top-rated-recipes .card-body p {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.index-page .top-rated-recipes .card-body p:last-child {
+    margin-bottom: 0;
 }
 
 .index-page .top-rated-recipes .card-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.2rem;
-  color: #3a5676;
-  margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: #3A5676; 
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease; 
 }
 
-.index-page .top-rated-recipes .card-text {
-  font-family: 'Arial', sans-serif;
-  color: black; 
-  font-size: 0.95rem;
-  margin-bottom: 10px; 
+.index-page .top-rated-recipes  .card-title a {
+    text-decoration: none; 
+    color: inherit; 
 }
 
-.index-page .top-rated-recipes .text-warning {
-  color: #ffc107; 
+.index-page .top-rated-recipes .card-title a:hover {
+    color: #5692B2; 
+    text-decoration: underline; 
 }
 
-.index-page .top-rated-recipes .text-muted {
-  color: #ddd; 
+.index-page .top-rated-recipes  .rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.index-page .top-rated-recipes .card-link {
-  text-decoration: none;
-  color: inherit; 
-  transition: transform 0.2s ease;
+.index-page .top-rated-recipes  .rating .star {
+    font-size: 1.2rem; 
+    color: #A8BAA7; 
+}
+
+.index-page .top-rated-recipes  .rating .star.text-muted {
+    color: #ddd; 
+}
+
+.index-page .top-rated-recipes .rating .rating-value {
+    font-size: 0.9rem; 
+    color: #333; 
+    margin-left: 5px; 
 }
 
 .index-page .top-rated-recipes .card-link:hover {
@@ -428,7 +449,7 @@ get_header();
 
  
 <!-- Section des Recettes les mieux notées -->
-<section class="top-rated-recipes py-5">
+<section class="top-rated-recipes">
     <div class="container">
         <h2>Les mieux notées</h2>
         <div class="row">
@@ -472,9 +493,8 @@ get_header();
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/photos/default.jpg" alt="Image par défaut" class="card-img-top">
                             <?php endif; ?>
                             <div class="card-body">
-                                <!-- Lien appliqué uniquement au titre -->
                                 <h5 class="card-title">
-                                    <a href="<?php echo get_permalink($recipe->ID); ?>" class="card-link">
+                                    <a href="<?php echo get_permalink($recipe->ID); ?>">
                                         <?php echo esc_html($recipe->post_title); ?>
                                     </a>
                                 </h5>
@@ -485,14 +505,16 @@ get_header();
                                     <strong>Temps total :</strong> <?php echo $total_minutes ? $total_minutes . ' min' : 'Non spécifié'; ?>
                                 </p>
                                 <p class="card-text">
-                                    <strong>Note moyenne :</strong>
-                                    <?php
-                                    $average_rating = round($recipe->average_rating, 1);
-                                    for ($i = 1; $i <= 5; $i++) {
-                                        echo $i <= $average_rating ? '<span class="text-warning">&#9733;</span>' : '<span class="text-muted">&#9734;</span>';
-                                    }
-                                    echo " ($average_rating)";
-                                    ?>
+                                    <strong>Note :</strong>
+                                    <div class="rating">
+                                        <?php
+                                        $average_rating = round($recipe->average_rating, 1);
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            echo $i <= $average_rating ? '<span class="star">&#9733;</span>' : '<span class="star text-muted">&#9734;</span>';
+                                        }
+                                        ?>
+                                        <span class="rating-value">(<?php echo $average_rating; ?>)</span>
+                                    </div>
                                 </p>
                             </div>
                         </div>
@@ -507,7 +529,7 @@ get_header();
 </section>
 
         <!-- Section des Catégories -->
-    <section class="categories py-5">
+    <section class="categories">
         <div class="container">
             <h2>Catégories</h2>
             <div class="d-flex flex-wrap justify-content-center gap-3">
@@ -542,7 +564,7 @@ get_header();
     </section>
 
 
-    <section class="trucs-et-astuces py-5">
+    <section class="trucs-et-astuces">
         <div class="container">
             <h2>Trucs et Astuces</h2>
             <div class="articles-list">
