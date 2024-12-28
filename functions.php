@@ -195,8 +195,8 @@ function custom_registration_form_handler() {
                     'user_password' => $password,
                     'remember' => true,
                 ]);
-                wp_safe_redirect(home_url());
-                exit;
+                /* wp_safe_redirect(home_url()); */
+                /* exit; */
             } else {
                 $errors[] = $user_id->get_error_message();
             }
@@ -234,8 +234,8 @@ add_shortcode('custom_registration_form', 'custom_registration_form_shortcode');
 // Redirection des utilisateurs non connectés
 add_action('template_redirect', function () {
     if (!is_user_logged_in() && !is_page(['connexion', 'inscription'])) {
-        wp_safe_redirect(home_url('/connexion'));
-        exit;
+        /* wp_safe_redirect(home_url('/connexion')); */
+        /* exit; */
     }
 });
 
@@ -257,8 +257,8 @@ function custom_login_handler() {
         $user = wp_signon($creds, false);
 
         if (!is_wp_error($user)) {
-            wp_safe_redirect(home_url());
-            exit;
+            /* wp_safe_redirect(home_url()); */
+            /* exit; */
         } else {
             echo '<p class="error-message">Nom d\'utilisateur ou mot de passe incorrect.</p>';
         }

@@ -6,16 +6,31 @@ get_header(); ?>
 <div class="body-wrapper">
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2 class="sidebar-title">Mon profil</h2>
-        <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
-        <aside>
-            <ul>
-                <li><a href="<?php echo get_permalink(get_page_by_path('modifier-profil')); ?>" class="sidebar-link active">Modifier le profil</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('parametres-compte')); ?>" class="sidebar-link">Paramètres du compte</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('mes-publications')); ?>" class="sidebar-link">Mes publications</a></li>
-            </ul>
-        </aside>
-    </div>
+    <h2 class="sidebar-title">Mon profil</h2>
+    <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
+    <aside>
+        <ul>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-profil'))); ?>" 
+                   class="sidebar-link <?php echo is_page('modifier-profil') ? 'active' : ''; ?>">
+                   Modifier le profil
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('parametres-compte'))); ?>" 
+                   class="sidebar-link <?php echo is_page('parametres-compte') ? 'active' : ''; ?>">
+                   Paramètres du compte
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('mes-publications'))); ?>" 
+                   class="sidebar-link <?php echo is_page('mes-publications') ? 'active' : ''; ?>">
+                   Mes publications
+                </a>
+            </li>
+        </ul>
+    </aside>
+</div>
 
     <div class="main-content">
         <section class="profile-edit w-100">
