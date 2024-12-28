@@ -1,207 +1,226 @@
-<style>/* Global Styles */
-/* Global Styles */
-*,
- *::before,
- *::after {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
- 
- body {
-   font-family: 'Poppins', sans-serif;
-   background-color: white;
-   color: black;
-   margin: 0;
-   padding: 0;
-   padding-top: 80px;
- }
- 
- /* Typography & General Layout */
- h1, h2, h3, h4, h5, h6 {
-   margin-bottom: 1rem;
-   text-align: center;
-   color: #3a5676;
-   font-weight: 400;
- }
- 
- h1 { font-size: 2.5rem; }
- h2 { font-size: 2rem; }
- h3 { font-size: 1.75rem; }
- h4 { font-size: 1.5rem; }
- h5 { font-size: 1.25rem; }
- h6 { font-size: 1rem; }
+<style>
 
- /* Footer Styles */
- .footer-container {
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 0;
+    padding-top: 80px;
+}
+
+.footer-container {
     background-color: #3a5676;
     color: white;
     padding: 40px 20px;
-  }
+}
 
-  .footer-container h5 {
-    text-align: center; 
+.footer-container h5 {
+    text-align: center;
     color: white;
-  }
+}
 
-  .footer-logo {
-    width: 120px;
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+.footer-logo {
+    max-width: 100%;
     height: auto;
-  }
+}
 
-  .footer-text {
+.footer-logo-mobile {
+    display: none; 
+}
+
+.footer-text {
     font-size: 14px;
     line-height: 1.5;
-    text-align: left;  
-  }
-
-  .footer-heading {
-    margin-bottom: 10px;
     text-align: left;
-  }
+}
 
-  .footer-link {
-    color: white; 
+.footer-heading {
+    margin-bottom: 10px;
+    text-align: center; 
+}
+
+.footer-link {
+    color: white;
     text-decoration: none;
-    text-align: center.
-  }
+    text-align: center; 
+    display: block; 
+    margin: 0 auto; 
+}
 
-  .footer-link:hover {
+.footer-link:hover {
     text-decoration: underline;
-  }
+}
 
-  .footer-line {
+.footer-line {
     border-color: white;
     margin: 20px 0;
-  }
+}
 
-  .social-icon {
+.social-icon {
     height: 24px;
     margin-left: 10px;
-  }
+}
 
-  .footer-bottom {
+.footer-bottom {
     font-size: 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
-  }
+    justify-content: space-between;
+}
 
-  .social-media a {
+.social-media a {
     text-decoration: none;
-  }
+}
 
- /* Media Queries */
- @media (max-width: 768px) {
-     .search-bar {
-        width: 250px;
-        font-size: 1rem;
-     }
-      
-     .btn {
-        padding: 6px 15px;
-     }
-      
-     .profile-image {
-        width: 30px;
-        height: 30px;
-     }
+.footer-button-container {
+    text-align: center; 
+    margin-top: 15px;
+}
 
-     .hero-section h1 {
-        font-size: 2rem;
-     }
-     
-     .top-rated-recipes .row {
+.btn {
+    display: inline-block; 
+    background-color: #ffb053;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e0913e;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 20px 15px;
+        text-align: center;
+    }
+
+    .footer-logo-desktop {
+        display: none; 
+    }
+
+    .footer-logo-mobile {
+        display: block; 
+        margin: 0 auto 15px; 
+        width: 40px;
+    }
+
+    .footer-logo-container {
+        justify-content: center;
+    }
+
+    .footer-text {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footer-line {
+        margin: 20px 0;
+    }
+
+    .footer-heading {
+        font-size: 14px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .footer-link {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
-     }
-
-     .article-card {
-        flex-direction: column;
-        width: 100%;
-     }
-
-     .article-card img {
-        width: 100%;
-        height: 200px;
-     }
-
-     .category-btn {
-        width: 120px;
-        height: 160px;
-     }
-
-     .category-btn span {
-        font-size: 1rem;
-     }
-
-     .navbar-brand .logo-image {
-        height: 30px;
-     }
-
-     .profile-image {
-        width: 25px;
-        height: 25px;
-     }
-
-     .footer-logo {
-        margin-bottom: 20px; /* Ajouter de l'espace sous le logo uniquement sur les écrans mobiles */
+        gap: 10px;
+        font-size: 12px;
     }
-  }
 
- </style>
-<?php /* Template Name: header*/ wp_footer(); ?>
-    <footer class="footer-container">
-                <div class="container">
-                    <div class="row">
-                        <!-- Section 1: Logo -->
-                        <div class="col-md-2 text-center text-md-start">
-                            <a href="#">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/CIY_vertical_vert.svg" alt="Logo" class="footer-logo">
-                            </a>
-                        </div>
-                        <!-- Section 2: Description -->
-                        <div class="col-md-5 text-center text-md-start">
-                            <p class="footer-text">
-                                Cook'It Yourself : des recettes faciles et des astuces malines pour te lancer en cuisine sans stress ! 
-                                Découvre, cuisine, et partage tes réussites avec d'autres étudiants.
-                            </p>
-                        </div>
-                        <!-- Section 3: Navigation -->
-                        <div class="col-md-2 text-center text-md-end">
-                            <h5 class="footer-heading">ALLER À</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="<?php echo site_url('/recettes'); ?>" class="footer-link">Recettes</a></li>
-                                <li><a href="<?php echo site_url('/trucs-et-astuces'); ?>" class="footer-link">Trucs et astuces</a></li>
-                                <li><a href="<?php echo site_url('/a-propos'); ?>" class="footer-link">À propos</a></li>
-                            </ul>
-                        </div>
-                        <!-- Section 4: Legal -->
-                        <div class="col-md-3 text-center text-md-end">
-                            <h5 class="footer-heading">SUPPORT JURIDIQUE</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="conditions-utilisation.html" class="footer-link">Conditions d’utilisation</a></li>
-                                <li><a href="<?php echo site_url('/mentions-legales'); ?>" class="footer-link">Mentions légales</a></li>
-                                <li><a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn mt-3">+ AJOUTER UNE RECETTE</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <hr class="footer-line">
-        
-                    <!-- Bottom Footer -->
-                    <div class="footer-bottom d-flex justify-content-between align-items-center">
-                        <p class="mb-0">© 2024.Tous droits réservés.</p>
-                        <div class="social-media d-flex">
-                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/tiktok_2.svg" alt="TikTok" class="social-icon"></a>
-                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/pinterset_2.svg" alt="Pinterest" class="social-icon"></a>
-                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/instagram_2.svg" alt="Instagram" class="social-icon"></a>
-                        <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/youtube_2.svg" alt="YouTube" class="social-icon"></a>
+    .social-media {
+        justify-content: center;
+        margin-top: 10px;
+    }
 
-                        </div>
-                    </div>
+    .social-icon {
+        margin: 0 5px;
+    }
+}
+</style>
+
+<footer class="footer-container">
+    <div class="container">
+        <div class="row align-items-start">
+            <!-- Section 1: Logo -->
+            <div class="col-md-2 footer-logo-container">
+                <!-- Logo Desktop -->
+                <a href="#" class="footer-logo-desktop">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/CIY_vertical_vert.svg" alt="Logo Desktop" class="footer-logo">
+                </a>
+                <!-- Logo Mobile -->
+                <a href="#" class="footer-logo-mobile">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/CIY_monogramme_vert.svg" alt="Logo Mobile" class="footer-logo">
+                </a>
+            </div>
+            <!-- Section 2: Description -->
+            <div class="col-md-5">
+                <p class="footer-text">
+                    Cook'It Yourself : des recettes faciles et des astuces malines pour te lancer en cuisine sans stress ! 
+                    Découvre, cuisine, et partage tes réussites avec d'autres étudiants.
+                </p>
+            </div>
+            <!-- Section 3: Navigation -->
+            <div class="col-md-2">
+                <h5 class="footer-heading">ALLER À</h5>
+                <ul class="list-unstyled">
+                    <li><a href="<?php echo site_url('/recettes'); ?>" class="footer-link">Recettes</a></li>
+                    <li><a href="<?php echo site_url('/trucs-et-astuces'); ?>" class="footer-link">Trucs et astuces</a></li>
+                    <li><a href="<?php echo site_url('/a-propos'); ?>" class="footer-link">À propos</a></li>
+                </ul>
+            </div>
+            <!-- Section 4: Legal -->
+            <div class="col-md-3">
+                <h5 class="footer-heading">SUPPORT JURIDIQUE</h5>
+                <ul class="list-unstyled">
+                    <li><a href="<?php echo site_url('/mentions-legales'); ?>" class="footer-link">Conditions d’utilisation</a></li>
+                    <li><a href="<?php echo site_url('/mentions-legales'); ?>" class="footer-link">Mentions légales</a></li>
+                </ul>
+                <div class="footer-button-container">
+                    <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
                 </div>
-    </footer>
-</body>
-</html>
+            </div>
+        </div>
+
+        <hr class="footer-line">
+
+        <!-- Bottom Footer -->
+        <div class="footer-bottom">
+            <p class="mb-0">© 2024.Tous droits réservés.</p>
+            <div class="social-media">
+                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/tiktok_2.svg" alt="TikTok" class="social-icon"></a>
+                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/pinterset_2.svg" alt="Pinterest" class="social-icon"></a>
+                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/instagram_2.svg" alt="Instagram" class="social-icon"></a>
+                <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/youtube_2.svg" alt="YouTube" class="social-icon"></a>
+            </div>
+        </div>
+    </div>
+</footer>
