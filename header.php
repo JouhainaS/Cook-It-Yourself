@@ -155,7 +155,7 @@ get_header();
                     <form role="search" method="get" action="<?php echo home_url('/'); ?>">
                         <input class="form-control search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
                     </form>
-                    <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
+                    <a href="<?php echo site_url('/ajouter-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
                 </div>
 
                 <a href="<?php echo site_url('/modifier-profil'); ?>" class="ms-auto">
