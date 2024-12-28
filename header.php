@@ -61,44 +61,51 @@ get_header();
             background-color: #ffb053;
             color: white;
             border-radius: 20px;
-            padding: 8px 20px;
+            padding: 0 20px;
             border: none;
             transition: background-color 0.3s ease;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn:hover {
             background-color: #dc9340;
         }
 
+        /* Conteneur pour la barre de recherche et le bouton */
+        .search-add-container {
+            display: flex;
+            align-items: center; /* Alignement vertical parfait */
+            gap: 15px; /* Espacement entre les éléments */
+        }
+
+        .search-bar {
+            width: 300px; /* Largeur fixe */
+            height: 50px; /* Même hauteur que le bouton */
+            padding: 0 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-top: 10px; /* Marge plus grande pour descendre */
+            line-height: normal;
+        }
+
         @media (max-width: 768px) {
-            .search-bar, .btn {
-                display: none; 
+            .search-add-container {
+                flex-direction: column; /* Éléments en colonne sur mobile */
+                align-items: flex-start; /* Alignement à gauche */
+                gap: 10px;
             }
 
-            .mobile-navbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
+            .search-bar {
+                width: 100%; /* Barre de recherche pleine largeur */
+                margin-top: 0;
             }
 
-            .navbar-toggler {
-                font-size: 3rem;
-                color: #3a5676;
-                border-radius: 5px;
-                padding: 5px 10px;
-            }
-
-            .navbar-toggler:hover {
-                background-color: transparent;
-                color: #3a5676;
-                border-color: #3a5676;
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
-
-            .logo-image {
-                height: 20px;
+            .btn {
+                width: 100%; /* Bouton pleine largeur */
             }
         }
     </style>
@@ -113,15 +120,12 @@ get_header();
         <div class="container">
             <!-- Mobile Navbar -->
             <div class="mobile-navbar d-lg-none">
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     &#9776;
                 </button>
-                
                 <a class="navbar-brand" href="<?php echo home_url('/'); ?>">
                     <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logo/logo_monogramme.svg" alt="Cook It Yourself Monogram" class="logo-image">
                 </a>
-
                 <a href="<?php echo site_url('/parametres-du-compte'); ?>">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
                 </a>
@@ -146,11 +150,13 @@ get_header();
                     </li>
                 </ul>
 
-                <form role="search" method="get" class="d-flex align-items-center me-3" action="<?php echo home_url('/'); ?>">
-                    <input class="form-control rounded-pill search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
-                </form>
-
-                <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
+                <!-- Barre de recherche et bouton -->
+                <div class="search-add-container">
+                    <form role="search" method="get" action="<?php echo home_url('/'); ?>">
+                        <input class="form-control search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
+                    </form>
+                    <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
+                </div>
 
                 <a href="<?php echo site_url('/modifier-profil'); ?>" class="ms-auto">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
