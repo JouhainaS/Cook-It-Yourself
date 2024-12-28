@@ -1,3 +1,7 @@
+<?php
+/** Template Name: Footer - Page */
+get_header(); 
+?>
 <style>
 
 *,
@@ -165,18 +169,166 @@ body {
         margin: 0 5px;
     }
 }
+.custom-footer-wrapper {
+    background-color: #3a5676;
+    color: white;
+    padding: 40px 20px;
+}
+
+.custom-footer-wrapper h5 {
+    text-align: center;
+    color: white;
+}
+
+.custom-footer-wrapper .footer-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+.custom-footer-wrapper .footer-logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.custom-footer-wrapper .footer-logo-mobile {
+    display: none; 
+}
+
+.custom-footer-wrapper .footer-text {
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.custom-footer-wrapper .footer-heading {
+    margin-bottom: 10px;
+    text-align: center; 
+}
+
+.custom-footer-wrapper .footer-link {
+    color: white;
+    text-decoration: none;
+    text-align: center; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+.custom-footer-wrapper .footer-link:hover {
+    text-decoration: underline;
+}
+
+.custom-footer-wrapper .footer-line {
+    border-color: white;
+    margin: 20px 0;
+}
+
+.custom-footer-wrapper .social-icon {
+    height: 24px;
+    margin-left: 10px;
+}
+
+.custom-footer-wrapper .footer-bottom {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.custom-footer-wrapper .social-media a {
+    text-decoration: none;
+}
+
+.custom-footer-wrapper .footer-button-container {
+    text-align: center; 
+    margin-top: 15px;
+}
+
+.custom-footer-wrapper .btn {
+    display: inline-block; 
+    background-color: #ffb053;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.custom-footer-wrapper .btn:hover {
+    background-color: #e0913e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .custom-footer-wrapper {
+        padding: 20px 15px;
+        text-align: center;
+    }
+
+    .custom-footer-wrapper .footer-logo-desktop {
+        display: none; 
+    }
+
+    .custom-footer-wrapper .footer-logo-mobile {
+        display: block; 
+        margin: 0 auto 15px; 
+        width: 40px;
+    }
+
+    .custom-footer-wrapper .footer-logo-container {
+        justify-content: center;
+    }
+
+    .custom-footer-wrapper .footer-text {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .custom-footer-wrapper .footer-line {
+        margin: 20px 0;
+    }
+
+    .custom-footer-wrapper .footer-heading {
+        font-size: 14px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .custom-footer-wrapper .footer-link {
+        font-size: 13px;
+    }
+
+    .custom-footer-wrapper .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+    }
+
+    .custom-footer-wrapper .social-media {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .custom-footer-wrapper .social-icon {
+        margin: 0 5px;
+    }
+}
+
 </style>
 
-<footer class="footer-container">
+<footer class="custom-footer-wrapper">
     <div class="container">
         <div class="row align-items-start">
             <!-- Section 1: Logo -->
             <div class="col-md-2 footer-logo-container">
-                <!-- Logo Desktop -->
                 <a href="#" class="footer-logo-desktop">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/CIY_vertical_vert.svg" alt="Logo Desktop" class="footer-logo">
                 </a>
-                <!-- Logo Mobile -->
                 <a href="#" class="footer-logo-mobile">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/logo/CIY_monogramme_vert.svg" alt="Logo Mobile" class="footer-logo">
                 </a>
@@ -214,7 +366,7 @@ body {
 
         <!-- Bottom Footer -->
         <div class="footer-bottom">
-            <p class="mb-0">© 2024.Tous droits réservés.</p>
+            <p class="mb-0">© 2024. Tous droits réservés.</p>
             <div class="social-media">
                 <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/tiktok_2.svg" alt="TikTok" class="social-icon"></a>
                 <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/RS/pinterset_2.svg" alt="Pinterest" class="social-icon"></a>

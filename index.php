@@ -103,26 +103,24 @@ get_header();
    margin-bottom: 40px;
  }
 
-/* SECTION TOP-RATED RECIPES */
 .index-page .top-rated-recipes {
-  padding: 60px 0; /* Ajoute un espace vertical (haut et bas) pour séparer visuellement la section des recettes les mieux notées. */
+  padding: 60px 0; 
 }
 
 .index-page .top-rated-recipes .container {
-  max-width: 1000px; /* Définit la largeur maximale de la section pour limiter la largeur totale. */
-  margin: 0 auto; /* Centre le contenu horizontalement. */
-  padding: 0 15px; /* Ajoute un espacement horizontal interne pour éviter que le contenu touche les bords. */
+  max-width: 1000px; 
+  margin: 0 auto; 
+  padding: 0 15px; 
 }
 
 .index-page .top-rated-recipes .row {
-  display: flex; /* Utilise Flexbox pour organiser les éléments enfants en ligne. */
-  flex-wrap: wrap; /* Permet aux cartes de passer à la ligne suivante si elles ne tiennent pas sur une seule. */
-  gap: 20px; /* Ajoute un espace uniforme entre les cartes. */
-  justify-content: space-between; /* Distribue les cartes avec des espaces égaux entre elles. */
-  align-items: center; /* Aligne les cartes verticalement au centre (utile si elles ont des hauteurs différentes). */
+  display: flex; 
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* INDIVIDUAL CARDS */
 .index-page .top-rated-recipes .card {
     width: 260px;
     border-radius: 15px;
@@ -362,46 +360,65 @@ get_header();
     gap: 20px;
   }
 
-  .index-page .card {
-    width: 100%;
-    margin-bottom: 20px;
-    height: 550px;
-  }
-
-  .index-page .article-card {
-    display: flex;
-    flex-direction: column;
+  .trucs-et-astuces .article-card {
+    flex-direction: row;
     align-items: stretch;
-    height: auto;
-  }
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+    height: 250px;
+}
 
-  .index-page .article-thumbnail {
-    flex: 0 0 auto;
-    width: 100%;
-    height: auto;
-  }
 
-  .index-page .article-thumbnail img {
+.trucs-et-astuces .article-card:hover {
+    transform: scale(1.02);
+}
+
+.trucs-et-astuces .article-thumbnail {
+    flex: 0 0 40%;
+    max-width: 40%;
+    overflow: hidden;
+}
+
+.trucs-et-astuces .article-thumbnail img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px 10px 0 0;
-  }
+    border-radius: 10px 0 0 10px;
+}
 
-  .index-page .article-content {
+.trucs-et-astuces .article-content {
     flex: 1;
     padding: 15px;
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-  .index-page .article-content h3 {
-    font-size: 1.2rem;
+.trucs-et-astuces .article-content h3 {
+    font-size: 1rem;
+    color: #3a5676;
     margin-bottom: 10px;
-  }
+}
 
-  .index-page .article-content p {
-    font-size: 0.95rem;
+.trucs-et-astuces .article-content h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.trucs-et-astuces .article-content h3 a:hover {
+    text-decoration: underline;
+}
+
+.trucs-et-astuces .article-content p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
     line-height: 1.6;
-  }
+}
 
   .index-page .categories {
     padding: 40px 0;

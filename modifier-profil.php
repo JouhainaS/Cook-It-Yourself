@@ -6,21 +6,36 @@ get_header(); ?>
 <div class="body-wrapper">
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2 class="sidebar-title">Mon profil</h2>
-        <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
-        <aside>
-            <ul>
-                <li><a href="<?php echo get_permalink(get_page_by_path('modifier-profil')); ?>" class="sidebar-link active">Modifier le profil</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('parametres-compte')); ?>" class="sidebar-link">Paramètres du compte</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('mes-publications')); ?>" class="sidebar-link">Mes publications</a></li>
-            </ul>
-        </aside>
-    </div>
+    <h2 class="sidebar-title">Mon profil</h2>
+    <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
+    <aside>
+        <ul>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-profil'))); ?>" 
+                   class="sidebar-link <?php echo is_page('modifier-profil') ? 'active' : ''; ?>">
+                   Modifier le profil
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('parametres-compte'))); ?>" 
+                   class="sidebar-link <?php echo is_page('parametres-compte') ? 'active' : ''; ?>">
+                   Paramètres du compte
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('mes-publications'))); ?>" 
+                   class="sidebar-link <?php echo is_page('mes-publications') ? 'active' : ''; ?>">
+                   Mes publications
+                </a>
+            </li>
+        </ul>
+    </aside>
+</div>
 
     <div class="main-content">
         <section class="profile-edit w-100">
             <h2 class="mb-4">Modifier le profil</h2>
-            <hr class="my-4"> <!-- Ajoute une ligne horizontale avant le titre principal -->
+            <hr class="my-4">
     
             <div class="profile-container d-flex align-items-start mb-4">
                 <!-- Section informations du profil -->
@@ -174,6 +189,44 @@ hr {
     border: 1px solid #5692B2;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.body-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    min-height: 100vh;
+    position: relative; 
+}
+
+.sidebar {
+    background-color: #EBF4E7;
+    width: 250px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 100%;
+    position: absolute; 
+    left: 0;
+    top: 0;
+    z-index: 0; 
+}
+
+.main-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 50px;
+    background-color: #fff;
+    min-height: calc(100vh - 50px); 
+    z-index: 1; 
+    position: relative;
+}
+
+footer {
+    position: relative; 
+    z-index: 10;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
 }
 </style>
 

@@ -584,17 +584,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         wrapper.appendChild(div);
     });
 
-    document.getElementById('add-step').addEventListener('click', function () {
-        const wrapper = document.getElementById('steps-wrapper');
-        const div = document.createElement('div');
-        div.className = 'step-group';
-        div.innerHTML = `
-            <textarea name="steps[]" placeholder="Étape ${wrapper.children.length + 1}"></textarea>
-            <button type="button" class="remove-step" style="background-color: #f8d7da; color: #721c24; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; margin-top: 5px;">Supprimer</button>
-        `;
-        wrapper.appendChild(div);
-    });
-
 </script>
 
 <?php

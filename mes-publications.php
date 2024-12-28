@@ -6,26 +6,36 @@ get_header(); ?>
 <div class="body-wrapper">
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2 class="sidebar-title">Mon profil</h2>
-        <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
-        <aside>
-            <ul>
-                <li><a href="<?php echo get_permalink(get_page_by_path('modifier-profil')); ?>" class="sidebar-link">Modifier le profil</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('parametres-compte')); ?>" class="sidebar-link">Paramètres du compte</a></li>
-                <li><a href="<?php echo get_permalink(get_page_by_path('mes-publications')); ?>" class="sidebar-link active">Mes publications</a></li>
-            </ul>
-        </aside>
-    </div>
+    <h2 class="sidebar-title">Mon profil</h2>
+    <a href="<?php echo wp_logout_url(home_url()); ?>" class="btn-deconnexion">Déconnexion</a>
+    <aside>
+        <ul>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-profil'))); ?>" 
+                   class="sidebar-link <?php echo is_page('modifier-profil') ? 'active' : ''; ?>">
+                   Modifier le profil
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('parametres-compte'))); ?>" 
+                   class="sidebar-link <?php echo is_page('parametres-compte') ? 'active' : ''; ?>">
+                   Paramètres du compte
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('mes-publications'))); ?>" 
+                   class="sidebar-link <?php echo is_page('mes-publications') ? 'active' : ''; ?>">
+                   Mes publications
+                </a>
+            </li>
+        </ul>
+    </aside>
+</div>
 
     <div class="main-content">
         <section class="profile-edit w-100">
             <h2 class="mb-4">Mes Publications</h2>
-            <hr class="my-4"> <!-- Ajoute une ligne horizontale avant le titre principal -->
-
-            <div class="publish-recipe d-flex align-items-center mb-4">
-                <p class="mb-0">Et si tu publiais une nouvelle recette ?</p>
-                <a href="<?php echo get_permalink(get_page_by_path('ajouter-recette')); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
-            </div>
+            <hr class="my-4"> 
 
             <div class="grid-container">
                 <?php
@@ -72,6 +82,12 @@ get_header(); ?>
                 endif;
                 ?>
             </div>
+
+            <div class="publish-recipe d-flex align-items-center mb-4">
+                <p class="mb-0">Et si tu publiais une nouvelle recette ?</p>
+                <a href="<?php echo get_permalink(get_page_by_path('ajouter-recette')); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
+            </div>
+
         </section>
     </div>
 </div>
@@ -116,15 +132,17 @@ get_header(); ?>
     }
 
     .card-title {
-        font-size: 1.3rem;
+        text-decoration: none; 
         color: #2c3e50;
-        margin-bottom: 5px;
-        text-decoration: none;
     }
 
     .card-title:hover {
-        text-decoration: none;
-        color: #5692B2;
+        color: #5692B2; 
+        text-decoration: none; 
+    }
+    .card-link {
+        text-decoration: none; 
+        color: inherit;
     }
 
     .recipe-meta {
@@ -153,6 +171,45 @@ get_header(); ?>
     .rating .rating-value {
         font-size: 0.9rem;
         color: #555;
+    }
+
+    .body-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        min-height: 100vh; 
+        position: relative;
+    }
+
+    .sidebar {
+        background-color: #EBF4E7;
+        width: 250px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        height: 100%; 
+        position: absolute; 
+        left: 0;
+        top: 0;
+        z-index: 0; 
+    }
+
+    .main-content {
+        margin-left: 250px;
+        flex-grow: 1;
+        padding: 50px;
+        background-color: #fff;
+        min-height: calc(100vh - 50px); 
+        z-index: 1; 
+        position: relative;
+    }
+
+    footer {
+        position: relative; 
+        z-index: 10;
+        background: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
     }
 </style>
 
