@@ -32,148 +32,146 @@ get_header(); ?>
         </aside>
     </div>
 
-
     <div class="main-content">
-        <section class="profile-edit w-100">
-            <h2 class="mb-4">Mes Publications</h2>
-            <hr class="my-4"> 
+        <h2 class="mb-4">Mes Publications</h2>
+        <hr class="my-4"> 
 
-            <div class="grid-container">
-                <?php
-                $current_user = wp_get_current_user();
+        <div class="grid-container">
+            <?php
+            $current_user = wp_get_current_user();
 
-                $args = [
-                    'post_type' => 'recipe',
-                    'posts_per_page' => -1,
-                    'author' => $current_user->ID
-                ];
-                $query = new WP_Query($args);
+            $args = [
+                'post_type' => 'recipe',
+                'posts_per_page' => -1,
+                'author' => $current_user->ID // Filtrer par l'auteur connecté
+            ];
+            $query = new WP_Query($args);
 
-                if ($query->have_posts()) :
-                    while ($query->have_posts()) : $query->the_post();
-                        $total_time = get_post_meta(get_the_ID(), 'total_time', true);
-                        $rating = get_post_meta(get_the_ID(), 'rating', true) ?: 4;
-                        ?>
-                        <a href="<?php the_permalink(); ?>" class="card-link">
-                            <div class="card">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <?php the_post_thumbnail('large', ['class' => 'custom-img']); ?>
-                                <?php else : ?>
-                                    <div class="placeholder" style="height: 180px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #aaa;">Image indisponible</div>
-                                <?php endif; ?>
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php the_title(); ?></h5>
-                                    <p class="recipe-meta">
-                                        <span class="time">Temps total : <?php echo $total_time ?: 'N/A'; ?> min</span>
-                                    </p>
-                                    <div class="rating">
-                                        <?php for ($i = 1; $i <= 5; $i++) {
-                                            echo $i <= $rating ? '<span class="star">&#9733;</span>' : '<span class="star">&#9734;</span>';
-                                        } ?>
-                                        <span class="rating-value">(<?php echo $rating; ?>)</span>
-                                    </div>
-                                </div>
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post();
+                    // Récupérer les métadonnées nécessaires
+                    $prep_time = get_post_meta(get_the_ID(), 'prep_time', true); // Temps de préparation
+                    $cook_time = get_post_meta(get_the_ID(), 'cook_time', true); // Temps de cuisson
+
+                    // Conversion en minutes
+                    $prep_minutes = !empty($prep_time) ? explode(':', $prep_time) : [0, 0];
+                    $cook_minutes = !empty($cook_time) ? explode(':', $cook_time) : [0, 0];
+                    $total_minutes = ($prep_minutes[0] * 60 + $prep_minutes[1]) + ($cook_minutes[0] * 60 + $cook_minutes[1]);
+
+                    // Formater le temps total en heures et minutes
+                    $formatted_time = $total_minutes > 0 
+                        ? floor($total_minutes / 60) . 'h ' . ($total_minutes % 60) . 'min' 
+                        : 'Non spécifié';
+
+                    $rating = get_post_meta(get_the_ID(), 'rating', true) ?: 0; // Par défaut, note à 0
+                    $author_name = get_the_author_meta('display_name', $current_user->ID);
+                    ?>
+                    <div class="card">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <?php the_post_thumbnail('large', ['class' => 'custom-img']); ?>
+                        <?php else : ?>
+                            <div class="placeholder" style="height: 180px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #aaa;">Image indisponible</div>
+                        <?php endif; ?>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                            </h5>
+                            <p class="recipe-meta">
+                                <strong>Par :</strong> <?php echo esc_html($author_name); ?>
+                            </p>
+                            <p class="recipe-meta">
+                                <strong>Temps total :</strong> <?php echo $formatted_time; ?>
+                            </p>
+                            <div class="rating">
+                                <strong>Note :</strong>
+                                <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                    <span class="star"><?php echo $i <= $rating ? '&#9733;' : '&#9734;'; ?></span>
+                                <?php endfor; ?>
+                                <span class="rating-value">(<?php echo $rating > 0 ? $rating : 'N/A'; ?>)</span>
                             </div>
-                        </a>
-                        <?php
-                    endwhile;
-                    wp_reset_postdata();
-                else :
-                    echo '<p>Aucune publication trouvée.</p>';
-                endif;
-                ?>
-            </div>
+                        </div>
+                    </div>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            else :
+                echo '<p>Aucune publication trouvée.</p>';
+            endif;
+            ?>
+        </div>
 
-            <div class="publish-recipe d-flex align-items-center mb-4">
+        <div class="publish-recipe d-flex align-items-center mb-4">
             <hr class="my-4"> 
-                <p class="mb-0">Et si tu publiais une nouvelle recette ?</p>
-                <a href="<?php echo get_permalink(get_page_by_path('ajouter-recette')); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
-            </div>
-
-        </section>
-    </div>
+            <p class="mb-0">Et si tu publiais une nouvelle recette ?</p>
+            <a href="<?php echo get_permalink(get_page_by_path('ajouter-recette')); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
+        </div>
+    <div>
 </div>
 
+
 <style>
-    .grid-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 20px;
-    }
+    .main-content .grid-container {
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .card {
-        width: 260px;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        text-decoration: none;
-    }
+.main-content .card {
+    border: none; 
+    width: 260px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
+.main-content .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
 
-    .card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-    }
+.main-content .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
 
-    .card-body {
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.main-content .card-body p {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #000;
+}
 
-    .card-title {
-        text-decoration: none; 
-        color: #2c3e50;
-    }
+.main-content .rating .star {
+    font-size: 1.2rem;
+    color: #A8BAA7; 
+}
 
-    .card-title:hover {
-        color: #5692B2; 
-        text-decoration: none; 
-    }
-    .card-link {
-        text-decoration: none; 
-        color: inherit;
-    }
+.main-content .rating .star.text-muted {
+    color: #ddd;
+}
 
-    .recipe-meta {
-        color: #000;
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-        font-weight: normal;
-    }
+.main-content .rating .rating-value {
+    font-size: 0.9rem;
+    color: #333; 
+}
 
-    .recipe-meta .time {
-        margin-top: 3px;
-        display: block;
-    }
+.main-content .card-title a {
+    text-decoration: none;
+    color: #3A5676;
+}
 
-    .rating {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+.main-content .card-title a:hover {
+    color: #5692B2; 
+    text-decoration: underline;
+}
 
-    .rating .star {
-        font-size: 1.2rem;
-        color: #ffc107;
-    }
-
-    .rating .rating-value {
-        font-size: 0.9rem;
-        color: #555;
-    }
 
     .body-wrapper {
         display: flex;
