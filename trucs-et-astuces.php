@@ -1,16 +1,33 @@
 <?php
-/* Template Name: Trucs et Astuces - Page */
+/* Template Name: Trucs et Astuces */
 get_header();
 ?>
 <style>
 
-/* Global Styles */
+.article h3,
+.article-card .article-content h3 {
+    color: #3a5676;
+    margin: 10px 15px;
+    font-size: 1.3rem;
+}
+
+.article h3 a,
+.article-card .article-content h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.article h3 a:hover,
+.article-card .article-content h3 a:hover {
+    text-decoration: underline;
+    color: #5692B2;
+}
+
 .trucs-et-astuces-page {
     padding: 40px 20px;
     background-color: white;
 }
 
-/* Titre principal */
 .trucs-et-astuces-page h1 {
     font-size: 2.5rem;
     text-align: center;
@@ -22,80 +39,62 @@ get_header();
     margin-bottom: 60px; 
 }
 
-/* Titre des sections */
 .category-section h2 {
-    text-align: left; /* Alignement à gauche */
+    text-align: left;
     font-size: 2rem;
     color: #5692B2;
     margin-bottom: 20px;
 }
 
-/* Articles container */
 .articles {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-/* Article card styles */
 .article {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.article h3 {
+    color: #3a5676;
+    margin: 10px 15px;
+    font-size: 1.3rem;
+}
+
 
 .article:hover {
     transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .article img {
     width: 100%;
     height: auto;
     display: block;
+    object-fit: cover;
 }
 
-.article h3 {
-    font-size: 1.25rem;
-    color: #333;
-    margin: 10px 15px;
-}
-
-/* Style des liens des titres */
-.article-content h3 a {
-    text-decoration: none; /* Pas de soulignement par défaut */
-    color: #333; /* Couleur noire */
-}
-
-.article-content h3 a:hover {
-    text-decoration: underline; /* Soulignement au survol */
-    color: #333; /* Garde la couleur noire au survol */
-}
-
-/* Description des articles */
 .article p {
     font-size: 0.9rem;
     color: #555;
     margin: 0 15px 15px;
 }
 
-/* Section 1 : Astuces */
-.astuces-section .articles-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 .astuces-section .article-card {
     display: flex;
-    align-items: stretch;
+    flex-direction: row; 
+    align-items: stretch; 
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
-    margin-bottom: 10px;
+    margin-bottom: 20px; 
 }
 
 .astuces-section .article-card:hover {
@@ -103,56 +102,42 @@ get_header();
 }
 
 .astuces-section .article-thumbnail {
-    flex: 1;
-    max-width: 33.33%;
-    overflow: hidden;
+    flex: 0 0 40%; 
+    max-width: 40%;
 }
 
 .astuces-section .article-thumbnail img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 0 0 10px;
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 10px 0 0 10px; 
 }
 
 .astuces-section .article-content {
-    flex: 2;
-    padding: 20px;
+    flex: 1; 
+    padding: 20px; 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column; 
+    justify-content: center; 
 }
 
-/* Métadonnées */
-.article-meta {
-    display: flex;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: #777;
-    margin-top: auto;
+.astuces-section .article-content h3 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    color: #3a5676;
 }
 
-.article-meta .author,
-.article-meta .date {
-    font-style: italic;
-}
-
-.article-meta .date {
+.astuces-section .article-content p {
+    font-size: 1rem;
     color: #555;
-}
-
-/* Section 3 : Alternatives Végétales */
-.alternatives-vegetales-section {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 60px;
+    margin: 0;
 }
 
 .alternatives-vegetales-section .content-wrapper {
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .alternatives-vegetales-section .image-container {
@@ -174,75 +159,133 @@ get_header();
     padding-left: 20px;
 }
 
-.alternatives-vegetales-section .article {
-    padding: 15px 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.alternatives-vegetales-section .article:last-child {
-    border-bottom: none;
-}
-
-.alternatives-vegetales-section .article h3 {
-    font-size: 1.25rem;
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: 500;
-}
-
-/* Sections 2 et 4 */
 .stop-gaspillage-section .articles,
 .materiels-section .articles {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
-}
-
-.stop-gaspillage-section .article,
-.materiels-section .article {
-    background-color: white;
-    border-radius: 15px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.stop-gaspillage-section .article:hover,
-.materiels-section .article:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 14.4px 0 rgba(86, 146, 178, 0.41);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
 .stop-gaspillage-section .article img,
 .materiels-section .article img {
-    width: 100%;
     height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid #ddd;
 }
 
-.stop-gaspillage-section .article h3,
-.materiels-section .article h3 {
-    font-size: 1.25rem;
-    color: #333;
-    margin: 15px;
+.materiels-section .articles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
-/* Responsive */
+.materiels-section .article img {
+    height: 200px;
+}
+
 @media (max-width: 768px) {
-    .stop-gaspillage-section .articles,
-    .materiels-section .articles {
-        grid-template-columns: 1fr;
+    .trucs-et-astuces-page {
+        padding: 20px;
     }
 
-    .stop-gaspillage-section .article img,
-    .materiels-section .article img {
+    .trucs-et-astuces-page h1 {
+        font-size: 2rem;
+    }
+
+    .category-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .articles {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .astuces-section .article-card {
+        flex-direction: row;
+    }
+
+    .astuces-section .article-thumbnail {
+        flex: 0 0 40%; 
+    }
+
+    .astuces-section .article-thumbnail img {
+        height: 100%; 
+    }
+
+    .astuces-section .article-content {
+        padding: 15px; 
+    }
+
+    .astuces-section .article-content h3 {
+        font-size: 1rem;
+    }
+
+    .astuces-section .article-content p {
+        font-size: 0.9rem;
+    }
+
+    .article img {
         height: 150px;
     }
-}
 
+    .stop-gaspillage-section .articles,
+    .materiels-section .articles {
+        display: flex;
+        flex-wrap: nowrap; 
+        overflow-x: auto; 
+        gap: 15px; 
+        scroll-snap-type: x mandatory;
+        padding-bottom: 20px;
+    }
+
+    .stop-gaspillage-section .article,
+    .materiels-section .article {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
+    }
+
+
+    .stop-gaspillage-section .articles::-webkit-scrollbar,
+    .materiels-section .articles::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .stop-gaspillage-section .articles::-webkit-scrollbar-thumb,
+    .materiels-section .articles::-webkit-scrollbar-thumb {
+        background: #5692B2;
+        border-radius: 4px;
+    }
+
+    .stop-gaspillage-section .articles::-webkit-scrollbar-track,
+    .materiels-section .articles::-webkit-scrollbar-track {
+        background: #ddd;
+    }
+    .alternatives-vegetales-section .content-wrapper {
+        flex-direction: column; 
+        gap: 10px; 
+        border-left: none; 
+        padding-left: 0;
+    }
+
+    .alternatives-vegetales-section .image-container {
+        max-width: 100%; 
+    }
+
+    .alternatives-vegetales-section .image-container img {
+        border-radius: 10px; 
+        width: 100%; 
+        height: auto; 
+    }
+
+    .alternatives-vegetales-section .articles-container {
+        border-left: none; 
+        padding-left: 0;
+    }
+
+    .alternatives-vegetales-section .articles-container .article {
+        padding: 10px 0; 
+        border-bottom: none;
+    }
+}
 
 </style>
 
@@ -269,10 +312,6 @@ get_header();
                             </div>
                             <div class="article-content">
                                 <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <div class="article-meta">
-                                    <span class="author">Par <?php the_author(); ?></span>
-                                    <span class="date">| Publié le <?php echo get_the_date(); ?></span>
-                                </div>
                                 <p><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
                             </div>
                         </div>
@@ -324,7 +363,7 @@ get_header();
             <!-- Contenu : Image à gauche et articles à droite -->
             <div class="content-wrapper">
                 <div class="image-container">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/photos/articles/alternatives-végétales.jpg" alt="Alternatives végétales">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/photos/articles/alternatives-végétales.jpg'); ?>" alt="Alternatives végétales">
                 </div>
                 <div class="articles-container">
                     <?php

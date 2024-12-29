@@ -2,9 +2,9 @@
     /* Template Name: 404 */
 get_header(); ?>
 
-<div class="container text-center" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; padding: 20px;">
+<div class="container text-center" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60vh; padding: 20px;">
     <!-- Image -->
-    <div style="margin-bottom: 20px;">
+    <div style="margin: 20px 0;">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/404.svg" alt="404 Image" style="max-width: 100px; height: auto;">
     </div>
 

@@ -283,3 +283,30 @@ function force_content_headings_to_h2($content) {
     return $content;
 }
 add_filter('the_content', 'force_content_headings_to_h2');
+
+add_action('template_redirect', function() {
+    // Liste des slugs des pages nécessitant une connexion
+    $restricted_pages = [
+        'ajouter-recette',
+        'mes-publications',
+        'modifier-le-profil',
+        'parametres-du-compte'
+    ];
+
+    // Vérifier si l'utilisateur n'est pas connecté
+    if (!is_user_logged_in()) {
+        global $post;
+
+        // Vérifier si la page actuelle fait partie des pages restreintes
+        if (isset($post) && in_array($post->post_name, $restricted_pages)) {
+            // URL de la page actuelle
+            $current_url = home_url(add_query_arg([], $wp->request));
+
+            // Rediriger vers la page de connexion avec un paramètre pour revenir après connexion
+            wp_redirect(wp_login_url($current_url));
+            exit;
+        }
+    }
+});
+
+

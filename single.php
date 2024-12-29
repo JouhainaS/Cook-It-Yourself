@@ -1,148 +1,108 @@
 <?php 
-/** Template Name: Single - Page */
+/* Template Name: single-article*/
 get_header(); ?>
 
 <style>
-    
-        .custom-article {
+
+    .article-page {
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+        padding: 20px;
         background-color: #fff;
-        padding: 100px;
+        max-width: 1000px;
+        margin: 0 auto;
+        box-sizing: border-box;
     }
 
     .custom-title {
         font-size: 2rem;
-        color: #333;
+        color: #3A5676;
         text-align: center;
         margin-bottom: 20px;
     }
 
-    .custom-content {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #555;
-    }
-
-    article img {
-        border-radius: 10px;
-        width: 100%; 
-        height: auto; 
-        object-fit: cover; 
-    }
-
-    body {
-        font-family: 'Poppins', sans-serif;
-        font-size: 16px;
-        line-height: 1.6;
-        color: #333;
-    }
-
-    .custom-article h1 {
-        color: #3a5676;
-    }
-
-    .custom-article h2, h3, h4, h5, h6 {
-        margin-bottom: 1rem;
+    .custom-content h2 {
+        font-size: 1.5rem;
+        color: #3A5676;
+        margin-top: 20px;
+        margin-bottom: 20px;
         text-align: left;
-        color: #3a5676;
-        font-weight: 400;
-    }
-    
-    .custom-article h1 { font-size: 2rem; }
-    .custom-article h2 { font-size: 1.75rem; }
-    .custom-article h3 { font-size: 1.5rem; }
-    .custom-article h4 { font-size: 1.25rem; }
-    .custom-article h5 { font-size: 1rem; }
- 
-    .custom-article p {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 400;
-        font-size: 1rem;
-        color: black;
     }
 
-    /* Links */
-    .custom-article a {
-        font-family: 'Poppins', sans-serif;
-        color: #5692B2;
-        text-decoration: none;
-    }
-
-    .custom-article a:hover {
-        text-decoration: underline;
-    }
-
-    .custom-article ul, .custom-article ol {
-        margin-top: 20px; /* Espace au-dessus de la liste */
-        margin-bottom: 20px; /* Espace en-dessous de la liste */
-        padding-left: 20px; /* Indentation pour les listes */
-        color: black; /* Assure que le texte des listes est noir */
-    }
-
-    .custom-article ul li, .custom-article ol li {
-        margin-bottom: 10px; /* Espace entre les éléments */
-        line-height: 1.8; /* Interligne augmenté */
-        color: black; /* Assure que le texte des items est noir */
-    }
-
-    
-    /* Related Articles Section */
-    .related-articles {
-        padding: 50px 0;
-    }
-
-    .related-articles .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .related-articles h2 {
-        font-size: 2rem;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-    .related-articles .articles-list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 cartes alignées */
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .related-articles .article-card {
-        background-color: #fff;
-        border-radius: 15px;
-        box-shadow: 0px 0px 14px rgba(86, 146, 178, 0.41); /* Ombre avec les nouveaux paramètres */
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        width: 320px; /* Largeur de la carte */
-        height: 400px; /* Hauteur de la carte */
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .related-articles .article-card:hover {
-        transform: scale(1.05); /* Zoom au survol */
-        box-shadow: 0px 0px 20px rgba(86, 146, 178, 0.5); /* Accentue l'ombre au survol */
-    }
-
-
-
-    .related-articles .article-thumbnail {
+    .custom-content img {
         width: 100%;
-        height: 50%; /* L'image occupe la moitié de la carte */
-        overflow: hidden;
+        height: auto;
+        max-height: 500px; 
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
+        object-fit: cover; 
     }
 
     .related-articles .article-thumbnail img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+    .related-articles .article-thumbnail {
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+        }
+
+    .article-page ul,
+    .article-page ol {
+        margin-top: 20px; 
+        margin-bottom: 20px;
+        padding-left: 20px; 
     }
 
+    .article-page ul li,
+    .article-page ol li {
+        margin-bottom: 10px; 
+        line-height: 1.8; 
+    }
+
+    .related-articles .articles-list {
+        display: flex; 
+        flex-wrap: nowrap;
+        gap: 15px; 
+        overflow-x: auto;
+        padding-bottom: 10px;
+        scroll-snap-type: x mandatory; 
+        max-width: 100%;
+    }
+
+    /* Styles individuels des cartes */
+    .related-articles .article-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        width: 280px; 
+        height: 400px;
+        margin-bottom: 20px;
+        scroll-snap-align: start;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .related-articles .article-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .related-articles .container {
+        max-width: 1000px; 
+        margin: 0 auto; 
+        padding: 0 15px; 
+    }
+
+    /* Contenu dans les cartes */
     .related-articles .article-content {
         padding: 20px;
-        height: 50%; /* Le contenu occupe l'autre moitié */
+        height: 50%; 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -163,57 +123,84 @@ get_header(); ?>
         text-decoration: underline;
     }
 
-    .related-articles .article-content p {
-        font-size: 0.9rem;
-        color: #555;
-    }
-
     .related-articles h2 {
         font-size: 2rem;
         font-weight: 400;
         text-align: left;
         margin-bottom: 40px;
     }
+
+    .related-articles .article-content p {
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    /* Scrollbar personnalisé */
+    .related-articles .articles-list::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .related-articles .articles-list::-webkit-scrollbar-thumb {
+        background: #5692B2; 
+        border-radius: 4px;
+    }
+
+    .related-articles .articles-list::-webkit-scrollbar-track {
+        background: #ddd;
+    }
+
     .section-divider {
-        width: 100%; /* Ligne pleine largeur du container */
-        height: 2px; /* Ligne fine */
-        background-color: #e0e0e0; /* Gris clair */
-        border: none; /* Supprime les styles par défaut de <hr> */
-        margin: 20px 0; /* Espacement au-dessus et en dessous */
+        width: 100%; 
+        height: 2px;
+        background-color: #e0e0e0;
+        border: none;
+        margin: 20px 0;
+    }
+
+    /* Responsive : ajustement en mobile */
+    @media (max-width: 768px) {
+        .related-articles .article-card {
+            flex: 0 0 300px;
+            height: 400px;
+        }
+
+        .related-articles .article-thumbnail {
+            height: 50%;
+        }
+
+        .related-articles .article-content {
+            height: 50%;
+        }
+
+        .related-articles .articles-list{
+            margin-bottom: 30px;
+        }
     }
 
 </style>
 
-<main>
-    <div class="container">
-
+<main class="article-page">
+    <!-- Contenu principal de la page -->
     <?php if (have_posts()): ?>
-
         <?php while(have_posts()): the_post(); ?>
-
-        <article class="custom-article">
-            <h1 class="custom-title"><?php the_title(); ?></h1>
-            <div class="custom-content">
-                <?php the_content(); ?>
-            </div>
-        </article>
-
+            <article class="custom-article">
+                <h1 class="custom-title"><?php the_title(); ?></h1>
+                <div class="custom-content">
+                    <?php the_content(); ?>
+                </div>
+            </article>
         <?php endwhile; ?>
-
     <?php else: ?>
         <p>Pas d'articles</p>
     <?php endif; ?>
+</main>
 
-    </div>
-
-    <!-- Related Articles Section -->
-    <section class="related-articles">
+<section class="related-articles">
     <div class="container">
-        <hr class="section-divider"> <!-- Ligne de séparation -->
+        <hr class="section-divider">
         <h2>Tu pourrais trouver ça utile</h2>
         <div class="articles-list">
             <?php
-            // Query pour récupérer les articles des catégories spécifiques
             $args = array(
                 'post_type'      => 'post',
                 'posts_per_page' => 3,
@@ -246,7 +233,5 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
-</main>
 
 <?php get_footer(); ?>

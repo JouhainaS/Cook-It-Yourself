@@ -1,7 +1,6 @@
 <?php
-/** Template Name: Header - Page */
-get_header(); 
-?>
+    /** Template Name: Header - Page */
+get_header(); ?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -13,7 +12,8 @@ get_header();
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        *, *::before, *::after {
+
+*, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -34,8 +34,8 @@ get_header();
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 10px 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 5px 0; 
         }
 
         .navbar-brand {
@@ -51,63 +51,131 @@ get_header();
             font-weight: 450;
             color: #3a5676;
             transition: color 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .nav-link:hover {
             color: #5692b2;
         }
 
+        .search-add-container {
+            display: flex;
+            align-items: center; 
+            gap: 15px; 
+            justify-content: flex-end; 
+            height: 35px;
+        }
+
+        .search-bar {
+            width: 300px; 
+            height: 35px;
+            padding: 0 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            line-height: 1;
+            box-sizing: border-box; 
+            margin: 0; 
+            margin: 13px 0 0;
+        }
+
         .btn {
             background-color: #ffb053;
             color: white;
             border-radius: 20px;
-            padding: 0 20px;
+            padding: 0 15px;
             border: none;
-            transition: background-color 0.3s ease;
-            height: 50px;
+            height: 35px;
             display: flex;
-            align-items: center;
+            align-items: center; 
+            justify-content: center; 
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .profile-image {
+            height: 35px;
+            width: 35px;
+            display: flex;
+            align-items: center; 
             justify-content: center;
         }
 
         .btn:hover {
             background-color: #dc9340;
-        }
-
-        /* Conteneur pour la barre de recherche et le bouton */
-        .search-add-container {
-            display: flex;
-            align-items: center; /* Alignement vertical parfait */
-            gap: 15px; /* Espacement entre les éléments */
-        }
-
-        .search-bar {
-            width: 300px; /* Largeur fixe */
-            height: 50px; /* Même hauteur que le bouton */
-            padding: 0 15px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-            margin-top: 10px; /* Marge plus grande pour descendre */
-            line-height: normal;
+            color: white;
         }
 
         @media (max-width: 768px) {
+
+            .collapse .profile-image {
+                display: none;
+            }
+
+            .mobile-navbar .profile-image {
+                display: block;
+            }
+
             .search-add-container {
-                flex-direction: column; /* Éléments en colonne sur mobile */
-                align-items: flex-start; /* Alignement à gauche */
+                flex-direction: column;
+                align-items: center;
                 gap: 10px;
+                width: 100%;
+                margin-top: 15px;
             }
 
             .search-bar {
-                width: 100%; /* Barre de recherche pleine largeur */
-                margin-top: 0;
+                width: 90%;
+                max-width: 300px;
+                height: 45px;
+                padding: 0 15px;
+                border-radius: 20px;
+                border: 1px solid #ddd;
+                font-size: 14px;
             }
 
             .btn {
-                width: 100%; /* Bouton pleine largeur */
+                width: 90%;
+                max-width: 300px;
+                height: 45px;
+                text-align: center;
+                font-size: 14px;
+                border-radius: 20px;
+            }
+
+            .mobile-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .navbar-collapse .profile-icon-mobile {
+                display: none;
+            }
+
+            .navbar-toggler {
+                font-size: 3rem;
+                color: #3a5676;
+                border-radius: 5px;
+                padding: 5px 10px;
+            }
+
+            .navbar-toggler:hover {
+                background-color: transparent;
+                color: #3a5676;
+                border-color: #3a5676;
+                transform: scale(1.1);
+                transition: all 0.3s ease;
+            }
+
+            .logo-image {
+                height: 20px;
             }
         }
+
     </style>
 
     <?php wp_head(); ?>
@@ -120,16 +188,19 @@ get_header();
         <div class="container">
             <!-- Mobile Navbar -->
             <div class="mobile-navbar d-lg-none">
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     &#9776;
                 </button>
+
                 <a class="navbar-brand" href="<?php echo home_url('/'); ?>">
                     <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logo/logo_monogramme.svg" alt="Cook It Yourself Monogram" class="logo-image">
                 </a>
-                <a href="<?php echo site_url('/parametres-du-compte'); ?>">
+
+                <a href="<?php echo site_url('/modifier-le-profil'); ?>">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
                 </a>
-            </div>
+                </div>
 
             <!-- Desktop Navbar -->
             <div class="collapse navbar-collapse" id="navbarContent">
@@ -155,12 +226,12 @@ get_header();
                     <form role="search" method="get" action="<?php echo home_url('/'); ?>">
                         <input class="form-control search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
                     </form>
-                    <a href="<?php echo site_url('/ajouter-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
-                </div>
+                    <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
 
-                <a href="<?php echo site_url('/modifier-profil'); ?>" class="ms-auto">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
-                </a>
+                    <a href="<?php echo site_url('/modifier-le-profil'); ?>" class="ms-auto">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
