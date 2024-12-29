@@ -76,6 +76,7 @@ get_header(); ?>
             line-height: 1;
             box-sizing: border-box; 
             margin: 0; 
+            margin: 13px 0 0;
         }
 
         .btn {
