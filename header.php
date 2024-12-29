@@ -127,8 +127,7 @@ get_header(); ?>
             }
 
             .search-bar {
-                width: 90%;
-                max-width: 300px;
+                width: 100%; 
                 height: 45px;
                 padding: 0 15px;
                 border-radius: 20px;
@@ -137,8 +136,8 @@ get_header(); ?>
             }
 
             .btn {
-                width: 90%;
-                max-width: 300px;
+                width: 100%; 
+
                 height: 45px;
                 text-align: center;
                 font-size: 14px;

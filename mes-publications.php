@@ -102,7 +102,9 @@ get_header(); ?>
 </div>
 
 <style>
+
 .body-wrapper {
+    flex-direction: column;
     display: flex;
     justify-content: flex-start;
     align-items: stretch;
@@ -176,20 +178,21 @@ get_header(); ?>
 .main-content {
     margin-left: 250px;
     flex-grow: 1;
-    padding: 50px;
+    padding: 20px;
     background-color: #fff;
     min-height: calc(100vh - 50px);
     z-index: 1; 
     position: relative;
 }
 
+
 footer {
-    position: relative; 
     z-index: 10;
-    background: #333;
-    color: #fff;
+    background-color: #333;
+    color: white;
     text-align: center;
     padding: 20px 0;
+    margin-top: auto; 
 }
 
 .grid-container {
@@ -265,39 +268,44 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-        .body-wrapper {
-            flex-direction: column;
-        }
+    .body-wrapper {
+        flex-direction: column;
+    }
 
-        .sidebar {
-            position: relative;
-            width: 100%;
-            height: auto;
-            z-index: 1;
-            box-shadow: none;
-        }
+    .sidebar {
+        text-align: center;
+        position: relative;
+        width: 100%;
+        height: auto; 
+        z-index: 1;
+        box-shadow: none;
+    }
 
-        .sidebar ul li {
-            text-align: center;
-        }
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+        min-height: auto;
+    }
 
-        .main-content {
-            margin-left: 0;
-            padding: 20px;
-        }
+    footer {
+        position: relative;
+        width: 100%;
+    }
 
-        .profile-container {
-            flex-direction: column;
-        }
+    .grid-container {
+        flex-direction: column;
+        gap: 15px; 
+        margin-bottom: 20px;
+    }
 
-        .form-control {
-            width: 100%;
-        }
+    .card {
+        width: 100%;
+    }
 
-        .btn-update {
-            width: 100%;
-        }
-    } 
+    .btn-update {
+        width: 100%; 
+}
+
 </style>
 
 <?php get_footer(); ?>
