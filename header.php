@@ -1,5 +1,5 @@
 <?php
-    /** Template Name: Header - Page */
+/** Template Name: Header - Page */
 get_header(); ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ get_header(); ?>
         }
 
         .logo-image {
-            height: 35px;
+            height: 30px;
         }
 
         .nav-link {
@@ -60,53 +60,53 @@ get_header(); ?>
 
         .search-add-container {
             display: flex;
-            align-items: center; 
-            gap: 15px; 
-            justify-content: flex-end; 
-            height: 35px;
+            align-items: center; /* Centre verticalement les éléments */
+            gap: 15px; /* Espacement uniforme entre les éléments */
+            justify-content: flex-end; /* Aligne à droite */
         }
 
         .search-bar {
-            width: 300px; 
-            height: 35px;
+            width: 300px; /* Largeur fixe pour la barre de recherche */
+            height: 35px; 
             padding: 0 15px;
             border-radius: 20px;
             border: 1px solid #ddd;
             font-size: 1rem;
-            line-height: 1;
-            box-sizing: border-box; 
-            margin: 0; 
-            margin: 13px 0 0;
+            margin: 0; /* Supprime le margin-top */
+            line-height: normal;
+            transition: none; /* Désactive les transitions pour la barre de recherche */
+        }
+
+        .search-bar:hover {
+            border-color: #ddd; /* Pas de changement de dimensions ni d'autres effets */
         }
 
         .btn {
             background-color: #ffb053;
             color: white;
             border-radius: 20px;
-            padding: 0 15px;
+            padding: 0 20px;
             border: none;
             height: 35px;
             display: flex;
-            align-items: center; 
-            justify-content: center; 
+            align-items: center;
+            justify-content: center;
             font-size: 16px;
             text-align: center;
-            transition: background-color 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        .profile-image {
-            height: 35px;
-            width: 35px;
-            display: flex;
-            align-items: center; 
-            justify-content: center;
+            transition: background-color 0.3s ease; /* Transition uniquement sur la couleur */
         }
 
         .btn:hover {
-            background-color: #dc9340;
+            background-color: #dc9340; /* Change uniquement la couleur */
             color: white;
         }
+
+        .profile-image {
+            height: 40px; /* Ajuste la taille de l'icône */
+            margin-left: 15px; /* Ajoute un espacement si nécessaire */
+        }
+
+
 
         @media (max-width: 768px) {
 
@@ -127,7 +127,8 @@ get_header(); ?>
             }
 
             .search-bar {
-                width: 100%; 
+                width: 90%;
+                max-width: 300px;
                 height: 45px;
                 padding: 0 15px;
                 border-radius: 20px;
@@ -136,8 +137,8 @@ get_header(); ?>
             }
 
             .btn {
-                width: 100%; 
-
+                width: 90%;
+                max-width: 300px;
                 height: 45px;
                 text-align: center;
                 font-size: 14px;
@@ -227,9 +228,10 @@ get_header(); ?>
                     </form>
                     <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
 
-                    <a href="<?php echo site_url('/modifier-le-profil'); ?>" class="ms-auto">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
-                    </a>
+
+                <a href="<?php echo site_url('/modifier-le-profil'); ?>" class="ms-auto">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
+                </a>
                 </div>
             </div>
         </div>
