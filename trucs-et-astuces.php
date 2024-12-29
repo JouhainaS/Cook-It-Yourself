@@ -171,6 +171,16 @@ get_header();
     height: 200px;
 }
 
+.materiels-section .articles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.materiels-section .article img {
+    height: 200px;
+}
+
 @media (max-width: 768px) {
     .trucs-et-astuces-page {
         padding: 20px;
@@ -213,6 +223,10 @@ get_header();
         font-size: 0.9rem;
     }
 
+    .article img {
+        height: 150px;
+    }
+
     .stop-gaspillage-section .articles,
     .materiels-section .articles {
         display: flex;
@@ -220,6 +234,7 @@ get_header();
         overflow-x: auto; 
         gap: 15px; 
         scroll-snap-type: x mandatory;
+        padding-bottom: 20px;
     }
 
     .stop-gaspillage-section .article,
@@ -228,9 +243,6 @@ get_header();
         scroll-snap-align: start;
     }
 
-    .article img {
-        height: 150px;
-    }
 
     .stop-gaspillage-section .articles::-webkit-scrollbar,
     .materiels-section .articles::-webkit-scrollbar {

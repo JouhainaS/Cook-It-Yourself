@@ -121,7 +121,9 @@ get_header();
   align-items: center;
 }
 
+
 .index-page .top-rated-recipes .card {
+    border: none; 
     width: 260px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -345,6 +347,10 @@ get_header();
   color: #3a5676;
 }
 
+.index-page .trucs-et-astuces {
+    margin-bottom: 40px; 
+}
+
 @media (max-width: 768px) {
   .index-page .hero-section h1 {
     font-size: 2.5rem;
@@ -356,9 +362,35 @@ get_header();
   }
 
   .index-page .top-rated-recipes .row {
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto; 
+        gap: 15px; 
+        scroll-snap-type: x mandatory; 
+        padding-bottom: 20px; 
+        justify-content: center; 
+    }
+
+    .index-page .top-rated-recipes .row .col-md-3 {
+        flex: 0 0 auto; 
+        width: 100%; 
+        max-width: 90%; 
+        scroll-snap-align: center;
+        margin: 0 auto;
+    }
+
+    .index-page .top-rated-recipes .row::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .index-page .top-rated-recipes .row::-webkit-scrollbar-thumb {
+        background: #5692B2; 
+        border-radius: 4px;
+    }
+
+    .index-page .top-rated-recipes .row::-webkit-scrollbar-track {
+        background: #ddd;
+    }
 
   .trucs-et-astuces .article-card {
     flex-direction: row;
@@ -551,28 +583,28 @@ get_header();
             <h2>Catégories</h2>
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <!-- Petit déjeuner -->
-                <a href="<?php echo home_url('petit-dejeuner.php'); ?>" class="category-btn">
+                <a href="<?php echo home_url('/recettes'); ?>" class="category-btn">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/petit-dejeuner.svg" alt="Petit déjeuner" class="category-icon">
                     <span>Petit 
                         <br> déjeuner</span>
                 </a>
                 <!-- Déjeuner -->
-                <a href="<?php echo home_url('dejeuner.php'); ?>" class="category-btn">
+                <a href="<?php echo home_url('/recettes'); ?>" class="category-btn">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dejeuner.svg" alt="Déjeuner" class="category-icon">
                     <span>Déjeuner</span>
                 </a>
                 <!-- Dîner -->
-                <a href="<?php echo home_url('diner.php'); ?>" class="category-btn">
+                <a href="<?php echo home_url('/recettes'); ?>" class="category-btn">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/diner.svg" alt="Dîner" class="category-icon">
                     <span>Dîner</span>
                 </a>
                 <!-- Desserts -->
-                <a href="<?php echo home_url('dessert.php'); ?>" class="category-btn">
+                <a href="<?php echo home_url('/recettes'); ?>" class="category-btn">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/dessert.svg" alt="Desserts" class="category-icon">
                     <span>Desserts</span>
                 </a>
                 <!-- Boissons -->
-                <a href="<?php echo home_url('boisson.php'); ?>" class="category-btn">
+                <a href="<?php echo home_url('/recettes'); ?>" class="category-btn">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/boisson.svg" alt="Boissons" class="category-icon">
                     <span>Boissons</span>
                 </a>
@@ -621,4 +653,4 @@ get_header();
     </section>
   </div>
 
-    <?php get_footer(); ?>
+<?php get_footer(); ?>

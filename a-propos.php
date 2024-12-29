@@ -139,20 +139,17 @@ get_header();
     box-shadow: 0px 1px 4px rgba(86, 146, 178, 0.45);
 }
 
-.apropos-page .container {
+.apropos-page {
     padding: 20px;
     margin-top: 40px;
-    background-color: #f5f5f5;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto; 
     padding-left: 20px;
     padding-right: 20px;
 }
-.time-section {
+
+.apropos-page .time-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -161,7 +158,7 @@ get_header();
     text-align: center;
 }
 
-.time-box {
+.apropos-page .time-box {
     flex: 1;
     max-width: 300px;
     display: flex;
@@ -169,7 +166,7 @@ get_header();
     align-items: center;
 }
 
-.time-box img {
+.apropos-page .time-box img {
     height: auto;
     max-height: 80px;
     width: auto; 
@@ -178,16 +175,14 @@ get_header();
     box-shadow: none; 
 }
 
-
-
-.time-box h4 {
+.apropos-page .time-box h4 {
     font-size: 1.2rem;
     font-weight: bold;
     color: #8DA08D;
     margin-bottom: 5px;
 }
 
-.time-box p {
+.apropos-page .time-box p {
     font-size: 1rem;
     color: black;
     margin: 0;
@@ -234,23 +229,9 @@ get_header();
     }
 }
 
-@media (max-width: 480px) {
-    .apropos-page h1 {
-        font-size: 1.75rem;
-    }
-
-    .apropos-page p {
-        font-size: 0.85rem;
-    }
-
-    .apropos-page .btn {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-    }
-}
 </style> 
 
-<main class="apropos-page container"> 
+<main class="apropos-page"> 
 <h1>Cook'It Yourself : la cuisine étudiante, fun et accessible</h1>
 
 <div class="intro">
@@ -286,7 +267,7 @@ get_header();
         <p>Cherche des idées avec les ingrédients qui traînent dans ton frigo.</p>
     </div>
 </div>
-
+ 
 </div>
 
 <div class="together">

@@ -1,7 +1,6 @@
 <?php
-/** Template Name: Header - Page */
-get_header(); 
-?>
+    /** Template Name: Header - Page */
+get_header(); ?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -13,7 +12,8 @@ get_header();
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        *, *::before, *::after {
+
+*, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -34,8 +34,8 @@ get_header();
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 10px 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 5px 0; 
         }
 
         .navbar-brand {
@@ -51,141 +51,61 @@ get_header();
             font-weight: 450;
             color: #3a5676;
             transition: color 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .nav-link:hover {
             color: #5692b2;
         }
 
+        .search-add-container {
+            display: flex;
+            align-items: center; 
+            gap: 15px; 
+            justify-content: flex-end; 
+            height: 35px;
+        }
+
+        .search-bar {
+            width: 300px; 
+            height: 35px;
+            padding: 0 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            line-height: 1;
+            box-sizing: border-box; 
+            margin: 0; 
+        }
+
         .btn {
             background-color: #ffb053;
             color: white;
             border-radius: 20px;
-            padding: 0 20px;
+            padding: 0 15px;
             border: none;
-            transition: background-color 0.3s ease;
-            height: 50px;
+            height: 35px;
             display: flex;
-            align-items: center;
+            align-items: center; 
+            justify-content: center; 
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .profile-image {
+            height: 35px;
+            width: 35px;
+            display: flex;
+            align-items: center; 
             justify-content: center;
         }
 
         .btn:hover {
             background-color: #dc9340;
-        }
-
-        .search-add-container {
-            display: flex;
-            align-items: center;
-            gap: 15px; 
-        }
-
-        .search-bar {
-            width: 300px; 
-            height: 50px; 
-            padding: 0 15px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-            margin-top: 10px;
-            line-height: normal;
-        }
-
-        <?php
-/** Template Name: Header - Page */
-get_header(); 
-?>
-
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-    <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title><?php bloginfo('name'); ?> | <?php wp_title(); ?></title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: white;
-            color: black;
-            margin: 0;
-            padding-top: 80px;
-        }
-
-        .custom-navbar {
-            background-color: #f5efeb;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-image {
-            height: 35px;
-        }
-
-        .nav-link {
-            font-weight: 450;
-            color: #3a5676;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #5692b2;
-        }
-
-        .btn {
-            background-color: #ffb053;
             color: white;
-            border-radius: 20px;
-            padding: 0 20px;
-            border: none;
-            transition: background-color 0.3s ease;
-            height: 50px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 16px;
-            text-align: center; 
         }
-
-        .btn:hover {
-            background-color: #dc9340;
-        }
-
-        .search-add-container {
-            display: flex;
-            align-items: center; 
-            gap: 15px; 
-        }
-
-        .search-bar {
-            width: 250px; 
-            height: 50px; 
-            padding: 0 15px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-            margin-top: 10px; 
-            line-height: normal;
-        }
-
 
         @media (max-width: 768px) {
 
@@ -306,11 +226,11 @@ get_header();
                         <input class="form-control search-bar" type="search" placeholder="RECHERCHE DE RECETTES" name="s" aria-label="Search">
                     </form>
                     <a href="<?php echo site_url('/ajouter-une-recette'); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
-                </div>
 
-                <a href="<?php echo site_url('/modifier-le-profil'); ?>" class="ms-auto">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
-                </a>
+                    <a href="<?php echo site_url('/modifier-le-profil'); ?>" class="ms-auto">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/icones/profil.svg" alt="Profile Icon" class="profile-image">
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
