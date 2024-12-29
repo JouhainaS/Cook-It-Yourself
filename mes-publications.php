@@ -12,20 +12,20 @@ get_header(); ?>
             <ul>
                 <li>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-le-profil'))); ?>" 
-                    class="sidebar-link <?php echo is_page('modifier-le-profil') ? : ''; ?>">
-                    Modifier le profil
+                       class="sidebar-link <?php echo is_page('modifier-le-profil') ? 'active' : ''; ?>">
+                        Modifier le profil
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('parametres-du-compte'))); ?>" 
-                    class="sidebar-link <?php echo is_page('parametres-du-compte') ?  : ''; ?>">
-                    Paramètres du compte
+                       class="sidebar-link <?php echo is_page('parametres-du-compte') ? '' : ''; ?>">
+                        Paramètres du compte
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('mes-publications'))); ?>" 
-                    class="sidebar-link <?php echo is_page('mes-publications') ? 'active' : ''; ?>">
-                    Mes publications
+                       class="sidebar-link <?php echo is_page('mes-publications') ? 'active' : ''; ?>">
+                        Mes publications
                     </a>
                 </li>
             </ul>
@@ -49,22 +49,18 @@ get_header(); ?>
 
             if ($query->have_posts()) :
                 while ($query->have_posts()) : $query->the_post();
-                    // Récupérer les métadonnées nécessaires
-                    $prep_time = get_post_meta(get_the_ID(), 'prep_time', true); // Temps de préparation
-                    $cook_time = get_post_meta(get_the_ID(), 'cook_time', true); // Temps de cuisson
+                    $prep_time = get_post_meta(get_the_ID(), 'prep_time', true);
+                    $cook_time = get_post_meta(get_the_ID(), 'cook_time', true);
 
-                    // Conversion en minutes
                     $prep_minutes = !empty($prep_time) ? explode(':', $prep_time) : [0, 0];
                     $cook_minutes = !empty($cook_time) ? explode(':', $cook_time) : [0, 0];
                     $total_minutes = ($prep_minutes[0] * 60 + $prep_minutes[1]) + ($cook_minutes[0] * 60 + $cook_minutes[1]);
 
-                    // Formater le temps total en heures et minutes
                     $formatted_time = $total_minutes > 0 
                         ? floor($total_minutes / 60) . 'h ' . ($total_minutes % 60) . 'min' 
                         : 'Non spécifié';
 
-                    $rating = get_post_meta(get_the_ID(), 'rating', true) ?: 0; // Par défaut, note à 0
-                    $author_name = get_the_author_meta('display_name', $current_user->ID);
+                    $rating = get_post_meta(get_the_ID(), 'rating', true) ?: 0;
                     ?>
                     <div class="card">
                         <?php if (has_post_thumbnail()) : ?>
@@ -76,9 +72,6 @@ get_header(); ?>
                             <h5 class="card-title">
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </h5>
-                            <p class="recipe-meta">
-                                <strong>Par :</strong> <?php echo esc_html($author_name); ?>
-                            </p>
                             <p class="recipe-meta">
                                 <strong>Temps total :</strong> <?php echo $formatted_time; ?>
                             </p>
@@ -103,151 +96,107 @@ get_header(); ?>
         <div class="publish-recipe d-flex align-items-center mb-4">
             <hr class="my-4"> 
             <p class="mb-0">Et si tu publiais une nouvelle recette ?</p>
-            <a href="<?php echo get_permalink(get_page_by_path('ajouter-recette')); ?>" class="btn">+ AJOUTER UNE RECETTE</a>
+            <a href="<?php echo get_permalink(get_page_by_path('ajouter-recette')); ?>" class="btn-update">+ AJOUTER UNE RECETTE</a>
         </div>
-    <div>
+    </div>
 </div>
 
-
 <style>
-    .main-content .grid-container {
-    display: flex; 
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
-    align-items: center;
+.body-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    height: 100vh;
+    padding: 0;
 }
 
-.main-content .card {
-    border: none; 
+.sidebar {
+    background-color: #EBF4E7;
+    width: 250px;
+    padding: 20px 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+.main-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 50px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
     width: 260px;
+    background-color: #fff;
+    border: none;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.main-content .card:hover {
+.card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.main-content .card img {
+.card img {
     width: 100%;
     height: 180px;
     object-fit: cover;
 }
 
-.main-content .card-body p {
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: #000;
+.card-body {
+    padding: 15px;
 }
 
-.main-content .rating .star {
-    font-size: 1.2rem;
-    color: #A8BAA7; 
-}
-
-.main-content .rating .star.text-muted {
-    color: #ddd;
-}
-
-.main-content .rating .rating-value {
-    font-size: 0.9rem;
-    color: #333; 
-}
-
-.main-content .card-title a {
+.card-title a {
     text-decoration: none;
     color: #3A5676;
 }
 
-.main-content .card-title a:hover {
-    color: #5692B2; 
+.card-title a:hover {
     text-decoration: underline;
+    color: #5692B2;
 }
 
-
-    .body-wrapper {
-        display: flex;
-        justify-content: flex-start;
-        align-items: stretch;
-        min-height: 100vh; 
-        position: relative;
-    }
-
-    .sidebar {
-        background-color: #EBF4E7;
-        width: 250px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        height: 100%; 
-        position: absolute; 
-        left: 0;
-        top: 0;
-        z-index: 0; 
-    }
-
-    .main-content {
-        margin-left: 250px;
-        flex-grow: 1;
-        padding: 50px;
-        background-color: #fff;
-        min-height: calc(100vh - 50px); 
-        z-index: 1; 
-        position: relative;
-    }
-
-    footer {
-        position: relative; 
-        z-index: 10;
-        background: #333;
-        color: #fff;
-        text-align: center;
-        padding: 20px 0;
-    }
-
-    /* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .body-wrapper {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        z-index: 1;
-        box-shadow: none;
-    }
-
-    .sidebar ul li {
-        text-align: center;
-    }
-
-    .main-content {
-        margin-left: 0;
-        padding: 20px;
-    }
-
-    .profile-container {
-        flex-direction: column;
-    }
-
-    .form-control {
-        width: 100%;
-    }
-
-    .btn-update {
-        width: 100%;
-    }
+.recipe-meta, .rating {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #000;
 }
 
+.rating .star {
+    font-size: 1.2rem;
+    color: #A8BAA7;
+}
+
+.rating-value {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.btn-update {
+    background-color: #5692B2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-update:hover {
+    background-color: #3f6e87;
+}
 </style>
 
 <?php get_footer(); ?>
