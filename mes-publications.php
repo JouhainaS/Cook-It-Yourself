@@ -12,7 +12,7 @@ get_header(); ?>
             <ul>
                 <li>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('modifier-le-profil'))); ?>" 
-                       class="sidebar-link <?php echo is_page('modifier-le-profil') ? 'active' : ''; ?>">
+                       class="sidebar-link <?php echo is_page('modifier-le-profil') ?  : ''; ?>">
                         Modifier le profil
                     </a>
                 </li>
@@ -106,18 +106,71 @@ get_header(); ?>
     display: flex;
     justify-content: flex-start;
     align-items: stretch;
-    height: 100vh;
-    padding: 0;
+    min-height: 100vh; 
+    position: relative; 
 }
 
 .sidebar {
     background-color: #EBF4E7;
     width: 250px;
-    padding: 20px 0;
-    position: fixed;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 100%; 
+    position: absolute;
     left: 0;
     top: 0;
-    height: 100%;
+    z-index: 0; 
+}
+
+.sidebar-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #3a5676;
+}
+
+.btn-deconnexion {
+    display: block;
+    margin: 20px auto;
+    font-size: 1rem;
+    color: black;
+    text-align: center;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-deconnexion:hover {
+    color: #e53935;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: normal;
+    padding: 10px;
+    display: block;
+    border-radius: 0;
+}
+
+.sidebar-link.active {
+    background-color: white;
+    color: #333;
+    font-weight: 550;
+}
+
+.sidebar-link:hover {
+    background-color: #D4E9D2;
 }
 
 .main-content {
@@ -125,14 +178,27 @@ get_header(); ?>
     flex-grow: 1;
     padding: 50px;
     background-color: #fff;
-    overflow-y: auto;
+    min-height: calc(100vh - 50px);
+    z-index: 1; 
+    position: relative;
+}
+
+footer {
+    position: relative; 
+    z-index: 10;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
 }
 
 .grid-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    margin-bottom: 20px; 
 }
+
 
 .card {
     width: 260px;
@@ -197,6 +263,41 @@ get_header(); ?>
 .btn-update:hover {
     background-color: #3f6e87;
 }
+
+@media screen and (max-width: 768px) {
+        .body-wrapper {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            position: relative;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+            box-shadow: none;
+        }
+
+        .sidebar ul li {
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+        }
+
+        .profile-container {
+            flex-direction: column;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .btn-update {
+            width: 100%;
+        }
+    } 
 </style>
 
 <?php get_footer(); ?>
