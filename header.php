@@ -65,6 +65,8 @@ get_header(); ?>
             justify-content: flex-end; /* Aligne à droite */
         }
 
+
+
         .search-bar {
             width: 300px; /* Largeur fixe pour la barre de recherche */
             height: 35px; 
@@ -72,7 +74,7 @@ get_header(); ?>
             border-radius: 20px;
             border: 1px solid #ddd;
             font-size: 1rem;
-            margin: 0; /* Supprime le margin-top */
+            margin-top: 10px; /* Ajoute un espace supplémentaire au-dessus de la barre de recherche */
             line-height: normal;
             transition: none; /* Désactive les transitions pour la barre de recherche */
         }
