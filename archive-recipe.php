@@ -123,10 +123,10 @@ get_header();
     color: #3A5676; 
     text-decoration: none;
     transition: color 0.3s ease, text-decoration 0.3s ease;
-    white-space: nowrap; /* Empêche le titre de passer à la ligne */
-    overflow: hidden; /* Cache le texte qui déborde */
-    text-overflow: ellipsis; /* Ajoute des points de suspension (...) */
-    display: block; /* Assure une bonne compatibilité */
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: block; 
 }
 .nos-recettes-page .card-title a {
     text-decoration: none;

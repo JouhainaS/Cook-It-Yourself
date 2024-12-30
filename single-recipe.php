@@ -645,26 +645,26 @@ get_header();
 }
 
 .stars input[type="radio"] {
-    display: none; /* Cache les inputs radio */
+    display: none; 
 }
 
 .stars label {
     font-size: 2rem;
-    color: #A8BAA7; /* Couleur des étoiles non sélectionnées */
+    color: #A8BAA7; 
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .stars input[type="radio"]:checked ~ label {
-    color: #5692B2; /* Couleur des étoiles sélectionnées */
+    color: #5692B2; 
 }
 
 .stars input[type="radio"]:hover ~ label {
-    color: #5692B2; /* Couleur des étoiles au survol */
+    color: #5692B2; 
 }
 
 .stars input[type="radio"]:checked:hover ~ label {
-    color: #5692B2; /* Assure que la couleur reste jaune après sélection */
+    color: #5692B2; 
 }
 
 @media (max-width: 768px) {
@@ -722,7 +722,7 @@ get_header();
 }
 
 @media print {
-    /* Cache tout sauf la partie à imprimer */
+    
     body * {
         visibility: hidden;
     }
@@ -739,7 +739,7 @@ get_header();
         width: 100%;
     }
 
-    /* Ajuste la section des détails */
+    
     .recipe-details {
         display: flex;
         justify-content: space-between; 
@@ -768,7 +768,7 @@ get_header();
         color: #000;
     }
 
-    /* Ajuste la section de l'image */
+   
     .recipe-image img {
         max-width: 100%;
         height: auto;
@@ -776,19 +776,19 @@ get_header();
         margin: 0 auto;
     }
 
-    /* Cache les icônes dans la section des détails */
+    
     .recipe-details .detail img {
         display: none;
     }
 
-    /* Ajuste la section Description */
+    
     .recipe-description p {
         font-size: 1rem;
         line-height: 1.4;
         margin-bottom: 10px;
     }
 
-    /* Ajuste la section des astuces du chef */
+    
     .chef-tips {
         border: none;
         padding: 10px;

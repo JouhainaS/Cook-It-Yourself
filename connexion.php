@@ -7,11 +7,11 @@ get_header();
 html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden; /* Désactive le scroll */
+    overflow: hidden; 
 }
 
 .page-wrapper {
-    height: 100%; /* Prend toute la hauteur de la fenêtre */
+    height: 100%; 
     display: flex;
     justify-content: center;
     align-items: center;

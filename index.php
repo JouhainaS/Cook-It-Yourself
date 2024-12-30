@@ -19,9 +19,9 @@ get_header();
 }
 
 .index-page .container {
-  max-width: 1200px; /* Augmentez la largeur */
+  max-width: 1200px; 
   margin: 0 auto;
-  padding: 0 20px; /* Ajustez les marges internes si nécessaire */
+  padding: 0 20px; 
 }
 
 
@@ -42,17 +42,17 @@ get_header();
 
 .index-page .top-rated-recipes h2 {
     text-align: center;
-    margin-left: 20px; /* Ajuste le décalage avec une petite marge */
+    margin-left: 20px; 
 }
 
 .index-page .trucs-et-astuces h2 {
-    text-align: center; /* S'assure que le texte est à gauche */
+    text-align: center; 
   
 }
 
 
 .index-page .categories h2 {
-    margin-left: 20px !important; /* Forcer la marge à gauche */
+    margin-left: 20px !important; 
 }
 
 .index-page h1 { font-size: 2.5rem; }
@@ -93,7 +93,7 @@ get_header();
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: rgba(117, 100, 84, 0.5); /* Par exemple, une transparence de 50% */
+   background-color: rgba(156, 119, 81, 0.49); 
    z-index: 1;
  }
  
@@ -143,19 +143,18 @@ get_header();
 }
 
 .index-page .top-rated-recipes .container {
-  margin: 50px auto; /* Centré */
-  padding: 0 !important; /* Supprime les paddings */
+  margin: 50px auto; 
+  padding: 0 !important; 
 }
 
 
 
 .index-page .top-rated-recipes .row {
-  display: flex; /* Utilise Flexbox pour aligner les cartes */
-  flex-wrap: wrap; /* Permet aux cartes de retourner à la ligne si nécessaire */
-  align-items: flex-start; /* Aligne les cartes en haut */
-  gap: 0px; /* Ajoute un espacement uniforme entre les cartes */
-  margin: 0; /* Supprime les marges inutiles */
-  padding: 0; /* Supprime les paddings */
+  display: flex; 
+  flex-wrap: wrap; 
+  align-items: flex-start; 
+  margin: 0; 
+  padding: 0; 
 }
 
 
@@ -174,14 +173,14 @@ get_header();
     object-fit: cover;
 }
 .card-img-top {
-    width: 100%; /* Toujours égal à la largeur de la carte */
-    height: 180px; /* Une hauteur constante */
-    object-fit: cover; /* Permet de remplir tout l'espace */
-    border-radius: 15px 15px 0 0; /* Facultatif, pour arrondir les coins */
+    width: 100%;
+    height: 180px; 
+    object-fit: cover; 
+    border-radius: 15px 15px 0 0; 
 }
 
 .index-page .top-rated-recipes .card-body {
-  padding: 15px; /* Ajustez selon vos besoins */
+  padding: 15px; 
 }
 
 
@@ -200,9 +199,9 @@ get_header();
     color: #3A5676; 
     text-decoration: none;
     transition: color 0.3s ease, text-decoration 0.3s ease;
-    white-space: nowrap; /* Empêche le titre de passer à la ligne */
-    overflow: hidden; /* Cache le texte qui déborde */
-    text-overflow: ellipsis; /* Ajoute des points de suspension (...) */
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
     display: block;
 }
 
@@ -280,10 +279,10 @@ get_header();
     color: #3A5676; 
     text-decoration: none;
     transition: color 0.3s ease, text-decoration 0.3s ease;
-    white-space: nowrap; /* Empêche le titre de passer à la ligne */
-    overflow: hidden; /* Cache le texte qui déborde */
-    text-overflow: ellipsis; /* Ajoute des points de suspension (...) */
-    display: block; /* Assure une bonne compatibilité */
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: block; 
 }
 
 .index-page .top-rated-recipes  .card-title a {
@@ -487,25 +486,25 @@ get_header();
     text-decoration: underline !important;
 }
 .index-page .top-rated-recipes .card {
-    margin: 0; /* Assurez-vous qu'aucune marge externe n'augmente l'espacement */
+    margin: 0; 
 }
 .index-page .top-rated-recipes .col-md-3 {
-  margin: 0 !important; /* Supprime les marges extérieures */
-  padding: 0 !important; /* Supprime les paddings intérieurs */
+  margin: 0 !important; 
+  padding: 0 !important; 
   display: flex;
-  justify-content: center; /* Centre les cartes dans les colonnes */
+  justify-content: center; 
 }
 
 
 @media (max-width: 768px) {
   
   .index-page .hero-section h1 {
-    font-size: 3rem; /* Réduit la taille du texte */
-    white-space: normal; /* Permet au texte de passer à la ligne */
-    word-wrap: break-word; /* Autorise le texte à se couper sur plusieurs lignes */
-    line-height: 1.3; /* Ajuste l'espacement vertical entre les lignes */
-    padding: 0 10px; /* Ajoute un peu de padding pour éviter les bordures */
-    text-align: center; /* Centre le contenu */
+    font-size: 3rem; 
+    white-space: normal; 
+    word-wrap: break-word; 
+    line-height: 1.3; 
+    padding: 0 10px; 
+    text-align: center; 
   }
 
 
@@ -623,20 +622,20 @@ get_header();
     height: 45px;
   }
   .index-page .category-btn {
-    text-decoration: none !important; /* Forcer aucune soulignation sur toute la catégorie */
+    text-decoration: none !important; 
 }
 
 .index-page .category-btn span {
-    text-decoration: none !important; /* Supprime la soulignation sur le texte */
+    text-decoration: none !important; 
 }
 
 .index-page .category-btn a {
-    text-decoration: none !important; /* Supprime la soulignation sur les liens */
+    text-decoration: none !important; 
 }
 
 .index-page .category-btn:hover a,
 .index-page .category-btn:hover span {
-    text-decoration: underline !important; /* Souligner uniquement au survol */
+    text-decoration: underline !important; 
 }
 }
 
