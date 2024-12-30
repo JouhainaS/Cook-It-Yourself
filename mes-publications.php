@@ -303,7 +303,8 @@ footer {
     }
 
     .btn-update {
-        width: 100%; 
+        width: 100%; /* Le bouton s'adapte à la largeur de l'écran */
+    }
 }
 
 </style>

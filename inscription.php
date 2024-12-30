@@ -7,11 +7,11 @@ get_header();
 html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden; /* Désactive le scroll */
+    overflow: hidden;
 }
 
 .page-wrapper {
-    height: 100%; /* Prend toute la hauteur de la fenêtre */
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,6 @@ html, body {
     text-align: center;
 }
 
-/* Restes des styles inchangés */
 form h2 {
     font-size: 24px;
     color: #3a5676;
@@ -49,7 +48,7 @@ form input[type="password"] {
 
 form input:focus {
     border-color: #5692b2;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 8px rgba(86, 146, 178, 0.5);
     outline: none;
 }
 
@@ -110,23 +109,39 @@ form button:hover {
             $username = sanitize_text_field($_POST['username']);
             $email = sanitize_email($_POST['email']);
             $password = $_POST['password'];
+            $errors = [];
 
-            if (!username_exists($username) && !email_exists($email)) {
+            if (username_exists($username)) {
+                $errors[] = "Ce nom d'utilisateur existe déjà.";
+            }
+            if (email_exists($email)) {
+                $errors[] = "Cet email est déjà utilisé.";
+            }
+            if (strlen($password) < 6) {
+                $errors[] = "Le mot de passe doit comporter au moins 6 caractères.";
+            }
+
+            if (empty($errors)) {
                 $user_id = wp_create_user($username, $password, $email);
 
                 if (!is_wp_error($user_id)) {
                     wp_signon([
-                        'user_login'    => $username,
+                        'user_login' => $username,
                         'user_password' => $password,
-                        'remember'      => true,
+                        'remember' => true,
                     ]);
-                    wp_safe_redirect(home_url());
+
+                    // Vérification de redirection
+                    $redirect_url = !empty($_GET['redirect_to']) ? esc_url_raw($_GET['redirect_to']) : home_url();
+                    wp_safe_redirect($redirect_url);
                     exit;
                 } else {
                     echo "<p class='error-message'>Erreur : " . $user_id->get_error_message() . "</p>";
                 }
             } else {
-                echo "<p class='error-message'>Le nom d'utilisateur ou l'email existe déjà.</p>";
+                foreach ($errors as $error) {
+                    echo "<p class='error-message'>" . esc_html($error) . "</p>";
+                }
             }
         }
         ?>

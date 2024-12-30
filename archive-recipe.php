@@ -120,11 +120,14 @@ get_header();
 
 .nos-recettes-page .card-title {
     font-size: 1.3rem;
-    color: #3A5676;
+    color: #3A5676; 
     text-decoration: none;
     transition: color 0.3s ease, text-decoration 0.3s ease;
+    white-space: nowrap; /* Empêche le titre de passer à la ligne */
+    overflow: hidden; /* Cache le texte qui déborde */
+    text-overflow: ellipsis; /* Ajoute des points de suspension (...) */
+    display: block; /* Assure une bonne compatibilité */
 }
-
 .nos-recettes-page .card-title a {
     text-decoration: none;
     color: inherit;
@@ -382,13 +385,13 @@ get_header();
                                     </a>
                                 </h5>
                                 <p class="card-text">
-                                    <strong>Par :</strong> <?php echo esc_html($author_name); ?>
+                                    Par : <?php echo esc_html($author_name); ?>
                                 </p>
                                 <p class="card-text">
-                                    <strong>Temps total :</strong> <?php echo $total_minutes ? $total_minutes . ' min' : 'Non spécifié'; ?>
+                                    Temps total : <?php echo $total_minutes ? $total_minutes . ' min' : 'Non spécifié'; ?>
                                 </p>
                                 <p class="card-text">
-                                    <strong>Note :</strong>
+                                    
                                     <div class="rating">
                                         <?php for ($i = 1; $i <= 5; $i++) : ?>
                                             <span class="star<?php echo $i <= $average_rating ? '' : ' text-muted'; ?>">&#9733;</span>

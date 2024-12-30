@@ -3,6 +3,15 @@
 get_header(); 
 ?>
 <style>
+    body, html {
+    overflow-x: hidden; /* Empêche tout débordement horizontal */
+}
+.index-page .container {
+    max-width: 100%; /* Empêche de dépasser la largeur de l'écran */
+    padding: 0 15px; /* Ajoute un peu de marge interne */
+    overflow-x: hidden; /* Supprime le scroll horizontal */
+}
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -10,10 +19,11 @@ get_header();
 }
 
 .index-page .container {
-  max-width: 1000px;
+  max-width: 1200px; /* Augmentez la largeur */
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 20px; /* Ajustez les marges internes si nécessaire */
 }
+
 
 .index-page body {
   font-family: 'Poppins', sans-serif;
@@ -30,12 +40,37 @@ get_header();
   color: #3a5676;
 }
 
+.index-page .top-rated-recipes h2 {
+    text-align: center;
+    margin-left: 20px; /* Ajuste le décalage avec une petite marge */
+}
+
+.index-page .trucs-et-astuces h2 {
+    text-align: center; /* S'assure que le texte est à gauche */
+  
+}
+
+
+.index-page .categories h2 {
+    margin-left: 20px !important; /* Forcer la marge à gauche */
+}
+
 .index-page h1 { font-size: 2.5rem; }
 .index-page h2 { font-size: 2rem; }
 .index-page h3 { font-size: 1.75rem; }
 .index-page h4 { font-size: 1.5rem; }
 .index-page h5 { font-size: 1.25rem; }
 .index-page h6 { font-size: 1rem; }
+
+.hero-section {
+    max-width: 100%; /* Permet à la section de s'étendre */
+    text-align: center; /* Centre le texte horizontalement */
+}
+
+.hero-section h1 {
+    display: inline-block; /* Permet au texte de s’étendre */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+}
 
 .index-page .hero-section {
    position: relative;
@@ -58,7 +93,7 @@ get_header();
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: 0 4px 10px rgba(0, 0, 0, 0.1);
+   background-color: rgba(117, 100, 84, 0.5); /* Par exemple, une transparence de 50% */
    z-index: 1;
  }
  
@@ -108,17 +143,98 @@ get_header();
 }
 
 .index-page .top-rated-recipes .container {
-  max-width: 1000px; 
-  margin: 0 auto; 
-  padding: 0 15px; 
+  margin: 50px auto; /* Centré */
+  padding: 0 !important; /* Supprime les paddings */
 }
 
+
+
 .index-page .top-rated-recipes .row {
-  display: flex; 
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Utilise Flexbox pour aligner les cartes */
+  flex-wrap: wrap; /* Permet aux cartes de retourner à la ligne si nécessaire */
+  align-items: flex-start; /* Aligne les cartes en haut */
+  gap: 0px; /* Ajoute un espacement uniforme entre les cartes */
+  margin: 0; /* Supprime les marges inutiles */
+  padding: 0; /* Supprime les paddings */
+}
+
+
+
+
+
+
+.index-page .top-rated-recipes .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.index-page .top-rated-recipes .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.card-img-top {
+    width: 100%; /* Toujours égal à la largeur de la carte */
+    height: 180px; /* Une hauteur constante */
+    object-fit: cover; /* Permet de remplir tout l'espace */
+    border-radius: 15px 15px 0 0; /* Facultatif, pour arrondir les coins */
+}
+
+.index-page .top-rated-recipes .card-body {
+  padding: 15px; /* Ajustez selon vos besoins */
+}
+
+
+.index-page .top-rated-recipes .card-body p {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.index-page .top-rated-recipes .card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.index-page .top-rated-recipes .card-title {
+    font-size: 1.3rem;
+    color: #3A5676; 
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    white-space: nowrap; /* Empêche le titre de passer à la ligne */
+    overflow: hidden; /* Cache le texte qui déborde */
+    text-overflow: ellipsis; /* Ajoute des points de suspension (...) */
+    display: block;
+}
+
+.index-page .top-rated-recipes .card-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.index-page .top-rated-recipes .card-title a:hover {
+    color: #5692B2;
+    text-decoration: underline;
+}
+
+.index-page .top-rated-recipes .rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.index-page .top-rated-recipes .rating .star {
+    font-size: 1.2rem;
+    color: #A8BAA7;
+}
+
+.index-page .top-rated-recipes .rating .star.text-muted {
+    color: #ddd;
+}
+
+.index-page .top-rated-recipes .rating .rating-value {
+    font-size: 0.9rem;
+    color: #333;
+    margin-left: 5px;
 }
 
 
@@ -163,7 +279,11 @@ get_header();
     font-size: 1.3rem;
     color: #3A5676; 
     text-decoration: none;
-    transition: color 0.3s ease, text-decoration 0.3s ease; 
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    white-space: nowrap; /* Empêche le titre de passer à la ligne */
+    overflow: hidden; /* Cache le texte qui déborde */
+    text-overflow: ellipsis; /* Ajoute des points de suspension (...) */
+    display: block; /* Assure une bonne compatibilité */
 }
 
 .index-page .top-rated-recipes  .card-title a {
@@ -350,11 +470,44 @@ get_header();
 .index-page .trucs-et-astuces {
     margin-bottom: 40px; 
 }
+.index-page .category-btn {
+    text-decoration: none !important;
+}
+
+.index-page .category-btn span {
+    text-decoration: none !important; 
+}
+
+.index-page .category-btn a {
+    text-decoration: none !important;
+}
+
+.index-page .category-btn:hover a,
+.index-page .category-btn:hover span {
+    text-decoration: underline !important;
+}
+.index-page .top-rated-recipes .card {
+    margin: 0; /* Assurez-vous qu'aucune marge externe n'augmente l'espacement */
+}
+.index-page .top-rated-recipes .col-md-3 {
+  margin: 0 !important; /* Supprime les marges extérieures */
+  padding: 0 !important; /* Supprime les paddings intérieurs */
+  display: flex;
+  justify-content: center; /* Centre les cartes dans les colonnes */
+}
+
 
 @media (max-width: 768px) {
+  
   .index-page .hero-section h1 {
-    font-size: 2.5rem;
+    font-size: 3rem; /* Réduit la taille du texte */
+    white-space: normal; /* Permet au texte de passer à la ligne */
+    word-wrap: break-word; /* Autorise le texte à se couper sur plusieurs lignes */
+    line-height: 1.3; /* Ajuste l'espacement vertical entre les lignes */
+    padding: 0 10px; /* Ajoute un peu de padding pour éviter les bordures */
+    text-align: center; /* Centre le contenu */
   }
+
 
   .index-page .hero-section .search-bar {
     font-size: 1rem;
@@ -371,14 +524,7 @@ get_header();
         justify-content: center; 
     }
 
-    .index-page .top-rated-recipes .row .col-md-3 {
-        flex: 0 0 auto; 
-        width: 100%; 
-        max-width: 90%; 
-        scroll-snap-align: center;
-        margin: 0 auto;
-    }
-
+   
     .index-page .top-rated-recipes .row::-webkit-scrollbar {
         height: 8px;
     }
@@ -476,7 +622,24 @@ get_header();
   .index-page .category-icon {
     height: 45px;
   }
+  .index-page .category-btn {
+    text-decoration: none !important; /* Forcer aucune soulignation sur toute la catégorie */
 }
+
+.index-page .category-btn span {
+    text-decoration: none !important; /* Supprime la soulignation sur le texte */
+}
+
+.index-page .category-btn a {
+    text-decoration: none !important; /* Supprime la soulignation sur les liens */
+}
+
+.index-page .category-btn:hover a,
+.index-page .category-btn:hover span {
+    text-decoration: underline !important; /* Souligner uniquement au survol */
+}
+}
+
 </style>
 
 <body <?php body_class(); ?>>
@@ -488,7 +651,7 @@ get_header();
         <div class="hero-background"></div>
         <div class="overlay"></div>
         <div class="container">
-            <h1 class="display-4 fw-bold">Cuisiner n’a jamais été aussi fun !!!</h1>
+            <h1 class="display-4 fw-bold">Cuisiner n’a jamais été aussi simple! </h1>
             <!-- Search Bar -->
             <form class="d-flex align-items-center me-3" method="get" action="<?php echo home_url('/'); ?>">
                 <input class="form-control rounded-pill search-bar" type="search" name="s" placeholder="RECHERCHE PAR PLAT, INGREDIENTS, ..." aria-label="Search">
@@ -548,13 +711,13 @@ get_header();
                                     </a>
                                 </h5>
                                 <p class="card-text">
-                                    <strong>Par :</strong> <?php echo esc_html($author_name); ?>
+                                    Par : <?php echo esc_html($author_name); ?>
                                 </p>
                                 <p class="card-text">
-                                    <strong>Temps total :</strong> <?php echo $total_minutes ? $total_minutes . ' min' : 'Non spécifié'; ?>
+                                    Temps total : <?php echo $total_minutes ? $total_minutes . ' min' : 'Non spécifié'; ?>
                                 </p>
                                 <p class="card-text">
-                                    <strong>Note :</strong>
+                                    
                                     <div class="rating">
                                         <?php
                                         $average_rating = round($recipe->average_rating, 1);

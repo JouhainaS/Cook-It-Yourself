@@ -1,4 +1,4 @@
-<?php 
+<?php
 /** Template Name: Connexion - Page */
 get_header();
 ?>
@@ -28,7 +28,6 @@ html, body {
     text-align: center;
 }
 
-/* Restes des styles inchangés */
 form h2 {
     font-size: 24px;
     color: #3a5676;
@@ -118,7 +117,18 @@ form button:hover {
             if (is_wp_error($user)) {
                 echo "<p class='error-message'>Nom d'utilisateur ou mot de passe incorrect.</p>";
             } else {
-                wp_safe_redirect(home_url());
+                // Debugging redirection (optionnel, à retirer en production)
+                error_log('POST: ' . print_r($_POST, true));
+                error_log('GET: ' . print_r($_GET, true));
+
+                // Gérer la redirection après connexion
+                if (!empty($_GET['redirect_to'])) {
+                    // Rediriger vers l'URL prévue
+                    wp_safe_redirect(esc_url_raw($_GET['redirect_to']));
+                } else {
+                    // Rediriger vers la page d'accueil par défaut
+                    wp_safe_redirect(home_url());
+                }
                 exit;
             }
         }
