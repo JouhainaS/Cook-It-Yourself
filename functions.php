@@ -17,45 +17,40 @@ add_action('after_setup_theme', 'register_custom_menus');
 
 // Ajouter les styles et scripts
 function styles_scripts() {
-    // CSS Bootstrap
     wp_enqueue_style(
         'bootstrap',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css',
         [],
-        '5.3.0-alpha1' // Version Bootstrap
+        '5.3.0-alpha1'
     );
 
-    // Style personnalisé
     wp_enqueue_style(
         'style-css',
         get_template_directory_uri() . '/css/styles.css'
     );
 
-    // JS Bootstrap
     wp_enqueue_script(
         'bootstrap-bundle',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js',
         [],
-        '5.3.0-alpha1', // Version Bootstrap
-        true // Charger dans le footer
+        '5.3.0-alpha1',
+        true
     );
 
-    // Script personnalisé principal
     wp_enqueue_script(
         'app-js',
         get_template_directory_uri() . '/assets/js/app.js',
-        ['bootstrap-bundle'], // Dépendance avec Bootstrap
-        '1.0', // Version du script
-        true // Charger dans le footer
+        ['bootstrap-bundle'],
+        '1.0',
+        true
     );
 
-    // Script additionnel si nécessaire
     wp_enqueue_script(
         'script',
         get_template_directory_uri() . '/assets/js/script.js',
         [],
-        null, // Version inconnue
-        true // Charger dans le footer
+        null,
+        true
     );
 }
 add_action('wp_enqueue_scripts', 'styles_scripts');
@@ -74,21 +69,21 @@ add_filter('upload_mimes', 'allow_svg_uploads');
 
 // Filtrer l'éditeur d'images
 add_filter('wp_image_editors', function() {
-    return array('WP_Image_Editor_Imagick'); // Utiliser Imagick
+    return array('WP_Image_Editor_Imagick'); 
 });
 
 // Custom Post Type "Recettes"
 function create_post_type() {
     register_post_type('recipe', [
         'labels' => [
-            'name' => __('Recettes', 'textdomain'),
+            'name'          => __('Recettes', 'textdomain'),
             'singular_name' => __('Recette', 'textdomain'),
         ],
-        'supports' => ['title', 'editor', 'thumbnail', 'comments'],
-        'public' => true,
-        'has_archive' => true, // Active l'archive
-        'rewrite' => ['slug' => 'recettes'], // Détermine l'URL
-        'menu_icon' => 'dashicons-carrot', // Icône personnalisée
+        'supports'     => ['title', 'editor', 'thumbnail', 'comments'],
+        'public'       => true,
+        'has_archive'  => true,
+        'rewrite'      => ['slug' => 'recettes'],
+        'menu_icon'    => 'dashicons-carrot',
     ]);
 }
 add_action('init', 'create_post_type');
@@ -195,8 +190,9 @@ function custom_registration_form_handler() {
                     'user_password' => $password,
                     'remember' => true,
                 ]);
-                /* wp_safe_redirect(home_url()); */
-                /* exit; */
+                $redirect_url = !empty($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : home_url();
+                wp_safe_redirect($redirect_url);
+                exit;
             } else {
                 $errors[] = $user_id->get_error_message();
             }
@@ -207,58 +203,21 @@ function custom_registration_form_handler() {
 }
 add_action('init', 'custom_registration_form_handler');
 
-// Shortcode pour afficher le formulaire d'inscription
-function custom_registration_form_shortcode() {
-    $errors = get_transient('registration_errors');
-    delete_transient('registration_errors');
-
-    ob_start(); ?>
-    <form method="post" action="">
-        <h2>Inscription</h2>
-        <?php if (!empty($errors)): ?>
-            <ul class="error-messages">
-                <?php foreach ($errors as $error): ?>
-                    <li><?php echo esc_html($error); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Mot de passe" required>
-        <button type="submit" name="register">S'inscrire</button>
-    </form>
-    <?php return ob_get_clean();
-}
-add_shortcode('custom_registration_form', 'custom_registration_form_shortcode');
-
-// Redirection des utilisateurs non connectés
-add_action('template_redirect', function () {
-    if (!is_user_logged_in() && !is_page(['connexion', 'inscription'])) {
-        /* wp_safe_redirect(home_url('/connexion')); */
-        /* exit; */
-    }
-});
-
 // Redirection après connexion
-function redirect_after_login($redirect_to, $request, $user) {
-    return home_url();
-}
-add_filter('login_redirect', 'redirect_after_login', 10, 3);
-
-// Redirection après soumission du formulaire de connexion
 function custom_login_handler() {
     if (isset($_POST['login'])) {
         $creds = [
             'user_login'    => sanitize_text_field($_POST['username']),
             'user_password' => $_POST['password'],
-            'remember'      => isset($_POST['remember']) ? true : false,
+            'remember'      => isset($_POST['remember']),
         ];
 
         $user = wp_signon($creds, false);
 
         if (!is_wp_error($user)) {
-            /* wp_safe_redirect(home_url()); */
-            /* exit; */
+            $redirect_to = !empty($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : home_url();
+            wp_safe_redirect($redirect_to);
+            exit;
         } else {
             echo '<p class="error-message">Nom d\'utilisateur ou mot de passe incorrect.</p>';
         }
@@ -266,20 +225,33 @@ function custom_login_handler() {
 }
 add_action('init', 'custom_login_handler');
 
+// Restriction d'accès
+add_action('template_redirect', function () {
+    $restricted_pages = ['ajouter-une-recette-2', 'mes-publications', 'modifier-le-profil', 'parametre-du-compte'];
+    if (!is_user_logged_in() && is_page($restricted_pages)) {
+        $login_page_url = site_url('/connexion');
+        $redirect_url = add_query_arg('redirect_to', urlencode(get_permalink()), $login_page_url);
+        wp_safe_redirect($redirect_url);
+        exit;
+    }
+});
+wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap', false);
+
 function save_comment_rating($comment_id) {
-    if (isset($_POST['rating']) && $_POST['rating'] !== '') {
+    if (isset($_POST['rating']) && !empty($_POST['rating'])) {
         $rating = intval($_POST['rating']);
-        if ($rating >= 1 && $rating <= 5) {
-            add_comment_meta($comment_id, 'rating', $rating);
+        if ($rating >= 1 && $rating <= 5) { // Vérifie que la note est entre 1 et 5
+            add_comment_meta($comment_id, 'rating', $rating, true);
         }
     }
 }
 add_action('comment_post', 'save_comment_rating');
 
-function force_content_headings_to_h2($content) {
-    // Convertit les balises <h1>...<h6> en <h2> uniquement dans the_content
-    $content = preg_replace('/<h[1-6]([^>]*)>/i', '<h2$1>', $content);
-    $content = preg_replace('/<\/h[1-6]>/i', '</h2>', $content);
-    return $content;
+function allow_empty_comment_with_rating($commentdata) {
+    if (empty($commentdata['comment_content']) && isset($_POST['rating'])) {
+        // Génère un contenu par défaut pour éviter l'erreur
+        $commentdata['comment_content'] = 'Évaluation : ' . intval($_POST['rating']) . ' étoile(s).';
+    }
+    return $commentdata;
 }
-add_filter('the_content', 'force_content_headings_to_h2');
+add_filter('preprocess_comment', 'allow_empty_comment_with_rating');

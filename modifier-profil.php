@@ -35,10 +35,10 @@ get_header(); ?>
     <div class="main-content">
         <section class="profile-edit w-100">
             <h2 class="mb-4">Modifier le profil</h2>
-            <hr class="my-4"> <!-- Ajoute une ligne horizontale avant le titre principal -->
+            <hr class="my-4"> 
     
             <div class="profile-container d-flex align-items-start mb-4">
-                <!-- Section informations du profil -->
+               
                 <div class="info-section w-100">
                     <form method="post" action="">
                         <?php
@@ -224,11 +224,17 @@ footer {
     text-align: center;
     padding: 20px 0;
 }
-
 @media screen and (max-width: 768px) {
-        .body-wrapper {
-            flex-direction: column;
-        }
+    .body-wrapper {
+        flex-direction: column;
+        justify-content: flex-start; 
+        min-height: 100vh;
+    }
+
+    .main-content {
+        margin: 0; 
+        padding: 10px; 
+    }
 
         .sidebar {
             position: relative;
@@ -241,24 +247,35 @@ footer {
         .sidebar ul li {
             text-align: center;
         }
+    .profile-container {
+        margin: 0;
+        padding: 0;
+    }
 
-        .main-content {
-            margin-left: 0;
-            padding: 20px;
-        }
+    .sidebar {
+        margin: 0;
+        padding: 0;
+    }
 
-        .profile-container {
-            flex-direction: column;
-        }
+    footer {
+        margin-top: 20px; 
+    }
 
-        .form-control {
-            width: 100%;
-        }
+}
+    .main-content {
+        margin-bottom: 100px; 
+    }
 
-        .btn-update {
-            width: 100%;
-        }
-    } 
+    footer {
+        position: relative; 
+        margin-top: 50px; 
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+
 </style>
 
 <?php get_footer(); ?>

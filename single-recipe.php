@@ -189,26 +189,25 @@ get_header();
         
         <!-- Formulaire d'ajout de commentaire -->
         <div class="add-review">
-            <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post">
-                <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
-                
-                <div class="rating">
-                    <label for="rating">Votre évaluation : <span>(Requis)</span></label>
-                    <div class="stars">
-                        <?php for ($i = 1; $i <= 5; $i++) : ?>
-                            <input type="radio" id="star-<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" />
-                            <label for="star-<?php echo $i; ?>" class="star">&#9733;</label>
-                        <?php endfor; ?>
-                    </div>
-                </div>
+            
+        <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post">
+    <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
 
-                <div class="comment">
-                    <label for="comment">Votre avis : <span>(Optionnel)</span></label>
-                    <textarea id="comment" name="comment" placeholder="Partagez votre avis !"></textarea>
-                </div>
+    <label for="rating">Votre évaluation :</label>
+    <div class="stars">
+        <?php for ($i = 5; $i >= 1; $i--) : ?>
+            <input type="radio" id="star-<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" />
+            <label for="star-<?php echo $i; ?>">&#9733;</label>
+        <?php endfor; ?>
+    </div>
 
-                <button type="submit">Publier l'avis</button>
-            </form>
+    <label for="comment">Votre commentaire (optionnel) :</label>
+    <textarea name="comment" id="comment" placeholder="Ajoutez un commentaire (optionnel)"></textarea>
+
+    <button type="submit">Soumettre</button>
+</form>
+
+            
         </div>
 
     <!-- Liste des commentaires -->
@@ -635,9 +634,38 @@ get_header();
 
 .add-review .stars input[type="radio"]:checked ~ label,
 .add-review .stars input[type="radio"]:checked ~ label ~ label {
-    color: #A8BAA7;
+    color: #5692B2;
 }
 
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    gap: 5px;
+}
+
+.stars input[type="radio"] {
+    display: none; 
+}
+
+.stars label {
+    font-size: 2rem;
+    color: #A8BAA7; 
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.stars input[type="radio"]:checked ~ label {
+    color: #5692B2; 
+}
+
+.stars input[type="radio"]:hover ~ label {
+    color: #5692B2; 
+}
+
+.stars input[type="radio"]:checked:hover ~ label {
+    color: #5692B2; 
+}
 
 @media (max-width: 768px) {
     .recipe-header h1 {
@@ -694,7 +722,7 @@ get_header();
 }
 
 @media print {
-    /* Cache tout sauf la partie à imprimer */
+    
     body * {
         visibility: hidden;
     }
@@ -711,7 +739,7 @@ get_header();
         width: 100%;
     }
 
-    /* Ajuste la section des détails */
+    
     .recipe-details {
         display: flex;
         justify-content: space-between; 
@@ -740,7 +768,7 @@ get_header();
         color: #000;
     }
 
-    /* Ajuste la section de l'image */
+   
     .recipe-image img {
         max-width: 100%;
         height: auto;
@@ -748,19 +776,19 @@ get_header();
         margin: 0 auto;
     }
 
-    /* Cache les icônes dans la section des détails */
+    
     .recipe-details .detail img {
         display: none;
     }
 
-    /* Ajuste la section Description */
+    
     .recipe-description p {
         font-size: 1rem;
         line-height: 1.4;
         margin-bottom: 10px;
     }
 
-    /* Ajuste la section des astuces du chef */
+    
     .chef-tips {
         border: none;
         padding: 10px;

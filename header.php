@@ -60,27 +60,27 @@ get_header(); ?>
 
         .search-add-container {
             display: flex;
-            align-items: center; /* Centre verticalement les éléments */
-            gap: 15px; /* Espacement uniforme entre les éléments */
-            justify-content: flex-end; /* Aligne à droite */
+            align-items: center;
+            gap: 15px; 
+            justify-content: flex-end; 
         }
 
 
 
         .search-bar {
-            width: 300px; /* Largeur fixe pour la barre de recherche */
+            width: 300px;
             height: 35px; 
             padding: 0 15px;
             border-radius: 20px;
             border: 1px solid #ddd;
             font-size: 1rem;
-            margin-top: 10px; /* Ajoute un espace supplémentaire au-dessus de la barre de recherche */
+            margin-top: 10px;
             line-height: normal;
-            transition: none; /* Désactive les transitions pour la barre de recherche */
+            transition: none; 
         }
 
         .search-bar:hover {
-            border-color: #ddd; /* Pas de changement de dimensions ni d'autres effets */
+            border-color: #ddd; 
         }
 
         .btn {
@@ -95,17 +95,17 @@ get_header(); ?>
             justify-content: center;
             font-size: 16px;
             text-align: center;
-            transition: background-color 0.3s ease; /* Transition uniquement sur la couleur */
+            transition: background-color 0.3s ease;
         }
 
         .btn:hover {
-            background-color: #dc9340; /* Change uniquement la couleur */
+            background-color: #dc9340;
             color: white;
         }
 
         .profile-image {
-            height: 40px; /* Ajuste la taille de l'icône */
-            margin-left: 15px; /* Ajoute un espacement si nécessaire */
+            height: 40px;
+            margin-left: 15px;
         }
 
 

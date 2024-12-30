@@ -75,13 +75,7 @@ get_header(); ?>
                             <p class="recipe-meta">
                                 <strong>Temps total :</strong> <?php echo $formatted_time; ?>
                             </p>
-                            <div class="rating">
-                                <strong>Note :</strong>
-                                <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                    <span class="star"><?php echo $i <= $rating ? '&#9733;' : '&#9734;'; ?></span>
-                                <?php endfor; ?>
-                                <span class="rating-value">(<?php echo $rating > 0 ? $rating : 'N/A'; ?>)</span>
-                            </div>
+                           
                         </div>
                     </div>
                     <?php
@@ -237,22 +231,6 @@ footer {
     color: #5692B2;
 }
 
-.recipe-meta, .rating {
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    color: #000;
-}
-
-.rating .star {
-    font-size: 1.2rem;
-    color: #A8BAA7;
-}
-
-.rating-value {
-    font-size: 0.9rem;
-    color: #333;
-}
-
 .btn-update {
     background-color: #5692B2;
     color: white;
@@ -284,12 +262,18 @@ footer {
     .main-content {
         margin-left: 0;
         padding: 20px;
-        min-height: auto;
+        padding-bottom: 80px; 
+       
+
     }
 
     footer {
-        position: relative;
-        width: 100%;
+        position: relative; 
+        margin-top: 50px; 
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
     }
 
     .grid-container {
@@ -304,6 +288,7 @@ footer {
 
     .btn-update {
         width: 100%; 
+    }
 }
 
 </style>

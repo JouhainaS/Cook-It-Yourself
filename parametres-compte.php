@@ -37,10 +37,9 @@ get_header(); ?>
     <div class="main-content">
         <section class="profile-edit w-100">
             <h2 class="mb-4">Paramètres du compte</h2>
-            <hr class="my-4"> <!-- Ajoute une ligne horizontale avant le titre principal -->
-
+            <hr class="my-4"> 
             <div class="profile-container d-flex align-items-start mb-4">
-                <!-- Section informations du profil -->
+               
                 <div class="info-section w-100">
                     <form class="account-form" method="POST" action="">
                         <div class="col-md-6 mb-3">
@@ -220,10 +219,11 @@ footer {
     text-align: center;
     padding: 20px 0;
 }
-/* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .body-wrapper {
         flex-direction: column;
+        min-height: 100vh; 
+        display: flex;
     }
 
     .sidebar {
@@ -241,20 +241,22 @@ footer {
     .main-content {
         margin-left: 0;
         padding: 20px;
+        padding-bottom: 80px; 
+        flex-grow: 1; 
     }
 
-    .profile-container {
-        flex-direction: column;
-    }
-
-    .form-control {
+    footer {
+        margin-top: 50px; 
         width: 100%;
-    }
-
-    .btn-update {
-        width: 100%;
+        background: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 0;
+        position: relative; 
     }
 }
+
+
 
 </style>
 
