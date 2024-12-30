@@ -362,9 +362,7 @@ get_header();
 
             <!-- Contenu : Image à gauche et articles à droite -->
             <div class="content-wrapper">
-                <div class="image-container">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/photos/articles/alternatives-végétales.jpg'); ?>" alt="Alternatives végétales">
-                </div>
+               
                 <div class="articles-container">
                     <?php
                     $query_vegetales = new WP_Query(array(
