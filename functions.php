@@ -255,3 +255,9 @@ function allow_empty_comment_with_rating($commentdata) {
     return $commentdata;
 }
 add_filter('preprocess_comment', 'allow_empty_comment_with_rating');
+
+add_action('after_setup_theme', function () {
+    if (is_user_logged_in() && !current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
+});
